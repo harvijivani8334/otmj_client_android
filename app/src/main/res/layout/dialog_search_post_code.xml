@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:id="@+id/routRootView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWindowBackground">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_alignParentTop="true"
+            android:background="@android:color/transparent"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="@style/ToolbarStyle"
+            app:contentInsetLeft="0dp"
+            app:contentInsetStart="0dp"
+            app:contentInsetStartWithNavigation="0dp"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            tools:ignore="MissingPrefix">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <EditText
+                    android:id="@+id/edtSearch"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/transparent"
+                    android:hint="@string/lbl_search"
+                    android:imeOptions="actionSearch"
+                    android:inputType="text"
+                    android:textColor="@color/colorPrimaryText"
+                    android:textColorHint="@color/colorHint" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgClearText"
+                    android:layout_width="@dimen/size_30dp"
+                    android:layout_height="@dimen/size_30dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/size_11dp"
+                    android:padding="@dimen/size_7dp"
+                    android:tint="@color/colorSecondaryLightText"
+                    app:srcCompat="@drawable/ic_close" />
+            </RelativeLayout>
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_1dp"
+            android:layout_below="@+id/toolbar"
+            android:background="@color/colorDivider" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/divider"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="@dimen/size_11dp"
+            android:visibility="gone" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvPostCode"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_410dp"
+            android:layout_below="@+id/progressBar"
+            android:layout_marginTop="@dimen/size_9dp"
+            android:visibility="gone" />
+
+    </RelativeLayout>
+
+</layout>
+

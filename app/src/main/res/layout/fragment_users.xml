@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:focusableInTouchMode="true">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvUsersList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/size_8dp"
+            android:layout_marginBottom="@dimen/size_8dp"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+        <TextView
+            android:id="@+id/tvEmptyText"
+            style="@style/MediumFont"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/empty_trade_person"
+            android:textColor="@color/colorPrimaryText"
+            android:textSize="@dimen/text_size_13sp"
+            android:visibility="gone" />
+
+
+    </RelativeLayout>
+</layout>

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:fitsSystemWindows="true">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar_main" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/toolbar"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/SmallFont"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorTitleBg"
+                android:fontFamily="@string/font_family_medium"
+                android:paddingStart="@dimen/size_20dp"
+                android:paddingTop="@dimen/size_16dp"
+                android:paddingEnd="@dimen/size_20dp"
+                android:paddingBottom="@dimen/size_16dp"
+                android:text="@string/select_category"
+                android:textColor="@color/colorAccent" />
+
+            <TextView
+                style="@style/SmallFont"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@string/font_family_medium"
+                android:paddingStart="@dimen/size_20dp"
+                android:paddingTop="@dimen/size_16dp"
+                android:paddingEnd="@dimen/size_20dp"
+                android:paddingBottom="@dimen/size_16dp"
+                android:text="@string/search_by_Category"
+                android:textColor="@color/colorPrimaryText" />
+
+            <RelativeLayout
+                android:id="@+id/rlTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/size_20dp"
+                android:layout_marginEnd="@dimen/size_20dp">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgSearch"
+                    android:layout_width="@dimen/size_16dp"
+                    android:layout_height="@dimen/size_16dp"
+                    android:layout_alignBaseline="@id/edtTitle"
+                    android:baseline="@dimen/size_13dp"
+                    android:tint="@color/colorPrimaryText"
+                    app:srcCompat="@drawable/ic_search" />
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/edtTitle"
+                    style="@style/SmallFont"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/size_10dp"
+                    android:layout_toEndOf="@+id/imgSearch"
+                    android:focusableInTouchMode="true"
+                    android:hint="@string/hint_search_by_category"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:textColorHint="@color/colorHint"
+                    app:met_errorColor="@color/colorErrorColor"
+                    app:met_floatingLabel="normal"
+                    app:met_floatingLabelTextColor="@color/colorFloatingLabelText"
+                    app:met_singleLineEllipsis="false"
+                    app:met_textColor="@color/colorPrimaryText"
+                    app:met_textColorHint="@color/colorHint"
+                    app:met_underlineColor="@color/colorUnderline" />
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+        <com.balysv.materialripple.MaterialRippleLayout
+            android:id="@+id/btnNext"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/save_button_height_50dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="@dimen/size_20dp"
+            android:visibility="visible"
+            app:mrl_rippleColor="@color/colorRippleColor"
+            app:mrl_rippleDelayClick="true"
+            app:mrl_rippleDuration="@string/ripple_duration"
+            app:mrl_rippleHover="true"
+            app:mrl_rippleOverlay="true">
+
+            <TextView
+                android:id="@+id/txtNext"
+                style="@style/SmallFont"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorAccent"
+                android:fontFamily="@string/font_family_medium"
+                android:gravity="center"
+                android:text="@string/move_next"
+                android:textColor="@color/colorWhite" />
+        </com.balysv.materialripple.MaterialRippleLayout>
+
+    </RelativeLayout>
+</layout>
+

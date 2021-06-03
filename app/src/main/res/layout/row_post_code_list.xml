@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="info"
+            type="com.app.otmjobs.common.data.model.PostCodeInfo" />
+
+    </data>
+
+    <RelativeLayout
+        android:id="@+id/routMainView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/size_10dp"
+        android:paddingStart="@dimen/size_21dp"
+        android:paddingTop="@dimen/size_10dp"
+        android:paddingEnd="@dimen/size_21dp">
+
+        <TextView
+            android:id="@+id/txtTitle"
+            style="@style/SmallFontTextView"
+            android:text="@{info.addressline1}"
+            android:textColor="@color/colorPrimaryText" />
+
+        <TextView
+            android:id="@+id/txtSubTitle"
+            style="@style/VerySmallFontTextView"
+            android:layout_below="@+id/txtTitle"
+            android:textColor="@color/colorSecondaryLightText" />
+
+    </RelativeLayout>
+</layout>
+
+

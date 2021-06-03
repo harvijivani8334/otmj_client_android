@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".DashboardActivity"
+        tools:showIn="@layout/app_bar_dashboard">
+
+        <com.app.utilities.utils.ViewPagerDisableSwipe
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/divider" />
+
+        <View
+            android:id="@+id/divider"
+            style="@style/Divider"
+            android:layout_above="@+id/routTabsView"
+            android:visibility="visible" />
+
+        <LinearLayout
+            android:id="@+id/routTabsView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@color/colorDashBoardTabBg"
+            android:baselineAligned="false"
+            android:orientation="horizontal"
+            android:visibility="visible">
+
+            <RelativeLayout
+                android:id="@+id/routChatTab"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgChatTab"
+                    android:layout_width="@dimen/size_28dp"
+                    android:layout_height="@dimen/size_28dp"
+                    android:layout_centerInParent="true"
+                    app:srcCompat="@drawable/ic_inactive_chat_tab" />
+
+                <TextView
+                    android:id="@+id/txtMessageCount"
+                    style="@style/VerySmallFontTextView"
+                    android:layout_width="@dimen/size_20dp"
+                    android:layout_height="@dimen/size_20dp"
+                    android:layout_marginStart="@dimen/size_minus_12dp"
+                    android:layout_marginTop="@dimen/size_6dp"
+                    android:layout_toEndOf="@+id/imgChatTab"
+                    android:background="@drawable/circle_red"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/text_size_11sp"
+                    android:visibility="gone" />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/routStorage"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingTop="@dimen/size_12dp"
+                android:paddingBottom="@dimen/size_12dp">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgFolder"
+                    android:layout_width="@dimen/size_28dp"
+                    android:layout_height="@dimen/size_28dp"
+                    app:srcCompat="@drawable/ic_inactive_storage_tab" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/routHomeTab"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingTop="@dimen/size_12dp"
+                android:paddingBottom="@dimen/size_12dp">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgHomeTab"
+                    android:layout_width="@dimen/size_28dp"
+                    android:layout_height="@dimen/size_28dp"
+                    app:srcCompat="@drawable/ic_inactive_home_tab" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/routUsers"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingTop="@dimen/size_12dp"
+                android:paddingBottom="@dimen/size_12dp">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgUserTab"
+                    android:layout_width="@dimen/size_28dp"
+                    android:layout_height="@dimen/size_28dp"
+                    app:srcCompat="@drawable/ic_inactive_users_tab" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/routMoreTab"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingTop="@dimen/size_12dp"
+                android:paddingBottom="@dimen/size_12dp">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgMoreTab"
+                    android:layout_width="@dimen/size_28dp"
+                    android:layout_height="@dimen/size_28dp"
+                    app:srcCompat="@drawable/ic_inactive_more_tab" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </RelativeLayout>
+</layout>

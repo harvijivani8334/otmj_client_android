@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:id="@+id/relativelayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="@dimen/size_14dp"
+        android:paddingEnd="0dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imgUser"
+            android:layout_width="@dimen/size_60dp"
+            android:layout_height="@dimen/size_60dp"
+            android:layout_marginStart="@dimen/size_20dp"
+            android:tint="@color/light_gray"
+            app:srcCompat="@drawable/circle_red" />
+
+        <LinearLayout
+            android:id="@+id/routDetailsView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/imgUser"
+            android:orientation="vertical"
+            android:paddingStart="@dimen/size_14dp"
+            android:paddingEnd="@dimen/size_16dp">
+
+            <TextView
+                android:id="@+id/txtJobTitle"
+                style="@style/SmallFontTextView"
+                android:ellipsize="end"
+                android:fontFamily="@string/font_family_medium"
+                android:includeFontPadding="false"
+                android:singleLine="true"
+                android:text="Mathilda Campbell"
+                android:textColor="@color/colorPrimaryText" />
+
+            <TextView
+                android:id="@+id/txtJobDetail"
+                style="@style/VerySmallFontTextView"
+                android:layout_marginTop="@dimen/size_1dp"
+                android:text="Mechanic"
+                android:textColor="@color/colorSecondaryText" />
+
+            <RelativeLayout
+                android:id="@+id/routRatingView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_3dp">
+
+                <TextView
+                    android:id="@+id/txtStarRating"
+                    style="@style/VerySmallFont"
+                    android:layout_width="@dimen/size_30dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_rating"
+                    android:includeFontPadding="false"
+                    android:paddingStart="@dimen/size_6dp"
+                    android:paddingTop="@dimen/size_2dp"
+                    android:paddingEnd="@dimen/size_6dp"
+                    android:paddingBottom="@dimen/size_2dp"
+                    android:text="4.5"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/text_size_12sp" />
+
+                <androidx.appcompat.widget.AppCompatRatingBar
+                    android:id="@+id/RatingBar"
+                    style="@style/Widget.AppCompat.RatingBar.Small"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/size_6dp"
+                    android:layout_toEndOf="@id/txtStarRating"
+                    android:rating="3" />
+
+                <TextView
+                    android:id="@+id/txtChat"
+                    style="@style/SmallFontTextView"
+                    android:layout_alignParentEnd="true"
+                    android:text="@string/chat"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="@dimen/text_size_15sp" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/txtAvailability"
+                style="@style/VerySmallFontTextView"
+                android:layout_marginTop="@dimen/size_2dp"
+                android:text="Available"
+                android:textColor="@color/colorAccent" />
+        </LinearLayout>
+
+        <View
+            style="@style/Divider"
+            android:layout_below="@+id/routDetailsView"
+            android:layout_marginTop="@dimen/size_14dp" />
+
+    </RelativeLayout>
+</layout>

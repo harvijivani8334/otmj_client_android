@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#37b896</color>
+    <color name="colorPrimaryDark">#37b896</color>
+    <color name="colorAccent">#37b896</color>
+    <color name="colorWindowBackground">#ffffff</color>
+    <color name="colorWhite">#ffffff</color>
+    <color name="colorBlack">#000000</color>
+    <color name="colorDivider">#ebe9e6</color>
+    <color name="colorPrimaryText">#0b0b0b</color>
+    <color name="colorSecondaryText">#5a5a5a</color>
+    <color name="colorSecondaryLightText">#888888</color>
+    <color name="colorSecondaryExtraLightText">#ACACAC</color>
+    <color name="colorHint">#9d9d9d</color>
+    <color name="green">#00ae46</color>
+    <color name="red">#e50914</color>
+    <color name="light_gray">#f3f3f3</color>
+    <color name="colorRippleColor">#FFFF</color>
+    <color name="colorRipple2">#B3B3B3</color>
+    <color name="colorUnderline">#e6e9ee</color>
+    <color name="colorFloatingLabelText">#000000</color>
+    <color name="colorErrorColor">#e50914</color>
+    <color name="colorTitleBg">#F4F5F7</color>
+    <color name="colorDashBoardTabBg">#f4f5f7</color>
+    <color name="colorDashBoardInActiveTab">#000000</color>
+    <color name="colorDashBoardActiveTab">#0065FF</color>
+    <color name="colorDashBoardTabIndicator">#0065FF</color>
+    <color name="colorIconBackground">#E6EAEE</color>
+    <color name="colorPopupBackground">#ffffff</color>
+</resources>

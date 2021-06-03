@@ -1,0 +1,6 @@
+<resources>
+    <dimen name="progressbar_size">42dp</dimen>
+    <dimen name="progressbar_padding_size">8dp</dimen>
+    <dimen name="size_11dp">13dp</dimen>
+    <dimen name="size_21dp">26dp</dimen>
+</resources>

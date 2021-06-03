@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="signUpRequest"
+            type="com.app.otmjobs.authentication.data.model.SignUpRequest" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:focusableInTouchMode="true">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar_main" />
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/btnNext"
+            android:layout_below="@+id/toolbar">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgLogo"
+                    android:layout_width="@dimen/size_168dp"
+                    android:layout_height="@dimen/size_130dp"
+                    android:layout_centerHorizontal="true"
+                    app:srcCompat="@drawable/img_logo" />
+
+                <LinearLayout
+                    android:id="@+id/routNameView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/imgLogo"
+                    android:layout_marginStart="@dimen/size_21dp"
+                    android:layout_marginTop="@dimen/size_30dp"
+                    android:layout_marginEnd="@dimen/size_21dp"
+                    android:layout_marginBottom="@dimen/size_14dp">
+
+                    <com.rengwuxian.materialedittext.MaterialEditText
+                        android:id="@+id/edtFirstName"
+                        style="@style/SmallFont"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/size_8dp"
+                        android:layout_weight="1"
+                        android:hint="@string/hint_first_name"
+                        android:imeOptions="actionNext"
+                        android:inputType="textCapWords"
+                        android:text="@={signUpRequest.first_name}"
+                        app:met_errorColor="@color/colorErrorColor"
+                        app:met_floatingLabel="normal"
+                        app:met_floatingLabelTextColor="@color/colorFloatingLabelText"
+                        app:met_singleLineEllipsis="false"
+                        app:met_textColor="@color/colorPrimaryText"
+                        app:met_textColorHint="@color/colorHint"
+                        app:met_underlineColor="@color/colorUnderline" />
+
+                    <com.rengwuxian.materialedittext.MaterialEditText
+                        android:id="@+id/edtLastName"
+                        style="@style/SmallFont"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/size_8dp"
+                        android:layout_weight="1"
+                        android:hint="@string/hint_last_name"
+                        android:imeOptions="actionNext"
+                        android:inputType="textCapWords"
+                        android:text="@={signUpRequest.last_name}"
+                        app:met_errorColor="@color/colorErrorColor"
+                        app:met_floatingLabel="normal"
+                        app:met_floatingLabelTextColor="@color/colorFloatingLabelText"
+                        app:met_singleLineEllipsis="false"
+                        app:met_textColor="@color/colorPrimaryText"
+                        app:met_textColorHint="@color/colorHint"
+                        app:met_underlineColor="@color/colorUnderline" />
+
+                </LinearLayout>
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/edtEmailId"
+                    style="@style/SmallFont"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/routNameView"
+                    android:layout_marginStart="@dimen/size_20dp"
+                    android:layout_marginEnd="@dimen/size_20dp"
+                    android:layout_marginBottom="@dimen/size_14dp"
+                    android:hint="@string/hint_email_id"
+                    android:imeOptions="actionNext"
+                    android:inputType="textEmailAddress"
+                    android:text="@={signUpRequest.email_address}"
+                    app:met_errorColor="@color/colorErrorColor"
+                    app:met_floatingLabel="normal"
+                    app:met_floatingLabelTextColor="@color/colorFloatingLabelText"
+                    app:met_singleLineEllipsis="false"
+                    app:met_textColor="@color/colorPrimaryText"
+                    app:met_textColorHint="@color/colorHint"
+                    app:met_underlineColor="@color/colorUnderline" />
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/edtPassword"
+                    style="@style/SmallFont"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/edtEmailId"
+                    android:layout_marginStart="@dimen/size_20dp"
+                    android:layout_marginEnd="@dimen/size_20dp"
+                    android:layout_marginBottom="@dimen/size_14dp"
+                    android:hint="@string/hint_password"
+                    android:imeOptions="actionNext"
+                    android:inputType="textPassword"
+                    android:text="@={signUpRequest.password}"
+                    app:met_errorColor="@color/colorErrorColor"
+                    app:met_floatingLabel="normal"
+                    app:met_floatingLabelTextColor="@color/colorFloatingLabelText"
+                    app:met_singleLineEllipsis="false"
+                    app:met_textColor="@color/colorPrimaryText"
+                    app:met_textColorHint="@color/colorHint"
+                    app:met_underlineColor="@color/colorUnderline" />
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/edtConfirmPassword"
+                    style="@style/SmallFont"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/edtPassword"
+                    android:layout_marginStart="@dimen/size_20dp"
+                    android:layout_marginEnd="@dimen/size_20dp"
+                    android:layout_marginBottom="@dimen/size_14dp"
+                    android:hint="@string/hint_confirm_password"
+                    android:imeOptions="actionDone"
+                    android:inputType="textPassword"
+                    android:text="@={signUpRequest.confirm_password}"
+                    app:met_errorColor="@color/colorErrorColor"
+                    app:met_floatingLabel="normal"
+                    app:met_floatingLabelTextColor="@color/colorFloatingLabelText"
+                    app:met_singleLineEllipsis="false"
+                    app:met_textColor="@color/colorPrimaryText"
+                    app:met_textColorHint="@color/colorHint"
+                    app:met_underlineColor="@color/colorUnderline" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ivConfirmPasswordVisibility"
+                    android:layout_width="@dimen/size_30dp"
+                    android:layout_height="@dimen/size_30dp"
+                    android:layout_alignBaseline="@+id/edtConfirmPassword"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="@dimen/size_20dp"
+                    android:baseline="@dimen/size_20dp"
+                    android:padding="@dimen/size_7dp"
+                    app:srcCompat="@drawable/ic_eye_visible" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ivPasswordVisibility"
+                    android:layout_width="@dimen/size_30dp"
+                    android:layout_height="@dimen/size_30dp"
+                    android:layout_alignBaseline="@+id/edtPassword"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="@dimen/size_20dp"
+                    android:baseline="@dimen/size_20dp"
+                    android:padding="@dimen/size_7dp"
+                    app:srcCompat="@drawable/ic_eye_visible" />
+
+            </RelativeLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+        <com.balysv.materialripple.MaterialRippleLayout
+            android:id="@+id/btnNext"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/save_button_height_50dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="@dimen/size_20dp"
+            android:visibility="visible"
+            app:mrl_rippleColor="@color/colorRippleColor"
+            app:mrl_rippleDelayClick="true"
+            app:mrl_rippleDuration="@string/ripple_duration"
+            app:mrl_rippleHover="true"
+            app:mrl_rippleOverlay="true">
+
+            <TextView
+                android:id="@+id/txtNext"
+                style="@style/SmallFont"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorAccent"
+                android:fontFamily="@string/font_family_medium"
+                android:gravity="center"
+                android:text="@string/move_next"
+                android:textColor="@color/colorWhite" />
+        </com.balysv.materialripple.MaterialRippleLayout>
+
+    </RelativeLayout>
+</layout>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/edtSearch"
+            style="@style/SmallFont"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="@dimen/size_16dp"
+            android:layout_marginTop="@dimen/size_18dp"
+            android:layout_marginEnd="@dimen/size_16dp"
+            android:background="@color/transparent"
+            android:drawableStart="@drawable/ic_search"
+            android:drawablePadding="@dimen/size_5dp"
+            android:hint="@string/lbl_search"
+            android:imeOptions="actionDone"
+            android:singleLine="true"
+            app:met_baseColor="@color/colorPrimaryText"
+            app:met_floatingLabel="normal"
+            app:met_primaryColor="@color/colorPrimaryText"
+            app:met_singleLineEllipsis="true"
+            app:met_textColorHint="@color/colorHint" />
+
+        <View
+            android:id="@+id/divider"
+            style="@style/Divider"
+            android:layout_below="@+id/edtSearch"
+            android:layout_marginStart="@dimen/size_16dp"
+            android:layout_marginTop="@dimen/size_11dp"
+            android:layout_marginEnd="@dimen/size_16dp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_410dp"
+            android:layout_below="@id/divider"
+            android:layout_marginBottom="@dimen/size_14dp" />
+
+    </RelativeLayout>
+
+</layout>

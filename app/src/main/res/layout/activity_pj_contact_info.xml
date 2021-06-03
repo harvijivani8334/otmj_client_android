@@ -1,0 +1,439 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="data"
+            type="com.app.otmjobs.managejob.data.model.PostJobRequest" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:fitsSystemWindows="true">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar_main" />
+
+        <TextView
+            android:id="@+id/txtTitle"
+            style="@style/SmallFont"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/toolbar"
+            android:background="@color/colorTitleBg"
+            android:fontFamily="@string/font_family_medium"
+            android:paddingStart="@dimen/size_20dp"
+            android:paddingTop="@dimen/size_16dp"
+            android:paddingEnd="@dimen/size_20dp"
+            android:paddingBottom="@dimen/size_16dp"
+            android:text="@string/contact_information"
+            android:textColor="@color/colorAccent" />
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/btnNext"
+            android:layout_below="@id/txtTitle">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/toolbar"
+                android:orientation="vertical"
+                android:paddingStart="@dimen/size_20dp"
+                android:paddingEnd="@dimen/size_20dp">
+
+                <RelativeLayout
+                    android:id="@+id/routPhoneNumberView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_20dp"
+                    android:visibility="visible">
+
+                    <RelativeLayout
+                        android:id="@+id/routExtensionView"
+                        android:layout_width="@dimen/size_66dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true">
+
+                        <com.rengwuxian.materialedittext.MaterialEditText
+                            style="@style/SmallFont"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:focusable="false"
+                            android:inputType="number"
+                            android:textColor="@color/colorPrimaryText"
+                            android:visibility="gone"
+                            app:backgroundTint="@color/transparent"
+                            app:met_errorColor="@color/colorErrorColor"
+                            app:met_floatingLabel="none"
+                            app:met_floatingLabelTextColor="@color/colorFloatingLabelText"
+                            app:met_singleLineEllipsis="false"
+                            app:met_textColor="@color/colorPrimaryText"
+                            app:met_textColorHint="@color/colorHint"
+                            app:met_underlineColor="@color/colorUnderline" />
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/imgCountryFlag"
+                            android:layout_width="@dimen/size_40dp"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:adjustViewBounds="true" />
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="@dimen/size_25dp"
+                            android:layout_height="@dimen/size_25dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            app:srcCompat="@drawable/ic_arrow_down" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/size_4dp"
+                        android:layout_toEndOf="@+id/routExtensionView"
+                        android:visibility="visible">
+
+                        <com.rengwuxian.materialedittext.MaterialEditText
+                            android:id="@+id/edtPhoneExtension"
+                            style="@style/SmallFont"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="false"
+                            android:layout_marginEnd="@dimen/size_9dp"
+                            android:focusable="false"
+                            android:imeOptions="actionNext"
+                            android:text="@{data.phone_extension_name}"
+                            android:textColor="@color/colorPrimaryText"
+                            android:visibility="gone"
+                            app:backgroundTint="@color/transparent"
+                            app:met_errorColor="@color/colorErrorColor"
+                            app:met_floatingLabel="none"
+                            app:met_floatingLabelTextColor="@color/colorFloatingLabelText"
+                            app:met_hideUnderline="true"
+                            app:met_singleLineEllipsis="false"
+                            app:met_textColor="@color/colorPrimaryText"
+                            app:met_textColorHint="@color/colorHint"
+                            app:met_underlineColor="@color/colorAccent" />
+
+                        <com.rengwuxian.materialedittext.MaterialEditText
+                            android:id="@+id/edtPhone"
+                            style="@style/SmallFont"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="false"
+                            android:layout_toEndOf="@+id/edtPhoneExtension"
+                            android:hint="@string/mobile_number"
+                            android:imeOptions="actionDone"
+                            android:inputType="number"
+                            android:maxLength="10"
+                            android:text="@={data.phone_number}"
+                            android:textColor="@color/colorPrimaryText"
+                            app:backgroundTint="@color/transparent"
+                            app:met_errorColor="@color/colorErrorColor"
+                            app:met_floatingLabel="none"
+                            app:met_floatingLabelTextColor="@color/colorFloatingLabelText"
+                            app:met_textColor="@color/colorPrimaryText"
+                            app:met_textColorHint="@color/colorHint"
+                            app:met_underlineColor="@color/colorUnderline" />
+
+                    </RelativeLayout>
+
+                </RelativeLayout>
+
+                <TextView
+                    style="@style/SmallFont"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_16dp"
+                    android:fontFamily="@string/font_family_medium"
+                    android:text="@string/your_address"
+                    android:textColor="@color/colorPrimaryText" />
+
+                <RelativeLayout
+                    android:id="@+id/routPostcode"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_8dp"
+                    android:layout_marginBottom="@dimen/size_14dp">
+
+                    <com.balysv.materialripple.MaterialRippleLayout
+                        android:id="@+id/btnSearch"
+                        android:layout_width="@dimen/size_100dp"
+                        android:layout_height="@dimen/size_36dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="@dimen/size_10dp"
+                        android:background="@drawable/search_btn_bg"
+                        app:mrl_rippleColor="@color/colorRippleColor"
+                        app:mrl_rippleDelayClick="true"
+                        app:mrl_rippleDuration="@string/ripple_duration"
+                        app:mrl_rippleHover="true"
+                        app:mrl_rippleOverlay="true">
+
+                        <TextView
+                            android:id="@+id/txtSearch"
+                            style="@style/SmallFont"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="@string/btn_search"
+                            android:textAllCaps="false"
+                            android:textColor="@color/colorAccent"
+                            android:textSize="@dimen/text_size_15sp" />
+                    </com.balysv.materialripple.MaterialRippleLayout>
+
+                    <com.rengwuxian.materialedittext.MaterialEditText
+                        android:id="@+id/edtPostCode"
+                        style="@style/SmallFont"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/size_14dp"
+                        android:layout_toStartOf="@+id/btnSearch"
+                        android:focusable="false"
+                        android:focusableInTouchMode="true"
+                        android:hint="@string/post_code"
+                        android:imeOptions="actionNext"
+                        android:inputType="text"
+                        android:text="@={data.pin_code}"
+                        app:met_errorColor="@color/colorErrorColor"
+                        app:met_floatingLabel="highlight"
+                        app:met_floatingLabelTextColor="@color/colorFloatingLabelText"
+                        app:met_singleLineEllipsis="false"
+                        app:met_textColor="@color/colorPrimaryText"
+                        app:met_textColorHint="@color/colorHint"
+                        app:met_underlineColor="@color/colorUnderline" />
+
+                </RelativeLayout>
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/edtStreet"
+                    style="@style/SmallFont"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/size_14dp"
+                    android:focusableInTouchMode="true"
+                    android:hint="@string/street"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:text="@={data.street_address}"
+                    android:textColorHint="@color/colorHint"
+                    app:met_errorColor="@color/colorErrorColor"
+                    app:met_floatingLabel="highlight"
+                    app:met_floatingLabelTextColor="@color/colorFloatingLabelText"
+                    app:met_singleLineEllipsis="false"
+                    app:met_textColor="@color/colorPrimaryText"
+                    app:met_textColorHint="@color/colorHint"
+                    app:met_underlineColor="@color/colorUnderline" />
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/edtCity"
+                    style="@style/SmallFont"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/size_14dp"
+                    android:focusableInTouchMode="true"
+                    android:hint="@string/city"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:text="@={data.city}"
+                    android:textColorHint="@color/colorHint"
+                    app:met_errorColor="@color/colorErrorColor"
+                    app:met_floatingLabel="highlight"
+                    app:met_floatingLabelTextColor="@color/colorFloatingLabelText"
+                    app:met_singleLineEllipsis="false"
+                    app:met_textColor="@color/colorPrimaryText"
+                    app:met_textColorHint="@color/colorHint"
+                    app:met_underlineColor="@color/colorUnderline" />
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/edtCountry"
+                    style="@style/SmallFont"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/size_14dp"
+                    android:focusable="false"
+                    android:focusableInTouchMode="true"
+                    android:hint="@string/country"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:text="@={data.country}"
+                    android:textColorHint="@color/colorHint"
+                    app:met_errorColor="@color/colorErrorColor"
+                    app:met_floatingLabel="normal"
+                    app:met_floatingLabelTextColor="@color/colorFloatingLabelText"
+                    app:met_singleLineEllipsis="false"
+                    app:met_textColor="@color/colorPrimaryText"
+                    app:met_textColorHint="@color/colorHint"
+                    app:met_underlineColor="@color/colorUnderline" />
+
+                <CheckBox
+                    android:id="@+id/cbUseAnotherAddress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/use_another_Address" />
+
+                <LinearLayout
+                    android:id="@+id/routAnotherAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <RelativeLayout
+                        android:id="@+id/routPostcode2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/size_8dp"
+                        android:layout_marginBottom="@dimen/size_14dp">
+
+                        <com.balysv.materialripple.MaterialRippleLayout
+                            android:id="@+id/btnSearch2"
+                            android:layout_width="@dimen/size_100dp"
+                            android:layout_height="@dimen/size_36dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginTop="@dimen/size_10dp"
+                            android:background="@drawable/search_btn_bg"
+                            app:mrl_rippleColor="@color/colorRippleColor"
+                            app:mrl_rippleDelayClick="true"
+                            app:mrl_rippleDuration="@string/ripple_duration"
+                            app:mrl_rippleHover="true"
+                            app:mrl_rippleOverlay="true">
+
+                            <TextView
+                                android:id="@+id/txtSearch2"
+                                style="@style/SmallFont"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:text="@string/btn_search"
+                                android:textAllCaps="false"
+                                android:textColor="@color/colorAccent"
+                                android:textSize="@dimen/text_size_15sp" />
+                        </com.balysv.materialripple.MaterialRippleLayout>
+
+                        <com.rengwuxian.materialedittext.MaterialEditText
+                            android:id="@+id/edtPostCode2"
+                            style="@style/SmallFont"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/size_14dp"
+                            android:layout_toStartOf="@+id/btnSearch2"
+                            android:focusable="false"
+                            android:focusableInTouchMode="true"
+                            android:hint="@string/post_code"
+                            android:imeOptions="actionNext"
+                            android:inputType="text"
+                            android:text="@={data.second_pincode}"
+                            app:met_errorColor="@color/colorErrorColor"
+                            app:met_floatingLabel="highlight"
+                            app:met_floatingLabelTextColor="@color/colorFloatingLabelText"
+                            app:met_singleLineEllipsis="false"
+                            app:met_textColor="@color/colorPrimaryText"
+                            app:met_textColorHint="@color/colorHint"
+                            app:met_underlineColor="@color/colorUnderline" />
+
+                    </RelativeLayout>
+
+                    <com.rengwuxian.materialedittext.MaterialEditText
+                        android:id="@+id/edtStreet2"
+                        style="@style/SmallFont"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/size_14dp"
+                        android:focusableInTouchMode="true"
+                        android:hint="@string/street"
+                        android:imeOptions="actionNext"
+                        android:inputType="text"
+                        android:text="@={data.second_street_address}"
+                        android:textColorHint="@color/colorHint"
+                        app:met_errorColor="@color/colorErrorColor"
+                        app:met_floatingLabel="highlight"
+                        app:met_floatingLabelTextColor="@color/colorFloatingLabelText"
+                        app:met_singleLineEllipsis="false"
+                        app:met_textColor="@color/colorPrimaryText"
+                        app:met_textColorHint="@color/colorHint"
+                        app:met_underlineColor="@color/colorUnderline" />
+
+                    <com.rengwuxian.materialedittext.MaterialEditText
+                        android:id="@+id/edtCity2"
+                        style="@style/SmallFont"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/size_14dp"
+                        android:focusableInTouchMode="true"
+                        android:hint="@string/city"
+                        android:imeOptions="actionNext"
+                        android:inputType="text"
+                        android:text="@={data.second_city}"
+                        android:textColorHint="@color/colorHint"
+                        app:met_errorColor="@color/colorErrorColor"
+                        app:met_floatingLabel="highlight"
+                        app:met_floatingLabelTextColor="@color/colorFloatingLabelText"
+                        app:met_singleLineEllipsis="false"
+                        app:met_textColor="@color/colorPrimaryText"
+                        app:met_textColorHint="@color/colorHint"
+                        app:met_underlineColor="@color/colorUnderline" />
+
+                    <com.rengwuxian.materialedittext.MaterialEditText
+                        android:id="@+id/edtCountry2"
+                        style="@style/SmallFont"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/size_14dp"
+                        android:focusable="false"
+                        android:focusableInTouchMode="true"
+                        android:hint="@string/country"
+                        android:imeOptions="actionNext"
+                        android:inputType="text"
+                        android:text="@={data.second_country}"
+                        android:textColorHint="@color/colorHint"
+                        app:met_errorColor="@color/colorErrorColor"
+                        app:met_floatingLabel="highlight"
+                        app:met_floatingLabelTextColor="@color/colorFloatingLabelText"
+                        app:met_singleLineEllipsis="false"
+                        app:met_textColor="@color/colorPrimaryText"
+                        app:met_textColorHint="@color/colorHint"
+                        app:met_underlineColor="@color/colorUnderline" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+
+        <com.balysv.materialripple.MaterialRippleLayout
+            android:id="@+id/btnNext"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/save_button_height_50dp"
+            android:layout_alignParentBottom="true"
+            android:visibility="visible"
+            app:mrl_rippleColor="@color/colorRippleColor"
+            app:mrl_rippleDelayClick="true"
+            app:mrl_rippleDuration="@string/ripple_duration"
+            app:mrl_rippleHover="true"
+            app:mrl_rippleOverlay="true">
+
+            <TextView
+                android:id="@+id/txtNext"
+                style="@style/SmallFont"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorAccent"
+                android:fontFamily="@string/font_family_medium"
+                android:gravity="center"
+                android:text="@string/submit"
+                android:textColor="@color/colorWhite" />
+        </com.balysv.materialripple.MaterialRippleLayout>
+
+    </RelativeLayout>
+</layout>
+

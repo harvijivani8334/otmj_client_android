@@ -1,0 +1,7 @@
+<resources>
+    <dimen name="dialog_text_size">6sp</dimen>
+    <dimen name="progressbar_size">36dp</dimen>
+    <dimen name="progressbar_padding_size">5dp</dimen>
+    <dimen name="size_11dp">11dp</dimen>
+    <dimen name="size_21dp">21dp</dimen>
+</resources>

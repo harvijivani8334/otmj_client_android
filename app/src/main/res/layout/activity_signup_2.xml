@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="signUpRequest"
+            type="com.app.otmjobs.authentication.data.model.SignUpRequest" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:focusableInTouchMode="true">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar_main" />
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/btnNext"
+            android:layout_below="@+id/toolbar">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <RelativeLayout
+                    android:id="@+id/routPostcode"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/size_20dp"
+                    android:layout_marginTop="@dimen/size_25dp"
+                    android:layout_marginEnd="@dimen/size_20dp"
+                    android:layout_marginBottom="@dimen/size_14dp">
+
+                    <com.balysv.materialripple.MaterialRippleLayout
+                        android:id="@+id/btnSearch"
+                        android:layout_width="@dimen/size_100dp"
+                        android:layout_height="@dimen/size_36dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="@dimen/size_10dp"
+                        android:background="@drawable/search_btn_bg"
+                        app:mrl_rippleColor="@color/colorRippleColor"
+                        app:mrl_rippleDelayClick="true"
+                        app:mrl_rippleDuration="@string/ripple_duration"
+                        app:mrl_rippleHover="true"
+                        app:mrl_rippleOverlay="true">
+
+                        <TextView
+                            android:id="@+id/txtSearch"
+                            style="@style/SmallFont"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="@string/btn_search"
+                            android:textAllCaps="false"
+                            android:textColor="@color/colorAccent" />
+                    </com.balysv.materialripple.MaterialRippleLayout>
+
+                    <com.rengwuxian.materialedittext.MaterialEditText
+                        android:id="@+id/edtPostCode"
+                        style="@style/SmallFont"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/size_14dp"
+                        android:layout_toStartOf="@+id/btnSearch"
+                        android:focusable="false"
+                        android:focusableInTouchMode="true"
+                        android:hint="@string/post_code"
+                        android:imeOptions="actionNext"
+                        android:inputType="text"
+                        android:text="@={signUpRequest.pin_code}"
+                        app:met_errorColor="@color/colorErrorColor"
+                        app:met_floatingLabel="normal"
+                        app:met_floatingLabelTextColor="@color/colorFloatingLabelText"
+                        app:met_singleLineEllipsis="false"
+                        app:met_textColor="@color/colorPrimaryText"
+                        app:met_textColorHint="@color/colorHint"
+                        app:met_underlineColor="@color/colorUnderline" />
+
+                </RelativeLayout>
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/edtStreet"
+                    style="@style/SmallFont"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/routPostcode"
+                    android:layout_marginStart="@dimen/size_20dp"
+                    android:layout_marginEnd="@dimen/size_20dp"
+                    android:layout_marginBottom="@dimen/size_14dp"
+                    android:hint="@string/street"
+                    android:imeOptions="actionNext"
+                    android:text="@={signUpRequest.street_address}"
+                    app:met_errorColor="@color/colorErrorColor"
+                    app:met_floatingLabel="normal"
+                    app:met_floatingLabelTextColor="@color/colorFloatingLabelText"
+                    app:met_singleLineEllipsis="false"
+                    app:met_textColor="@color/colorPrimaryText"
+                    app:met_textColorHint="@color/colorHint"
+                    app:met_underlineColor="@color/colorUnderline" />
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/edtCity"
+                    style="@style/SmallFont"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/edtStreet"
+                    android:layout_marginStart="@dimen/size_20dp"
+                    android:layout_marginEnd="@dimen/size_20dp"
+                    android:layout_marginBottom="@dimen/size_14dp"
+                    android:hint="@string/city"
+                    android:imeOptions="actionNext"
+                    android:text="@={signUpRequest.city}"
+                    app:met_errorColor="@color/colorErrorColor"
+                    app:met_floatingLabel="normal"
+                    app:met_floatingLabelTextColor="@color/colorFloatingLabelText"
+                    app:met_singleLineEllipsis="false"
+                    app:met_textColor="@color/colorPrimaryText"
+                    app:met_textColorHint="@color/colorHint"
+                    app:met_underlineColor="@color/colorUnderline" />
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/edtCountry"
+                    style="@style/SmallFont"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/edtCity"
+                    android:layout_marginStart="@dimen/size_20dp"
+                    android:layout_marginEnd="@dimen/size_20dp"
+                    android:layout_marginBottom="@dimen/size_14dp"
+                    android:focusable="false"
+                    android:hint="@string/country"
+                    app:met_errorColor="@color/colorErrorColor"
+                    app:met_floatingLabel="normal"
+                    app:met_floatingLabelTextColor="@color/colorFloatingLabelText"
+                    app:met_singleLineEllipsis="false"
+                    app:met_textColor="@color/colorPrimaryText"
+                    app:met_textColorHint="@color/colorHint"
+                    app:met_underlineColor="@color/colorUnderline" />
+
+                <RelativeLayout
+                    android:id="@+id/routPhoneNumberView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/edtCountry"
+                    android:layout_marginStart="@dimen/size_20dp"
+                    android:layout_marginEnd="@dimen/size_20dp"
+                    android:layout_marginBottom="@dimen/size_14dp"
+                    android:visibility="visible">
+
+                    <RelativeLayout
+                        android:id="@+id/routExtensionView"
+                        android:layout_width="@dimen/size_66dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true">
+
+                        <com.rengwuxian.materialedittext.MaterialEditText
+                            style="@style/SmallFont"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:focusable="false"
+                            android:inputType="number"
+                            android:textColor="@color/colorPrimaryText"
+                            android:visibility="gone"
+                            app:backgroundTint="@color/transparent"
+                            app:met_errorColor="@color/colorErrorColor"
+                            app:met_floatingLabel="none"
+                            app:met_floatingLabelTextColor="@color/colorFloatingLabelText"
+                            app:met_singleLineEllipsis="false"
+                            app:met_textColor="@color/colorPrimaryText"
+                            app:met_textColorHint="@color/colorHint"
+                            app:met_underlineColor="@color/colorUnderline" />
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/imgCountryFlag"
+                            android:layout_width="@dimen/size_40dp"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:adjustViewBounds="true" />
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="@dimen/size_25dp"
+                            android:layout_height="@dimen/size_25dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            app:srcCompat="@drawable/ic_arrow_down" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toEndOf="@+id/routExtensionView"
+                        android:visibility="visible">
+
+                        <com.rengwuxian.materialedittext.MaterialEditText
+                            android:id="@+id/edtPhoneExtension"
+                            style="@style/SmallFont"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="false"
+                            android:layout_marginStart="@dimen/size_4dp"
+                            android:layout_marginEnd="@dimen/size_9dp"
+                            android:focusable="false"
+                            android:imeOptions="actionNext"
+                            android:textColor="@color/colorPrimaryText"
+                            android:visibility="gone"
+                            app:backgroundTint="@color/transparent"
+                            app:met_errorColor="@color/colorErrorColor"
+                            app:met_floatingLabel="none"
+                            app:met_floatingLabelTextColor="@color/colorFloatingLabelText"
+                            app:met_hideUnderline="true"
+                            app:met_singleLineEllipsis="false"
+                            app:met_textColor="@color/colorPrimaryText"
+                            app:met_textColorHint="@color/colorHint"
+                            app:met_underlineColor="@color/colorAccent" />
+
+                        <com.rengwuxian.materialedittext.MaterialEditText
+                            android:id="@+id/edtPhone"
+                            style="@style/SmallFont"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="false"
+                            android:layout_toEndOf="@+id/edtPhoneExtension"
+                            android:hint="@string/mobile_number"
+                            android:imeOptions="actionDone"
+                            android:inputType="number"
+                            android:maxLength="10"
+                            android:text="@={signUpRequest.phone_number}"
+                            android:textColor="@color/colorPrimaryText"
+                            app:backgroundTint="@color/transparent"
+                            app:met_errorColor="@color/colorErrorColor"
+                            app:met_floatingLabel="none"
+                            app:met_floatingLabelTextColor="@color/colorFloatingLabelText"
+                            app:met_textColor="@color/colorPrimaryText"
+                            app:met_textColorHint="@color/colorHint"
+                            app:met_underlineColor="@color/colorUnderline" />
+
+                    </RelativeLayout>
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+        </androidx.core.widget.NestedScrollView>
+
+        <com.balysv.materialripple.MaterialRippleLayout
+            android:id="@+id/btnNext"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/save_button_height_50dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="@dimen/size_20dp"
+            android:visibility="visible"
+            app:mrl_rippleColor="@color/colorRippleColor"
+            app:mrl_rippleDelayClick="true"
+            app:mrl_rippleDuration="@string/ripple_duration"
+            app:mrl_rippleHover="true"
+            app:mrl_rippleOverlay="true">
+
+            <TextView
+                android:id="@+id/txtNext"
+                style="@style/SmallFont"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorAccent"
+                android:fontFamily="@string/font_family_medium"
+                android:gravity="center"
+                android:text="@string/create_Account"
+                android:textColor="@color/colorWhite" />
+        </com.balysv.materialripple.MaterialRippleLayout>
+
+    </RelativeLayout>
+</layout>

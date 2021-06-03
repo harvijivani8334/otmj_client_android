@@ -1,0 +1,44 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="fileDetail"
+            type="com.app.otmjobs.common.data.model.FileDetail" />
+    </data>
+
+    <RelativeLayout
+        android:id="@+id/routMainView"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_112dp">
+
+        <ImageView
+            android:id="@+id/imgGallery"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:layout_margin="@dimen/size_1dp"
+            android:scaleType="centerCrop" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imgCamera"
+            android:layout_width="@dimen/size_50dp"
+            android:layout_height="@dimen/size_50dp"
+            android:layout_centerInParent="true"
+            android:visibility="gone"
+            app:srcCompat="@drawable/ic_camera" />
+
+        <ImageView
+            android:id="@+id/imgCheck"
+            android:layout_width="@dimen/size_20dp"
+            android:layout_height="@dimen/size_20dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_centerInParent="true"
+            android:layout_margin="@dimen/size_6dp"
+            android:visibility="invisible" />
+
+    </RelativeLayout>
+
+</layout>

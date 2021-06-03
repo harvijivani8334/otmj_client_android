@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:custom="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+
+    </data>
+
+    <RelativeLayout
+        android:id="@+id/routMainView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar_main" />
+
+        <View
+            android:id="@+id/toolbarDivider"
+            style="@style/ToolbarDivider"
+            android:layout_below="@+id/toolbar" />
+
+        <com.isseiaoki.simplecropview.CropImageView
+            android:id="@+id/cropImageView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/divider"
+            android:layout_below="@+id/toolbarDivider"
+            android:padding="@dimen/size_14dp"
+            custom:scv_background_color="@color/colorWindowBackground"
+            custom:scv_crop_mode="fit_image"
+            custom:scv_frame_color="@color/colorAccent"
+            custom:scv_frame_stroke_weight="@dimen/size_1dp"
+            custom:scv_guide_color="@color/colorAccent"
+            custom:scv_guide_show_mode="show_always"
+            custom:scv_guide_stroke_weight="@dimen/size_1dp"
+            custom:scv_handle_color="@color/colorAccent"
+            custom:scv_handle_show_mode="show_always"
+            custom:scv_handle_size="@dimen/size_11dp"
+            custom:scv_min_frame_size="@dimen/size_50dp"
+            custom:scv_overlay_color="#AA1C1C1C"
+            custom:scv_touch_padding="@dimen/size_8dp" />
+
+        <View
+            android:id="@+id/divider"
+            style="@style/Divider"
+            android:layout_above="@+id/routManageCropView" />
+
+        <RelativeLayout
+            android:id="@+id/routManageCropView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:orientation="horizontal"
+            android:padding="@dimen/size_11dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgRotateLeft"
+                    android:layout_width="@dimen/size_38dp"
+                    android:layout_height="@dimen/size_38dp"
+                    android:layout_marginEnd="@dimen/size_9dp"
+                    android:padding="@dimen/size_6dp"
+                    app:srcCompat="@drawable/ic_rotate_left" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgRotateRight"
+                    android:layout_width="@dimen/size_38dp"
+                    android:layout_height="@dimen/size_38dp"
+                    android:layout_marginStart="@dimen/size_9dp"
+                    android:padding="@dimen/size_6dp"
+                    app:srcCompat="@drawable/ic_rotate_right" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+</layout>

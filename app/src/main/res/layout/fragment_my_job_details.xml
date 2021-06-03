@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="info"
+            type="com.app.otmjobs.managejob.data.model.PostJobRequest" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txtCategory"
+            style="@style/MediumFontTextView"
+            android:layout_marginStart="@dimen/size_20dp"
+            android:layout_marginTop="@dimen/size_16dp"
+            android:layout_marginEnd="@dimen/size_20dp"
+            android:fontFamily="@string/font_family_medium"
+            android:text="@{info.trade_name}"
+            android:textColor="@color/colorPrimaryText"
+            android:textSize="@dimen/text_size_17sp" />
+
+        <TextView
+            android:id="@+id/txtSubCategory"
+            style="@style/MediumFontTextView"
+            android:layout_marginStart="@dimen/size_20dp"
+            android:layout_marginEnd="@dimen/size_20dp"
+            android:text="@{info.job_title}"
+            android:textColor="@color/colorPrimaryText"
+            android:textSize="@dimen/text_size_15sp" />
+
+        <TextView
+            android:id="@+id/txtDescription"
+            style="@style/MediumFontTextView"
+            android:layout_marginStart="@dimen/size_20dp"
+            android:layout_marginTop="@dimen/size_2dp"
+            android:layout_marginEnd="@dimen/size_20dp"
+            android:layout_marginBottom="@dimen/size_6dp"
+            android:text="@{info.job_description}"
+            android:textColor="@color/colorSecondaryLightText"
+            android:textSize="@dimen/text_size_14sp" />
+
+        <TextView
+            android:id="@+id/txtPhotos"
+            style="@style/SmallFontTextView"
+            android:layout_marginStart="@dimen/size_20dp"
+            android:layout_marginTop="@dimen/size_8dp"
+            android:layout_marginEnd="@dimen/size_20dp"
+            android:fontFamily="@string/font_family_medium"
+            android:text="@string/photos"
+            android:textColor="@color/colorPrimaryText"
+            android:visibility="gone" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvPhotos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/size_20dp"
+            android:layout_marginTop="@dimen/size_8dp"
+            android:layout_marginEnd="@dimen/size_20dp"
+            android:layout_marginBottom="@dimen/size_8dp"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+        <View
+            style="@style/Divider"
+            android:layout_marginTop="@dimen/size_8dp" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/size_20dp"
+            android:layout_marginTop="@dimen/size_16dp"
+            android:layout_marginEnd="@dimen/size_20dp"
+            android:layout_marginBottom="@dimen/size_16dp">
+
+            <TextView
+                style="@style/MediumFontTextView"
+                android:text="@string/budget"
+                android:textColor="@color/colorSecondaryLightText"
+                android:textSize="@dimen/text_size_16sp" />
+
+            <TextView
+                android:id="@+id/txtBudget"
+                style="@style/MediumFontTextView"
+                android:layout_alignParentEnd="true"
+                android:fontFamily="@string/font_family_medium"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="@dimen/text_size_16sp" />
+
+        </RelativeLayout>
+
+        <View style="@style/Divider" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/size_20dp"
+            android:layout_marginTop="@dimen/size_16dp"
+            android:layout_marginEnd="@dimen/size_20dp"
+            android:layout_marginBottom="@dimen/size_16dp">
+
+            <TextView
+                style="@style/MediumFontTextView"
+                android:text="@string/how_soon"
+                android:textColor="@color/colorSecondaryLightText"
+                android:textSize="@dimen/text_size_16sp" />
+
+            <TextView
+                style="@style/MediumFontTextView"
+                android:layout_alignParentEnd="true"
+                android:fontFamily="@string/font_family_medium"
+                android:text="@{info.expected_start_time}"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="@dimen/text_size_16sp" />
+
+        </RelativeLayout>
+
+        <View style="@style/Divider" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/size_20dp"
+            android:layout_marginTop="@dimen/size_16dp"
+            android:layout_marginEnd="@dimen/size_20dp"
+            android:layout_marginBottom="@dimen/size_16dp">
+
+            <TextView
+                style="@style/MediumFontTextView"
+                android:text="@string/posted_on"
+                android:textColor="@color/colorSecondaryLightText"
+                android:textSize="@dimen/text_size_16sp" />
+
+            <TextView
+                style="@style/MediumFontTextView"
+                android:layout_alignParentEnd="true"
+                android:fontFamily="@string/font_family_medium"
+                android:text="@{info.date_added}"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="@dimen/text_size_16sp" />
+
+        </RelativeLayout>
+
+        <View style="@style/Divider" />
+
+    </LinearLayout>
+</layout>

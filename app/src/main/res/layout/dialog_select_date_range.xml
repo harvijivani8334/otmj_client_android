@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWindowBackground"
+        android:orientation="vertical"
+        android:paddingStart="@dimen/size_20dp"
+        android:paddingTop="@dimen/size_20dp"
+        android:paddingEnd="@dimen/size_20dp"
+        android:paddingBottom="@dimen/size_20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/edtFromDate"
+                style="@style/SmallFont"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/size_7dp"
+                android:layout_weight="1"
+                android:focusable="false"
+                android:hint="@string/from_date"
+                android:inputType="text"
+                android:textColor="@color/colorPrimaryText"
+                app:met_errorColor="@color/colorErrorColor"
+                app:met_floatingLabel="normal"
+                app:met_floatingLabelTextColor="@color/colorFloatingLabelText"
+                app:met_singleLineEllipsis="false"
+                app:met_textColor="@color/colorPrimaryText"
+                app:met_textColorHint="@color/colorHint"
+                app:met_underlineColor="@color/colorUnderline" />
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/edtToDate"
+                style="@style/SmallFont"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/size_7dp"
+                android:layout_weight="1"
+                android:focusable="false"
+                android:hint="@string/to_date"
+                android:inputType="text"
+                android:textColor="@color/colorPrimaryText"
+                app:met_errorColor="@color/colorErrorColor"
+                app:met_floatingLabel="normal"
+                app:met_floatingLabelTextColor="@color/colorFloatingLabelText"
+                app:met_singleLineEllipsis="false"
+                app:met_textColor="@color/colorPrimaryText"
+                app:met_textColorHint="@color/colorHint"
+                app:met_underlineColor="@color/colorUnderline" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/size_20dp"
+            android:weightSum="2">
+
+            <TextView
+                android:id="@+id/txtCancel"
+                style="@style/SmallFont"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/size_5dp"
+                android:layout_weight="1"
+                android:background="@drawable/search_btn_bg"
+                android:gravity="center"
+                android:padding="@dimen/size_11dp"
+                android:text="@string/cancel"
+                android:textAllCaps="false"
+                android:textColor="@color/colorPrimaryText" />
+
+            <TextView
+                android:id="@+id/txtSelect"
+                style="@style/SmallFont"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/size_5dp"
+                android:layout_weight="1"
+                android:background="@drawable/rounded_button_bg"
+                android:gravity="center"
+                android:padding="@dimen/size_11dp"
+                android:text="@string/select"
+                android:textAllCaps="false"
+                android:textColor="@color/colorWhite" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</layout>

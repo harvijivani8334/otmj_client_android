@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:focusableInTouchMode="true"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/routSettings"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:paddingStart="@dimen/size_21dp"
+            android:paddingTop="@dimen/size_21dp"
+            android:paddingEnd="@dimen/size_21dp"
+            android:paddingBottom="@dimen/size_21dp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imgSettings"
+                android:layout_width="@dimen/size_21dp"
+                android:layout_height="@dimen/size_21dp"
+                android:layout_centerVertical="true"
+                android:tint="@color/colorPrimaryText"
+                app:srcCompat="@drawable/ic_settings" />
+
+            <TextView
+                android:id="@+id/txtSettings"
+                style="@style/MediumFontTextView"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/size_16dp"
+                android:layout_toEndOf="@+id/imgSettings"
+                android:fontFamily="@string/font_family_medium"
+                android:text="@string/settings"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="@dimen/text_size_16sp" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imgSettingsCompleted"
+                android:layout_width="@dimen/size_13dp"
+                android:layout_height="@dimen/size_13dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:tint="@color/colorHint"
+                android:visibility="visible"
+                app:srcCompat="@drawable/ic_arrow_right" />
+
+        </RelativeLayout>
+
+        <View
+            style="@style/Divider" />
+
+        <RelativeLayout
+            android:id="@+id/routAppInformation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:paddingStart="@dimen/size_21dp"
+            android:paddingTop="@dimen/size_21dp"
+            android:paddingEnd="@dimen/size_21dp"
+            android:paddingBottom="@dimen/size_21dp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imgAppInformation"
+                android:layout_width="@dimen/size_21dp"
+                android:layout_height="@dimen/size_21dp"
+                android:layout_centerVertical="true"
+                android:tint="@color/colorPrimaryText"
+                app:srcCompat="@drawable/ic_info" />
+
+            <TextView
+                android:id="@+id/txtAppInformation"
+                style="@style/MediumFontTextView"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/size_16dp"
+                android:layout_toEndOf="@+id/imgAppInformation"
+                android:fontFamily="@string/font_family_medium"
+                android:text="@string/app_information"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="@dimen/text_size_16sp" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="@dimen/size_13dp"
+                android:layout_height="@dimen/size_13dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:tint="@color/colorHint"
+                android:visibility="visible"
+                app:srcCompat="@drawable/ic_arrow_right" />
+
+        </RelativeLayout>
+
+        <View
+            style="@style/Divider" />
+
+        <RelativeLayout
+            android:id="@+id/routLogout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:paddingStart="@dimen/size_25dp"
+            android:paddingTop="@dimen/size_21dp"
+            android:paddingEnd="@dimen/size_21dp"
+            android:paddingBottom="@dimen/size_21dp">
+
+            <TextView
+                style="@style/MediumFontTextView"
+                android:layout_centerVertical="true"
+                android:fontFamily="@string/font_family_medium"
+                android:text="@string/logout"
+                android:textColor="@color/red"
+                android:textSize="@dimen/text_size_14sp" />
+
+            <TextView
+                style="@style/MediumFontTextView"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:fontFamily="@string/font_family_medium"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="@dimen/text_size_13sp" />
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+</layout>

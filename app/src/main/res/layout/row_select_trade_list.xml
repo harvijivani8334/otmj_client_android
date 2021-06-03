@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="info"
+            type="com.app.otmjobs.managejob.data.model.TradeInfo" />
+
+    </data>
+
+    <RelativeLayout
+        android:id="@+id/routMainView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/size_20dp"
+        android:paddingTop="@dimen/size_11dp"
+        android:paddingEnd="@dimen/size_18dp"
+        android:paddingBottom="@dimen/size_11dp">
+
+        <TextView
+            android:id="@+id/txtTitle"
+            style="@style/SmallFontTextView"
+            android:layout_width="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@+id/imgCheck"
+            android:text="@{info.trade_name}"
+            android:textColor="@color/colorPrimaryText"
+            android:textSize="@dimen/text_size_17sp" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imgCheck"
+            android:layout_width="@dimen/size_16dp"
+            android:layout_height="@dimen/size_16dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            app:srcCompat="@drawable/ic_check_circle_green_24dp" />
+
+    </RelativeLayout>
+</layout>
+
+

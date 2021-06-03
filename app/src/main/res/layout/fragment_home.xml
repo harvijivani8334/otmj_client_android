@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:focusableInTouchMode="true">
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorTitleBg"
+            app:tabGravity="fill"
+            app:tabIndicatorColor="@color/colorAccent"
+            app:tabIndicatorHeight="@dimen/size_3dp"
+            app:tabMode="fixed"
+            app:tabPaddingBottom="@dimen/size_5dp"
+            app:tabPaddingEnd="@dimen/size_8dp"
+            app:tabPaddingStart="@dimen/size_8dp"
+            app:tabPaddingTop="@dimen/size_5dp"
+            app:tabSelectedTextColor="@color/colorAccent"
+            app:tabTextAppearance="@style/MyCustomTextAppearance"
+            app:tabTextColor="@color/colorDashBoardInActiveTab" />
+
+        <View
+            android:id="@+id/divider"
+            style="@style/Divider"
+            android:layout_below="@+id/tabs" />
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/divider" />
+
+    </RelativeLayout>
+</layout>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:ignore="ContentDescription">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar_main" />
+
+        <View
+            android:id="@+id/toolbarDivider"
+            style="@style/ToolbarDivider"
+            android:layout_below="@+id/toolbar" />
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/vpPhotos"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/dividerBottom"
+            android:layout_below="@+id/toolbarDivider" />
+
+        <View
+            android:id="@+id/dividerBottom"
+            style="@style/ToolbarDivider"
+            android:layout_above="@+id/txtImageCount" />
+
+        <TextView
+            android:id="@+id/txtImageCount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:gravity="center"
+            android:padding="@dimen/size_8dp"
+            android:text="1/4"
+            android:textColor="@color/colorPrimaryText"
+            android:textSize="@dimen/text_size_13sp" />
+    </RelativeLayout>
+</layout>

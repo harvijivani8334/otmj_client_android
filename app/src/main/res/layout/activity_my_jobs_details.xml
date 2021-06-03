@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="info"
+            type="com.app.otmjobs.managejob.data.model.PostJobRequest" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:focusableInTouchMode="true">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar_main" />
+
+        <View
+            android:id="@+id/toolbarDivider"
+            style="@style/ToolbarDivider"
+            android:layout_below="@+id/toolbar" />
+
+        <RelativeLayout
+            android:id="@+id/routMainView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/toolbarDivider"
+            android:visibility="gone">
+
+            <RelativeLayout
+                android:id="@+id/routHeaderView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/size_14dp"
+                android:paddingBottom="@dimen/size_4dp">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgJob"
+                    android:layout_width="@dimen/size_140dp"
+                    android:layout_height="@dimen/size_100dp"
+                    android:layout_marginStart="@dimen/size_14dp"
+                    android:background="@color/light_gray"
+                    android:scaleType="centerCrop" />
+
+                <TextView
+                    android:id="@+id/txtNoImage"
+                    style="@style/SmallFontTextView"
+                    android:layout_alignStart="@id/imgJob"
+                    android:layout_alignTop="@id/imgJob"
+                    android:layout_alignEnd="@id/imgJob"
+                    android:layout_alignBottom="@id/imgJob"
+                    android:gravity="center"
+                    android:text="@string/no_image"
+                    android:textColor="@color/colorSecondaryExtraLightText" />
+
+                <TextView
+                    android:id="@+id/txtStatus"
+                    style="@style/VerySmallFontTextView"
+                    android:layout_alignStart="@id/imgJob"
+                    android:background="@color/colorAccent"
+                    android:ellipsize="end"
+                    android:includeFontPadding="false"
+                    android:paddingStart="@dimen/size_5dp"
+                    android:paddingTop="@dimen/size_4dp"
+                    android:paddingEnd="@dimen/size_5dp"
+                    android:paddingBottom="@dimen/size_4dp"
+                    android:singleLine="true"
+                    android:text="Completed"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/text_size_11sp"
+                    android:visibility="gone" />
+
+                <LinearLayout
+                    android:id="@+id/routPhotosCountView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignEnd="@id/imgJob"
+                    android:layout_alignBottom="@id/imgJob"
+                    android:background="#66000000"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingStart="@dimen/size_5dp"
+                    android:paddingTop="@dimen/size_4dp"
+                    android:paddingEnd="@dimen/size_5dp"
+                    android:paddingBottom="@dimen/size_4dp"
+                    android:visibility="gone">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="@dimen/size_14dp"
+                        android:layout_height="@dimen/size_14dp"
+                        android:tint="@color/colorWhite"
+                        app:srcCompat="@drawable/ic_empty_place_holder" />
+
+                    <TextView
+                        android:id="@+id/txtTotalImage"
+                        style="@style/VerySmallFontTextView"
+                        android:layout_marginStart="@dimen/size_5dp"
+                        android:ellipsize="end"
+                        android:includeFontPadding="false"
+                        android:singleLine="true"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="@dimen/text_size_13sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/size_14dp"
+                    android:layout_toEndOf="@+id/imgJob"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/size_9dp">
+
+                        <TextView
+                            android:id="@+id/txtJobName"
+                            style="@style/SmallFontTextView"
+                            android:layout_width="match_parent"
+                            android:layout_centerVertical="true"
+                            android:layout_toStartOf="@+id/imgMenu"
+                            android:ellipsize="end"
+                            android:fontFamily="@string/font_family_medium"
+                            android:includeFontPadding="false"
+                            android:singleLine="true"
+                            android:text="@{info.trade_name}"
+                            android:textColor="@color/colorPrimaryText" />
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/imgMenu"
+                            android:layout_width="@dimen/size_24dp"
+                            android:layout_height="@dimen/size_24dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:padding="@dimen/size_2dp"
+                            android:visibility="gone"
+                            app:srcCompat="@drawable/ic_more" />
+
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/txtJobDesc"
+                        style="@style/SmallFontTextView"
+                        android:layout_marginEnd="@dimen/size_15dp"
+                        android:ellipsize="end"
+                        android:includeFontPadding="false"
+                        android:singleLine="true"
+                        android:text="@{info.job_title}"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textSize="@dimen/text_size_13sp" />
+
+                    <TextView
+                        android:id="@+id/txtBudget"
+                        style="@style/SmallFontTextView"
+                        android:layout_marginTop="@dimen/size_5dp"
+                        android:layout_marginEnd="@dimen/size_15dp"
+                        android:ellipsize="end"
+                        android:singleLine="true"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="@dimen/text_size_13sp" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/size_2dp"
+                        android:layout_marginEnd="@dimen/size_16dp">
+
+                        <TextView
+                            style="@style/SmallFontTextView"
+                            android:layout_marginEnd="@dimen/size_12dp"
+                            android:ellipsize="end"
+                            android:singleLine="true"
+                            android:text="@string/posted_on"
+                            android:textColor="@color/colorSecondaryText"
+                            android:textSize="@dimen/text_size_13sp" />
+
+                        <TextView
+                            style="@style/SmallFontTextView"
+                            android:layout_alignParentEnd="true"
+                            android:ellipsize="end"
+                            android:singleLine="true"
+                            android:text="@{info.date_added}"
+                            android:textColor="@color/colorSecondaryText"
+                            android:textSize="@dimen/text_size_13sp" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/size_2dp"
+                        android:layout_marginEnd="@dimen/size_15dp"
+                        android:visibility="gone">
+
+                        <TextView
+                            style="@style/SmallFontTextView"
+                            android:layout_marginEnd="@dimen/size_12dp"
+                            android:ellipsize="end"
+                            android:singleLine="true"
+                            android:text="@string/completed_on"
+                            android:textColor="@color/colorSecondaryText"
+                            android:textSize="@dimen/text_size_13sp" />
+
+                        <TextView
+                            style="@style/SmallFontTextView"
+                            android:layout_alignParentEnd="true"
+                            android:ellipsize="end"
+                            android:singleLine="true"
+                            android:text="11 Mar 2021"
+                            android:textColor="@color/colorSecondaryText"
+                            android:textSize="@dimen/text_size_13sp" />
+
+                    </RelativeLayout>
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tabs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/routHeaderView"
+                app:tabGravity="fill"
+                app:tabIndicatorColor="@color/colorAccent"
+                app:tabIndicatorHeight="@dimen/size_3dp"
+                app:tabMode="fixed"
+                app:tabPaddingBottom="@dimen/size_5dp"
+                app:tabPaddingEnd="@dimen/size_8dp"
+                app:tabPaddingStart="@dimen/size_8dp"
+                app:tabPaddingTop="@dimen/size_5dp"
+                app:tabSelectedTextColor="@color/colorAccent"
+                app:tabTextAppearance="@style/MyCustomTextAppearance"
+                app:tabTextColor="@color/colorDashBoardInActiveTab" />
+
+            <View
+                android:id="@+id/divider"
+                style="@style/Divider"
+                android:layout_height="@dimen/size_10dp"
+                android:layout_below="@+id/tabs" />
+
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/viewPager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/divider" />
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+</layout>

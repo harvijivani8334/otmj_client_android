@@ -1,0 +1,4 @@
+rootProject.name = "OTM Jobs"
+include ':app'
+include ':utilities'
+include ':imagepickers'

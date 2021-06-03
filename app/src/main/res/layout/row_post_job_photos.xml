@@ -1,0 +1,42 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="fileDetail"
+            type="com.app.otmjobs.common.data.model.FileDetail" />
+    </data>
+
+    <RelativeLayout
+        android:id="@+id/routMainView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/size_5dp">
+
+        <ImageView
+            android:id="@+id/imgGallery"
+            android:layout_width="@dimen/size_76dp"
+            android:layout_height="@dimen/size_76dp"
+            android:layout_centerInParent="true"
+            android:scaleType="centerCrop" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imgAddImages"
+            android:layout_width="@dimen/size_76dp"
+            android:layout_height="@dimen/size_76dp"
+            android:layout_centerInParent="true"
+            app:srcCompat="@drawable/ic_add_image_place_holder" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imgRemoveImage"
+            android:layout_width="@dimen/size_26dp"
+            android:layout_height="@dimen/size_26dp"
+            android:padding="@dimen/size_3dp"
+            android:tint="@color/colorBlack"
+            android:layout_alignParentEnd="true"
+            app:srcCompat="@drawable/ic_cancel" />
+
+    </RelativeLayout>
+
+</layout>

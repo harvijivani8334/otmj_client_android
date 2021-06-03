@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPopupBackground"
+        android:orientation="vertical"
+        android:paddingTop="@dimen/size_10dp"
+        android:paddingBottom="@dimen/size_10dp">
+
+        <LinearLayout
+            android:id="@+id/routCamera"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/size_16dp"
+            android:paddingTop="@dimen/size_16dp"
+            android:paddingEnd="@dimen/size_16dp"
+            android:paddingBottom="@dimen/size_16dp"
+            android:visibility="gone">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="@dimen/size_26dp"
+                android:layout_height="@dimen/size_26dp"
+                android:layout_marginEnd="@dimen/size_16dp"
+                android:tint="@color/colorAccent"
+                app:srcCompat="@drawable/ic_camera" />
+
+            <TextView
+                style="@style/MediumFontTextView"
+                android:text="@string/camera"
+                android:textColor="@color/colorPrimaryText" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/routPhotos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/size_16dp"
+            android:paddingTop="@dimen/size_16dp"
+            android:paddingEnd="@dimen/size_16dp"
+            android:paddingBottom="@dimen/size_16dp"
+            android:visibility="gone">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="@dimen/size_26dp"
+                android:layout_height="@dimen/size_26dp"
+                android:layout_marginEnd="@dimen/size_16dp"
+                android:tint="@color/colorAccent"
+                app:srcCompat="@drawable/ic_gallery" />
+
+            <TextView
+                style="@style/MediumFontTextView"
+                android:text="@string/photos"
+                android:textColor="@color/colorPrimaryText" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</layout>

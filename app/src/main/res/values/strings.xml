@@ -1,0 +1,196 @@
+<resources>
+
+    <string-array name="imageExtension" translatable="false">
+        <item>jpg</item>
+        <item>png</item>
+        <item>jpeg</item>
+    </string-array>
+
+    <string name="app_name" translatable="false">OTM Jobs</string>
+    <string name="CHANNEL_ID" translatable="false">OTM Jobs</string>
+    <!--    <string name="font_family_regular" translatable="false">sans-serif</string>-->
+    <!--    <string name="font_family_medium" translatable="false">sans-serif-medium</string>-->
+
+    <string name="font_family_medium" translatable="false">sans-serif-medium</string>
+    <string name="font_family_regular" translatable="false">sans-serif</string>
+    <string name="google_key_api" translatable="false">AIzaSyBcxNZeUe5zUqDVXAvk3fOATaXROrpbUhE</string>
+    <string name="ripple_duration" translatable="false">300</string>
+    <string name="only_text_digits" translatable="false">ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz</string>
+    <string name="nav_header_desc" translatable="false">Navigation header</string>
+    <string name="website_url" translatable="false">https://otmjobs.com</string>
+    <string name="display_date_range" translatable="false">%s - %s</string>
+    <string name="display_budget_hint" translatable="false">%s (%s)</string>
+    <string name="display_budget" translatable="false">%s%s</string>
+    <string name="desc_order" translatable="false">DESC</string>
+
+    <string name="error_access_denied">Access Denied</string>
+    <string name="error_bad_request_400">The request could not be understood by the server due to malformed syntax.</string>
+    <string name="error_unauthorized_401">The request requires user authentication. The response MUST include a WWW-Authenticate header field.</string>
+    <string name="error_forbidden_403">The server understood the request but is refusing to fulfill it.</string>
+    <string name="error_not_found_404">The server has not found anything matching the Request-URI.</string>
+    <string name="error_method_not_allowed_405">The method specified in the Request-Line is not allowed for the resource identified by the Request-URI.</string>
+    <string name="error_request_timeout_408">Your request timed out. Please retry the request.</string>
+    <string name="error_request_entity_too_large_413">The server is refusing to process a request because the request entity is larger than the server is willing or able to process.</string>
+    <string name="error_request_uri_too_long_414">The server is refusing to service the request because the Request-URI is longer than the server is willing to interpret.</string>
+    <string name="error_internal_server_error_500">The server encountered an unexpected condition which prevented it from fulfilling the request.</string>
+    <string name="error_unknown">An unknown error occurred</string>
+    <string name="msg_unauthorized">We are signing you out as we found your account access from another device</string>
+    <string name="error_network">There is a problem connecting to the Server, please check your network connection, and then try again.</string>
+    <string name="error_internet_connection">Please check your internet connection</string>
+
+    //Error Strings
+    <!--    <string name="ERR100">Parameters Missing</string>-->
+
+    <string-array name="listJobStartFrom">
+        <item>Today</item>
+        <item>In One Week</item>
+        <item>In Two Weeks</item>
+        <item>Not Decided Yet</item>
+        <item>Custom Data</item>
+    </string-array>
+
+    <string name="ok">Ok</string>
+    <string name="error_required_field">Required Field</string>
+
+    <!--Introduction-->
+    <string name="lbl_search">Search</string>
+    <string name="hint_job_title">Job Title, Keywords or Company</string>
+    <string name="hint_location">Location</string>
+    <string name="btn_search">Search</string>
+    <string name="lbl_find">Find The Job That Fits Your Life</string>
+    <string name="lbl_description">Find The Job That Fits Your LifeFind The Job That Fits Your LifeFind The Job That Fits Your Life</string>
+    <string name="log_in">Log in</string>
+    <string name="create_Account">Create Account</string>
+
+    <!--Login-->
+    <string name="hint_email_id">Email ID</string>
+    <string name="hint_password">Password</string>
+    <string name="error_pwd_mandatory">Please enter password</string>
+    <string name="error_email">Please enter email</string>
+    <string name="error_valid_email">Please enter valid email</string>
+    <string name="btn_log_in">Log In</string>
+
+    <!-- Sign In Screen -->
+    <string name="hint_user_name">Name</string>
+    <string name="hint_confirm_password">Confirm Password</string>
+    <string name="lbl_other_login">Or Login With Social</string>
+    <string name="lbl_other_signup">Or SignUp With Social</string>
+    <string name="error_pwd_min_length">Password must contain 6 to 12 characters</string>
+    <string name="error_name_min_length">Name must be more than 4 characters</string>
+    <string name="error_password_not_match">Password does not match with the confirm password</string>
+    <string name="error_name_mandatory">Please enter name</string>
+    <string name="error_code_mandatory">Please enter Code</string>
+    <string name="btn_register">Register</string>
+    <string name="btn_continue">Continue</string>
+    <string name="error_user_name">Please enter username</string>
+    <string name="lbl_forgot_password">Forgot Password?</string>
+    <string name="hint_sign_up_account">Don\'t have an account?</string>
+    <string name="sign_up">Sign Up</string>
+
+    <!-- Sign Up Screen -->
+    <string name="hint_first_name">First Name</string>
+    <string name="hint_last_name">Last Name</string>
+    <string name="move_next">Move Next</string>
+    <string name="post_code">Post Code</string>
+    <string name="address">Address</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="msg_location_permission">This application needs access to your location.</string>
+    <string name="msg_gps_enable">GPS is disabled in your device. Would you like to enable it?\n\nYou must select \"High Accuracy\" from location mode.</string>
+    <string name="error_phone_number_min_length">Phone number must contain 10 digits</string>
+    <string name="error_invalid_password">Your password must be between 6 to 30 characters which contain atleast one uppercase letter, one lowercase letter and one digit.</string>
+    <string name="cancel">Cancel</string>
+    <string name="error_empty_country">Please select country</string>
+    <string name="error_phone_number_can_not_start_with_zero">Phone number cannot start with zero</string>
+
+    <!-- DashBoard -->
+    <string name="chat">Chat</string>
+    <string name="post_job">Post Job</string>
+    <string name="my_jobs">My Jobs</string>
+    <string name="more">More</string>
+    <string name="tradesman">Tradesman</string>
+    <string name="all_jobs">All Jobs</string>
+    <string name="emergency_jobs">Emergency Jobs</string>
+    <string name="popular_jobs">Popular Jobs</string>
+    <string name="no_image">No Image</string>
+    <string name="posted_on">Posted On:</string>
+    <string name="completed_on">Completed On:</string>
+    <string name="settings">Settings</string>
+    <string name="app_information">App Information</string>
+    <string name="logout">Logout</string>
+    <string name="photos">Photos</string>
+    <string name="budget">Budget</string>
+    <string name="how_soon">How Soon</string>
+    <string name="trades_person">Trades Person</string>
+    <string name="job_details">Job Details</string>
+    <string name="select_category">Select Category</string>
+    <string name="search_by_Category">Search By Category</string>
+    <string name="category_selected">Category Selected</string>
+    <string name="job_description">Job Description</string>
+    <string name="add_photos">Add Photos</string>
+    <string name="optional">(Optional)</string>
+    <string name="note_add_photos_or_video">Photos mean trades people can see exactly what you need. You can add up to 10 photos.</string>
+    <string name="error_max_image_limit">You can add up to 10 photos</string>
+    <string name="select_your_budget">Select Your Budget</string>
+    <string name="your_budget">Your Budget</string>
+    <string name="start_from">Start From</string>
+    <string name="choose_option">Choose Option</string>
+    <string name="save_and_continue">Save &amp; Continue</string>
+    <string name="contact_information">Contact Information</string>
+    <string name="mobile_number">Mobile Number</string>
+    <string name="your_address">Your Address</string>
+    <string name="street">Street</string>
+    <string name="city">City</string>
+    <string name="country">Country</string>
+    <string name="use_another_Address">Use Another Address</string>
+    <string name="hint_search_by_category">e.g. Plumbing &amp; Cold Water</string>
+    <string name="hint_installing">e.g. Installing</string>
+    <string name="submit">Submit</string>
+    <string name="logout_msg">Are you sure you want to logout?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+
+    <!-- Jobs -->
+    <string name="select_sub_category">Select Sub Category</string>
+    <string name="sub_category_selected">Sub Category Selected</string>
+    <string name="job_title">Job Title</string>
+    <string name="select_date_range">Select Date Range</string>
+    <string name="from_date">From Date</string>
+    <string name="to_date">To Date</string>
+    <string name="select">Select</string>
+    <string name="error_empty_date_range">Please select from date and to date</string>
+    <string name="edit">Edit</string>
+    <string name="remove">Remove</string>
+    <string name="delete">Delete</string>
+    <string name="error_delete_item">Are you sure you want to delete?</string>
+    <string name="empty_trade_person">No trades person connected</string>
+
+    <!-- EditProfile -->
+    <string name="edit_profile">Edit Profile</string>
+    <string name="basic_info">Basic Info</string>
+    <string name="full_name">Full Name</string>
+    <string name="save">Save</string>
+    <string name="upload_photo">Upload Photo</string>
+    <string name="lbl_dark_mode">Dark Mode</string>
+    <string name="notifications">Notifications</string>
+    <string name="lbl_location">Location</string>
+    <string name="lbl_about">About</string>
+    <string name="lbl_change_your_password">Change Your Password</string>
+    <string name="camera">Camera</string>
+    <string name="msg_storage_permission">This application needs access to your storage</string>
+    <string name="error_image_format">Invalid file format. Please choose the JPG, PNG and JPEG format</string>
+    <string name="date_of_birth">Date of Birth</string>
+
+    <!--        <string name=""></string>-->
+    <!--    <string name=""></string>-->
+
+    <!-- App Information -->
+    <string name="help_support">Help &amp; Support</string>
+    <string name="lbl_app_version" formatted="false">Version</string>
+    <string name="lbl_privacy_policy">Privacy Policy</string>
+    <string name="lbl_terms_of_use">Terms Of Use</string>
+    <string name="lbl_website">Website</string>
+
+    <string name="select_photos">Select Photos</string>
+
+
+</resources>

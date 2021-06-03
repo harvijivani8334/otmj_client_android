@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="data"
+            type="com.app.otmjobs.managejob.data.model.PostJobRequest" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:fitsSystemWindows="true">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar_main" />
+
+        <TextView
+            android:id="@+id/txtTitle"
+            style="@style/SmallFont"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/toolbar"
+            android:background="@color/colorTitleBg"
+            android:fontFamily="@string/font_family_medium"
+            android:paddingStart="@dimen/size_20dp"
+            android:paddingTop="@dimen/size_16dp"
+            android:paddingEnd="@dimen/size_20dp"
+            android:paddingBottom="@dimen/size_16dp"
+            android:text="@string/job_details"
+            android:textColor="@color/colorAccent" />
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/btnNext"
+            android:layout_below="@id/txtTitle">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/toolbar"
+                android:orientation="vertical"
+                android:paddingStart="@dimen/size_20dp"
+                android:paddingEnd="@dimen/size_20dp">
+
+                <TextView
+                    style="@style/SmallFont"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_20dp"
+                    android:fontFamily="@string/font_family_medium"
+                    android:text="@string/category_selected"
+                    android:textColor="@color/colorPrimaryText" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/size_14dp">
+
+                    <com.rengwuxian.materialedittext.MaterialEditText
+                        android:id="@+id/edtCategory"
+                        style="@style/SmallFont"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/ic_check_circle_green_24dp"
+                        android:drawablePadding="@dimen/size_10dp"
+                        android:focusable="false"
+                        android:focusableInTouchMode="true"
+                        android:hint="@string/hint_search_by_category"
+                        android:imeOptions="actionNext"
+                        android:inputType="text"
+                        android:text="@={data.trade_name}"
+                        android:textColorHint="@color/colorHint"
+                        app:met_errorColor="@color/colorErrorColor"
+                        app:met_floatingLabel="none"
+                        app:met_floatingLabelTextColor="@color/colorFloatingLabelText"
+                        app:met_singleLineEllipsis="false"
+                        app:met_textColor="@color/colorAccent"
+                        app:met_textColorHint="@color/colorHint"
+                        app:met_underlineColor="@color/colorUnderline" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="@dimen/size_16dp"
+                        android:layout_height="@dimen/size_16dp"
+                        android:layout_alignBaseline="@id/edtCategory"
+                        android:layout_alignParentEnd="true"
+                        android:baseline="@dimen/size_13dp"
+                        android:tint="@color/colorPrimaryText"
+                        app:srcCompat="@drawable/ic_edit" />
+                </RelativeLayout>
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/edtJobTitle"
+                    style="@style/SmallFont"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/size_14dp"
+                    android:hint="@string/job_title"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:text="@={data.job_title}"
+                    android:textColorHint="@color/colorHint"
+                    app:met_errorColor="@color/colorErrorColor"
+                    app:met_floatingLabel="highlight"
+                    app:met_floatingLabelTextColor="@color/colorFloatingLabelText"
+                    app:met_singleLineEllipsis="false"
+                    app:met_textColor="@color/colorPrimaryText"
+                    app:met_textColorHint="@color/colorHint"
+                    app:met_underlineColor="@color/colorUnderline" />
+
+                <TextView
+                    style="@style/SmallFont"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@string/font_family_medium"
+                    android:text="@string/job_description"
+                    android:textColor="@color/colorPrimaryText" />
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/edtJobDescription"
+                    style="@style/SmallFont"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/size_14dp"
+                    android:hint="@string/hint_installing"
+                    android:imeOptions="actionNext"
+                    android:text="@={data.job_description}"
+                    android:textColorHint="@color/colorHint"
+                    app:met_errorColor="@color/colorErrorColor"
+                    app:met_floatingLabel="none"
+                    app:met_floatingLabelTextColor="@color/colorFloatingLabelText"
+                    app:met_singleLineEllipsis="false"
+                    app:met_textColor="@color/colorPrimaryText"
+                    app:met_textColorHint="@color/colorHint"
+                    app:met_underlineColor="@color/colorUnderline" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:visibility="visible">
+
+                    <TextView
+                        style="@style/SmallFontTextView"
+                        android:fontFamily="@string/font_family_medium"
+                        android:text="@string/add_photos"
+                        android:textColor="@color/colorPrimaryText" />
+
+                    <TextView
+                        style="@style/SmallFontTextView"
+                        android:layout_marginStart="@dimen/size_6dp"
+                        android:text="@string/optional"
+                        android:textColor="@color/colorSecondaryLightText" />
+
+                </LinearLayout>
+
+                <TextView
+                    style="@style/SmallFontTextView"
+                    android:layout_marginTop="@dimen/size_1dp"
+                    android:text="@string/note_add_photos_or_video"
+                    android:textColor="@color/colorSecondaryLightText"
+                    android:textSize="@dimen/text_size_14sp"
+                    android:visibility="visible" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvPhotos"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_8dp"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+                <TextView
+                    style="@style/SmallFont"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_14dp"
+                    android:fontFamily="@string/font_family_medium"
+                    android:text="@string/select_your_budget"
+                    android:textColor="@color/colorPrimaryText"
+                    android:visibility="visible" />
+
+                <TextView
+                    style="@style/SmallFontTextView"
+                    android:layout_marginTop="@dimen/size_14dp"
+                    android:text="This job cost between  $100 to $500"
+                    android:textColor="@color/colorSecondaryLightText"
+                    android:visibility="gone" />
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/edtYourBudget"
+                    style="@style/SmallFont"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_4dp"
+                    android:hint="@string/your_budget"
+                    android:imeOptions="actionDone"
+                    android:inputType="numberDecimal"
+                    android:text="@={data.budget}"
+                    android:textColorHint="@color/colorHint"
+                    app:met_errorColor="@color/colorErrorColor"
+                    app:met_floatingLabel="highlight"
+                    app:met_floatingLabelTextColor="@color/colorFloatingLabelText"
+                    app:met_singleLineEllipsis="false"
+                    app:met_textColor="@color/colorPrimaryText"
+                    app:met_textColorHint="@color/colorHint"
+                    app:met_underlineColor="@color/colorUnderline" />
+
+                <TextView
+                    style="@style/SmallFont"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_16dp"
+                    android:fontFamily="@string/font_family_medium"
+                    android:text="@string/start_from"
+                    android:textColor="@color/colorPrimaryText" />
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/edtStartFrom"
+                    style="@style/SmallFont"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableEnd="@drawable/ic_arrow_down"
+                    android:focusable="false"
+                    android:focusableInTouchMode="true"
+                    android:hint="@string/choose_option"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:text="@={data.expected_start_time}"
+                    android:textColorHint="@color/colorHint"
+                    app:met_errorColor="@color/colorErrorColor"
+                    app:met_floatingLabel="none"
+                    app:met_floatingLabelTextColor="@color/colorFloatingLabelText"
+                    app:met_singleLineEllipsis="false"
+                    app:met_textColor="@color/colorPrimaryText"
+                    app:met_textColorHint="@color/colorHint"
+                    app:met_underlineColor="@color/colorUnderline" />
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+
+        <com.balysv.materialripple.MaterialRippleLayout
+            android:id="@+id/btnNext"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/save_button_height_50dp"
+            android:layout_alignParentBottom="true"
+            android:visibility="visible"
+            app:mrl_rippleColor="@color/colorRippleColor"
+            app:mrl_rippleDelayClick="true"
+            app:mrl_rippleDuration="@string/ripple_duration"
+            app:mrl_rippleHover="true"
+            app:mrl_rippleOverlay="true">
+
+            <TextView
+                android:id="@+id/txtNext"
+                style="@style/SmallFont"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorAccent"
+                android:fontFamily="@string/font_family_medium"
+                android:gravity="center"
+                android:text="@string/save_and_continue"
+                android:textColor="@color/colorWhite" />
+        </com.balysv.materialripple.MaterialRippleLayout>
+
+    </RelativeLayout>
+</layout>
+

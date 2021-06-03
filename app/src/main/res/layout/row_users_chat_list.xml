@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingStart="@dimen/size_20dp"
+        android:paddingTop="@dimen/size_14dp"
+        android:paddingEnd="0dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imgChat"
+            android:layout_width="@dimen/size_60dp"
+            android:layout_height="@dimen/size_60dp"
+            android:background="@color/light_gray" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/imgChat"
+            android:orientation="vertical"
+            android:paddingStart="@dimen/size_14dp"
+            android:paddingEnd="@dimen/size_16dp">
+
+            <TextView
+                android:id="@+id/txtJobTitle"
+                style="@style/SmallFontTextView"
+                android:ellipsize="end"
+                android:fontFamily="@string/font_family_medium"
+                android:includeFontPadding="false"
+                android:singleLine="true"
+                android:text="Bathroom Repair"
+                android:textColor="@color/colorAccent" />
+
+            <TextView
+                android:id="@+id/txtJobDetail"
+                style="@style/VerySmallFontTextView"
+                android:layout_marginTop="@dimen/size_1dp"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:text="Bath tub side panel needs to replace"
+                android:textColor="@color/colorSecondaryText" />
+
+            <RelativeLayout
+                android:id="@+id/routDetailsView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_8dp">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgPerson"
+                    android:layout_width="@dimen/size_30dp"
+                    android:layout_height="@dimen/size_30dp"
+                    android:layout_centerVertical="true"
+                    app:srcCompat="@drawable/circle_red"
+                    android:tint="@color/light_gray" />
+
+                <TextView
+                    android:id="@+id/txtPersonName"
+                    style="@style/SmallFontTextView"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/size_10dp"
+                    android:layout_toStartOf="@+id/txtTime"
+                    android:layout_toEndOf="@+id/imgPerson"
+                    android:ellipsize="end"
+                    android:fontFamily="@string/font_family_medium"
+                    android:includeFontPadding="false"
+                    android:singleLine="true"
+                    android:text="John Doe"
+                    android:textColor="@color/colorPrimaryText"
+                    android:textSize="@dimen/text_size_17sp" />
+
+                <TextView
+                    android:id="@+id/txtTime"
+                    style="@style/VerySmallFont"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:text="12 Dec, 03:50 PM"
+                    android:textColor="@color/colorSecondaryLightText" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/txtPersonMessage"
+                style="@style/VerySmallFontTextView"
+                android:layout_marginStart="@dimen/size_42dp"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:text="Hello sir,How may i help you!!"
+                android:textColor="@color/colorSecondaryText" />
+
+            <View
+                style="@style/Divider"
+                android:layout_marginTop="@dimen/size_14dp" />
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+</layout>

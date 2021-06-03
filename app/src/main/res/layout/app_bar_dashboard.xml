@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".DashboardActivity">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:background="@android:color/transparent"
+            android:minHeight="?attr/actionBarSize"
+            app:contentInsetLeft="0dp"
+            app:contentInsetStart="0dp"
+            app:contentInsetStartWithNavigation="0dp"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            tools:ignore="MissingPrefix">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imgUser"
+                android:layout_width="@dimen/size_30dp"
+                android:layout_height="@dimen/size_30dp"
+                android:layout_marginStart="@dimen/size_16dp"
+                android:contentDescription="@string/nav_header_desc" />
+
+            <TextView
+                android:id="@+id/toolBarNavigation"
+                style="@style/ToolbarTitleFont"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/size_10dp"
+                android:ellipsize="end"
+                android:fontFamily="@string/font_family_medium"
+                android:text=""
+                android:textColor="@color/colorPrimaryText" />
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <View
+            android:id="@+id/toolbarDivider"
+            style="@style/ToolbarDivider"
+            android:layout_below="@+id/toolbar" />
+
+        <include
+            android:id="@+id/contentDashboard"
+            layout="@layout/content_dashboard"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/toolbarDivider" />
+
+    </RelativeLayout>
+</layout>
