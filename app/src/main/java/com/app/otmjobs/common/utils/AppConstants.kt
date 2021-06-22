@@ -1,5 +1,6 @@
 package com.app.otmjobs.common.utils
 
+import androidx.work.Operation
 import com.app.utilities.utils.DateFormatsConstants
 
 object AppConstants {
@@ -76,6 +77,9 @@ object AppConstants {
         const val SELECT_JOB_START_FROM = 6
         const val DELETE_LOGIN_USER = 7
         const val VIEW_LOGIN_USER = 8
+        const val MARK_AS_COMPLETED_JOB = 9
+        const val MARK_AS_PAUSED_JOB = 10
+        const val JOB_HISTORY = 11
     }
 
     object FileExtension {
@@ -99,6 +103,20 @@ object AppConstants {
     object Directory {
         const val DEFAULT = "otmjobs"
         const val IMAGES = "otmjobs/images"
+    }
+
+    object Status {
+        const val SUCCESS = 1
+        const val ERROR = 2
+        const val LOADING = 3
+    }
+
+    object JobStatus {
+        const val Live = 1
+        const val Paused = 2
+        const val Completed = 3
+        const val Reposted = 4
+        const val Deleted = 5
     }
 }
 

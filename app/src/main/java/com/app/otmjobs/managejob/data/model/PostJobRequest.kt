@@ -30,5 +30,8 @@ class PostJobRequest(
     var device_type: String? = "",
     var date_modified: String? = "",
     var date_added: String? = "",
-    var images: MutableList<JobImageInfo>? = ArrayList()
+    var images: MutableList<JobImageInfo>? = ArrayList(),
+    var device_id: Int? = 0,
+    var status: Int? = 0,
+    var emergency: Int? = 0
 ) : Parcelable

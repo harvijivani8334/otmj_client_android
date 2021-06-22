@@ -25,4 +25,8 @@ interface ManageJobRepository {
         device_token: RequestBody,
         device_type: RequestBody,
     ): BaseResponse
+
+    suspend fun jobPaused(jobId: Int): BaseResponse
+
+    suspend fun jobCompleted(jobId: Int): BaseResponse
 }

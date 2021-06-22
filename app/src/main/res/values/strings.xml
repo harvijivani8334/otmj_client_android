@@ -70,6 +70,10 @@
     <string name="error_valid_email">Please enter valid email</string>
     <string name="btn_log_in">Log In</string>
 
+    <!--ForgotPassword-->
+    <string name="old_password">Old Password</string>
+    <string name="new_password">New Password</string>
+
     <!-- Sign In Screen -->
     <string name="hint_user_name">Name</string>
     <string name="hint_confirm_password">Confirm Password</string>
@@ -163,6 +167,14 @@
     <string name="delete">Delete</string>
     <string name="error_delete_item">Are you sure you want to delete?</string>
     <string name="empty_trade_person">No trades person connected</string>
+    <string name="mark_as_completed">Mark As Completed</string>
+    <string name="mark_as_paused">Mark As Paused</string>
+    <string name="job_history">Job History</string>
+    <string name="completed">Completed</string>
+    <string name="paused">Paused</string>
+    <string name="live">Live</string>
+    <string name="deleted">Deleted</string>
+    <string name="reposted">Reposted</string>
 
     <!-- EditProfile -->
     <string name="edit_profile">Edit Profile</string>

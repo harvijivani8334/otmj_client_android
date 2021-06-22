@@ -32,8 +32,8 @@ class MyJobsListAdapter(
     var list: MutableList<PostJobRequest>,
     var listener: SelectItemListener
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), SelectItemListener {
-    var selectedPosition = 0
-    var listAll: MutableList<PostJobRequest> = ArrayList()
+    private var selectedPosition = 0
+    private var listAll: MutableList<PostJobRequest> = ArrayList()
 
     init {
         this.listAll.addAll(list)
@@ -60,23 +60,75 @@ class MyJobsListAdapter(
             listener.onSelectItem(position, AppConstants.Action.VIEW_JOB)
         }
 
+        when (info.status) {
+            AppConstants.JobStatus.Live, AppConstants.JobStatus.Reposted -> {
+                itemViewHolder.binding.txtStatus.text = mContext.getString(R.string.live)
+                itemViewHolder.binding.imgStatus.setColorFilter(mContext.resources.getColor(R.color.green))
+            }
+            AppConstants.JobStatus.Paused -> {
+                itemViewHolder.binding.txtStatus.text = mContext.getString(R.string.paused)
+                itemViewHolder.binding.imgStatus.setColorFilter(mContext.resources.getColor(R.color.orange))
+            }
+            AppConstants.JobStatus.Completed -> {
+                itemViewHolder.binding.txtStatus.text = mContext.getString(R.string.completed)
+                itemViewHolder.binding.imgStatus.setColorFilter(mContext.resources.getColor(R.color.colorAccent))
+            }
+            AppConstants.JobStatus.Deleted -> {
+                itemViewHolder.binding.txtStatus.text = mContext.getString(R.string.deleted)
+                itemViewHolder.binding.imgStatus.setColorFilter(mContext.resources.getColor(R.color.red))
+            }
+            else -> {
+                itemViewHolder.binding.txtStatus.text = mContext.getString(R.string.live)
+                itemViewHolder.binding.imgStatus.setColorFilter(mContext.resources.getColor(R.color.green))
+            }
+
+        }
+
         itemViewHolder.binding.imgMenu.setOnClickListener { v ->
             selectedPosition = position
+
             val list: MutableList<ModuleInfo> = ArrayList()
 
             val edit = ModuleInfo()
             edit.name = mContext.getString(R.string.edit)
-            list.add(edit)
 
             val delete = ModuleInfo()
             delete.name = mContext.getString(R.string.delete)
-            list.add(delete)
+
+            val markAsCompleted = ModuleInfo()
+            markAsCompleted.name = mContext.getString(R.string.mark_as_completed)
+
+            val markAsPaused = ModuleInfo()
+            markAsPaused.name = mContext.getString(R.string.mark_as_paused)
+
+            val jobHistory = ModuleInfo()
+            jobHistory.name = mContext.getString(R.string.job_history)
+
+            when (info.status) {
+                AppConstants.JobStatus.Live, AppConstants.JobStatus.Reposted -> {
+                    list.add(edit)
+                    list.add(delete)
+                    list.add(markAsCompleted)
+                    list.add(markAsPaused)
+                    list.add(jobHistory)
+                }
+                AppConstants.JobStatus.Paused -> {
+                    list.add(edit)
+                    list.add(delete)
+                    list.add(markAsCompleted)
+                    list.add(jobHistory)
+                }
+                AppConstants.JobStatus.Completed -> {
+                    list.add(delete)
+                    list.add(jobHistory)
+                }
+            }
 
             PopupMenuHelper.showPopupMenu(
                 mContext,
                 v,
                 list,
-                position,
+                info.status!!,
                 this
             )
         }
@@ -143,9 +195,30 @@ class MyJobsListAdapter(
     }
 
     override fun onSelectItem(position: Int, tag: Int) {
-        when (position) {
-            0 -> listener.onSelectItem(tag, AppConstants.Action.EDIT_JOB)
-            1 -> listener.onSelectItem(tag, AppConstants.Action.DELETE_JOB)
+        when (tag) {
+            AppConstants.JobStatus.Live, AppConstants.JobStatus.Reposted -> {
+                when (position) {
+                    0 -> listener.onSelectItem(selectedPosition, AppConstants.Action.EDIT_JOB)
+                    1 -> listener.onSelectItem(selectedPosition, AppConstants.Action.DELETE_JOB)
+                    2 -> listener.onSelectItem(selectedPosition, AppConstants.Action.MARK_AS_COMPLETED_JOB)
+                    3 -> listener.onSelectItem(selectedPosition, AppConstants.Action.MARK_AS_PAUSED_JOB)
+                    4 -> listener.onSelectItem(selectedPosition, AppConstants.Action.JOB_HISTORY)
+                }
+            }
+            AppConstants.JobStatus.Paused -> {
+                when (position) {
+                    0 -> listener.onSelectItem(selectedPosition, AppConstants.Action.EDIT_JOB)
+                    1 -> listener.onSelectItem(selectedPosition, AppConstants.Action.DELETE_JOB)
+                    2 -> listener.onSelectItem(selectedPosition, AppConstants.Action.MARK_AS_COMPLETED_JOB)
+                    3 -> listener.onSelectItem(selectedPosition, AppConstants.Action.JOB_HISTORY)
+                }
+            }
+            AppConstants.JobStatus.Completed -> {
+                when (position) {
+                    0 -> listener.onSelectItem(selectedPosition, AppConstants.Action.DELETE_JOB)
+                    1 -> listener.onSelectItem(selectedPosition, AppConstants.Action.JOB_HISTORY)
+                }
+            }
         }
     }
 

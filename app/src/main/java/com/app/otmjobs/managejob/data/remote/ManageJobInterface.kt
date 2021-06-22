@@ -44,4 +44,12 @@ interface ManageJobInterface {
         @Part("device_token") device_token: RequestBody,
         @Part("device_type") device_type: RequestBody,
     ): BaseResponse
+
+    @Multipart
+    @POST("job/paused")
+    suspend fun jobPaused(@Part("job_id") job_id: Int): BaseResponse
+
+    @Multipart
+    @POST("job/completed")
+    suspend fun jobCompleted(@Part("job_id") job_id: Int): BaseResponse
 }

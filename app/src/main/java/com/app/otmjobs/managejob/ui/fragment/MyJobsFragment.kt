@@ -14,11 +14,14 @@ import com.app.otmjobs.common.callback.SelectItemListener
 import com.app.otmjobs.common.ui.fragment.BaseFragment
 import com.app.otmjobs.common.utils.AppConstants
 import com.app.otmjobs.common.utils.AppUtils
+import com.app.otmjobs.dashboard.ui.activity.SettingsActivity
 import com.app.otmjobs.databinding.FragmentMyJobsBinding
 import com.app.otmjobs.managejob.data.model.DeleteJobRequest
 import com.app.otmjobs.managejob.data.model.PostJobRequest
+import com.app.otmjobs.managejob.ui.activity.JobHistoryActivity
 import com.app.otmjobs.managejob.ui.activity.MyJobDetailsActivity
 import com.app.otmjobs.managejob.ui.activity.PostJobDetailsActivity
+import com.app.otmjobs.managejob.ui.adapter.JobHistoryListAdapter
 import com.app.otmjobs.managejob.ui.adapter.MyJobsListAdapter
 import com.app.otmjobs.managejob.ui.viewmodel.ManageJobViewModel
 import com.app.utilities.callback.DialogButtonClickListener
@@ -35,6 +38,7 @@ class MyJobsFragment : BaseFragment(), View.OnClickListener, SelectItemListener,
     private lateinit var searchViewItem: MenuItem
     private var adapter: MyJobsListAdapter? = null
     private var selectedJob: Int? = 0
+    private var selectedStatus: Int? = 0
 
     companion object {
         fun newInstance(): MyJobsFragment {
@@ -112,6 +116,7 @@ class MyJobsFragment : BaseFragment(), View.OnClickListener, SelectItemListener,
 
     private fun deleteJobObservers() {
         manageJobViewModel.baseResponse.observe(requireActivity()) { response ->
+            hideProgressDialog()
             try {
                 if (response == null) {
                     AlertDialogHelper.showDialog(
@@ -121,6 +126,11 @@ class MyJobsFragment : BaseFragment(), View.OnClickListener, SelectItemListener,
                     )
                 } else {
                     if (response.IsSuccess) {
+                        if (selectedStatus != 0) {
+                            adapter?.list!![selectedJob!!].status = selectedStatus
+                            adapter?.notifyDataSetChanged()
+                            selectedStatus = 0;
+                        }
 
                     } else {
                         AppUtils.handleUnauthorized(mContext, response)
@@ -156,25 +166,46 @@ class MyJobsFragment : BaseFragment(), View.OnClickListener, SelectItemListener,
     }
 
     override fun onSelectItem(position: Int, action: Int) {
-        if (action == AppConstants.Action.VIEW_JOB) {
-            viewJobDetails(position)
-        } else if (action == AppConstants.Action.EDIT_JOB) {
-            editJob(position)
-        } else if (action == AppConstants.Action.DELETE_JOB) {
-            selectedJob = position
-            deleteJob()
+        selectedJob = position
+        when (action) {
+            AppConstants.Action.VIEW_JOB ->
+                viewJobDetails(position)
+            AppConstants.Action.EDIT_JOB ->
+                editJob(position)
+            AppConstants.Action.DELETE_JOB -> {
+                deleteJob()
+            }
+            AppConstants.Action.MARK_AS_COMPLETED_JOB -> {
+                showProgressDialog(mContext, "")
+                selectedStatus = AppConstants.JobStatus.Completed
+                manageJobViewModel.markAsCompletedResponse(adapter!!.list[selectedJob!!].job_id!!)
+            }
+            AppConstants.Action.MARK_AS_PAUSED_JOB -> {
+                showProgressDialog(mContext, "")
+                selectedStatus = AppConstants.JobStatus.Paused
+                manageJobViewModel.markAsPausedResponse(adapter!!.list[selectedJob!!].job_id!!)
+            }
+            AppConstants.Action.JOB_HISTORY ->
+                moveActivity(mContext, JobHistoryActivity::class.java, false, false, null)
         }
     }
 
-    fun viewJobDetails(position: Int) {
+    private fun viewJobDetails(position: Int) {
         val bundle = Bundle()
         bundle.putInt(
             AppConstants.IntentKey.JOB_ID, adapter!!.list[position].job_id!!
         )
         val intent = Intent(requireActivity(), MyJobDetailsActivity::class.java)
         intent.putExtras(bundle)
-        startActivity(intent)
+        resultViewJob.launch(intent)
     }
+
+    private var resultViewJob =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                loadData(true)
+            }
+        }
 
     fun editJob(position: Int) {
         val bundle = Bundle()

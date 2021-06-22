@@ -183,4 +183,40 @@ class ManageJobViewModel(private val manageJobRepository: ManageJobRepository) :
             }
         }
     }
+
+    fun markAsPausedResponse(jobId: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val response =
+                    manageJobRepository.jobPaused(jobId)
+                withContext(Dispatchers.Main) {
+                    baseResponse.value = response
+                }
+            } catch (e: JSONException) {
+                traceErrorException(e)
+            } catch (e: CancellationException) {
+                traceErrorException(e)
+            } catch (e: Exception) {
+                traceErrorException(e)
+            }
+        }
+    }
+
+    fun markAsCompletedResponse(jobId: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val response =
+                    manageJobRepository.jobCompleted(jobId)
+                withContext(Dispatchers.Main) {
+                    baseResponse.value = response
+                }
+            } catch (e: JSONException) {
+                traceErrorException(e)
+            } catch (e: CancellationException) {
+                traceErrorException(e)
+            } catch (e: Exception) {
+                traceErrorException(e)
+            }
+        }
+    }
 }

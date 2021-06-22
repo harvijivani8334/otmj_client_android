@@ -90,6 +90,10 @@
             android:name=".dashboard.ui.activity.SettingsActivity"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:name=".managejob.ui.activity.JobHistoryActivity"
+            android:screenOrientation="portrait" />
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.provider"

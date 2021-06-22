@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar_main" />
+
+        <View
+            android:id="@+id/toolbarDivider"
+            style="@style/ToolbarDivider"
+            android:layout_below="@+id/toolbar" />
+
+        <LinearLayout
+            android:id="@+id/routTitleView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/toolbarDivider"
+            android:layout_marginStart="@dimen/size_20dp"
+            android:gravity="center_vertical"
+            android:paddingTop="@dimen/size_12dp"
+            android:paddingBottom="@dimen/size_12dp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="@dimen/size_9dp"
+                android:layout_height="@dimen/size_9dp"
+                android:tint="@color/colorAccent"
+                app:srcCompat="@drawable/circle_red" />
+
+            <TextView
+                style="@style/SmallFontTextView"
+                android:layout_marginStart="@dimen/size_10dp"
+                android:fontFamily="@string/font_family_medium"
+                android:text="Plumbing &amp; Cold Water"
+                android:textColor="@color/colorPrimaryText" />
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/divider"
+            style="@style/Divider"
+            android:layout_height="@dimen/size_8dp"
+            android:layout_below="@id/routTitleView" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/divider"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+    </RelativeLayout>
+
+</layout>

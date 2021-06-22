@@ -50,4 +50,12 @@ class ManageJobRepositoryImp(
     ): BaseResponse {
         return manageJobInterface.deleteJobImage(job_image_id, device_token, device_type)
     }
+
+    override suspend fun jobPaused(jobId: Int): BaseResponse {
+        return manageJobInterface.jobPaused(jobId)
+    }
+
+    override suspend fun jobCompleted(jobId: Int): BaseResponse {
+        return manageJobInterface.jobCompleted(jobId)
+    }
 }

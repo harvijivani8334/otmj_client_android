@@ -14,6 +14,7 @@
     <color name="colorHint">#9d9d9d</color>
     <color name="green">#00ae46</color>
     <color name="red">#e50914</color>
+    <color name="orange">#FFA500  </color>
     <color name="light_gray">#f3f3f3</color>
     <color name="colorRippleColor">#FFFF</color>
     <color name="colorRipple2">#B3B3B3</color>
