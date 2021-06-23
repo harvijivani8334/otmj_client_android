@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.app.otmjobs.authentication.data.model.*
 import com.app.otmjobs.authentication.data.repository.AuthenticationRepository
+import com.app.otmjobs.common.data.model.BaseResponse
 import com.app.otmjobs.common.utils.AppUtils
 import com.app.otmjobs.common.utils.traceErrorException
 import com.app.utilities.utils.StringHelper
@@ -24,6 +25,7 @@ class AuthenticationViewModel(val authenticationRepository: AuthenticationReposi
     val customerDetailsResponse = MutableLiveData<UserResponse>()
     val phoneExtensionResponse = MutableLiveData<PhoneExtensionResponse>()
     val countryResponse = MutableLiveData<CountryResponse>()
+    val baseResponse = MutableLiveData<BaseResponse>()
 
     fun login(loginRequest: LoginRequest) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -161,6 +163,24 @@ class AuthenticationViewModel(val authenticationRepository: AuthenticationReposi
                 traceErrorException(e)
             } catch (e: Exception) {
 
+                traceErrorException(e)
+            }
+        }
+    }
+
+    fun changePassword(changePasswordRequest: ChangePasswordRequest) {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val changePasswordResponse =
+                    authenticationRepository.changePassword(changePasswordRequest)
+                withContext(Dispatchers.Main) {
+                    baseResponse.value = changePasswordResponse
+                }
+            } catch (e: JSONException) {
+                traceErrorException(e)
+            } catch (e: CancellationException) {
+                traceErrorException(e)
+            } catch (e: Exception) {
                 traceErrorException(e)
             }
         }

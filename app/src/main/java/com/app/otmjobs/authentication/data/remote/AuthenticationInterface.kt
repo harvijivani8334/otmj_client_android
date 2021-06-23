@@ -1,6 +1,7 @@
 package com.app.otmjobs.authentication.data.remote
 
 import com.app.otmjobs.authentication.data.model.*
+import com.app.otmjobs.common.data.model.BaseResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.http.*
@@ -46,4 +47,7 @@ interface AuthenticationInterface {
         @Part("device_token") device_token: RequestBody,
         @Part("device_type") device_type: RequestBody,
     ): UserResponse
+
+    @POST("change-password")
+    suspend fun changePassword(@Body changePasswordRequest: ChangePasswordRequest): BaseResponse
 }

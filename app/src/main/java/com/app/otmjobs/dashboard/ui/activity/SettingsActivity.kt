@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.databinding.DataBindingUtil
 import com.app.otmjobs.MyApplication
 import com.app.otmjobs.R
+import com.app.otmjobs.authentication.ui.activity.ChangePasswordActivity
 import com.app.otmjobs.common.ui.activity.BaseActivity
 import com.app.otmjobs.common.utils.AppConstants
 import com.app.otmjobs.databinding.ActivitySettingsBinding
@@ -65,9 +66,13 @@ class SettingsActivity : BaseActivity(), View.OnClickListener {
             R.id.routSelectLanguage -> {
 
             }
-            R.id.routChangePassword -> {
-
-            }
+            R.id.routChangePassword -> moveActivity(
+                mContext,
+                ChangePasswordActivity::class.java,
+                false,
+                false,
+                null
+            )
         }
     }
 }

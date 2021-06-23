@@ -73,7 +73,10 @@
     <!--ForgotPassword-->
     <string name="old_password">Old Password</string>
     <string name="new_password">New Password</string>
-
+    <string name="update">Update</string>
+    <string name="error_empty_old_password">Please enter old password</string>
+    <string name="error_empty_new_password">Please enter new password</string>
+    
     <!-- Sign In Screen -->
     <string name="hint_user_name">Name</string>
     <string name="hint_confirm_password">Confirm Password</string>

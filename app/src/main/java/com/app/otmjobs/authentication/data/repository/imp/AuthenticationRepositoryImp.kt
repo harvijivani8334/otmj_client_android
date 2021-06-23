@@ -4,6 +4,7 @@ import com.app.otmjobs.MyApplication
 import com.app.otmjobs.authentication.data.model.*
 import com.app.otmjobs.authentication.data.remote.AuthenticationInterface
 import com.app.otmjobs.authentication.data.repository.AuthenticationRepository
+import com.app.otmjobs.common.data.model.BaseResponse
 import com.app.otmjobs.common.utils.AppUtils
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -75,4 +76,7 @@ class AuthenticationRepositoryImp(
         )
     }
 
+    override suspend fun changePassword(changePasswordRequest: ChangePasswordRequest): BaseResponse {
+        return authenticationInterface.changePassword(changePasswordRequest)
+    }
 }
