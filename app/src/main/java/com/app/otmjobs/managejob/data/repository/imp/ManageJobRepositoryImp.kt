@@ -58,4 +58,16 @@ class ManageJobRepositoryImp(
     override suspend fun jobCompleted(jobId: Int): BaseResponse {
         return manageJobInterface.jobCompleted(jobId)
     }
+
+    override suspend fun getTradesPersons(jobId: Int): TradesPersonResponse {
+        return manageJobInterface.getTradesPersons(jobId)
+    }
+
+    override suspend fun getTradesPersons(): TradesPersonResponse {
+        return manageJobInterface.getTradesPersons()
+    }
+
+    override suspend fun getWorkerDetails(workerId: Int): BaseResponse {
+        return manageJobInterface.getWorkerDetails(workerId)
+    }
 }

@@ -76,7 +76,7 @@
     <string name="update">Update</string>
     <string name="error_empty_old_password">Please enter old password</string>
     <string name="error_empty_new_password">Please enter new password</string>
-    
+
     <!-- Sign In Screen -->
     <string name="hint_user_name">Name</string>
     <string name="hint_confirm_password">Confirm Password</string>
@@ -194,6 +194,9 @@
     <string name="msg_storage_permission">This application needs access to your storage</string>
     <string name="error_image_format">Invalid file format. Please choose the JPG, PNG and JPEG format</string>
     <string name="date_of_birth">Date of Birth</string>
+    <string name="categories_serviced">Categories Serviced</string>
+    <string name="available_hours">Available Hours</string>
+    <string name="available_after_work_hours">Available after work hours?</string>
 
     <!--        <string name=""></string>-->
     <!--    <string name=""></string>-->

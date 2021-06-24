@@ -9,17 +9,17 @@ import androidx.databinding.DataBindingUtil
 import com.app.otmjobs.R
 import com.app.otmjobs.authentication.data.model.User
 import com.app.otmjobs.authentication.ui.activity.EditProfileActivity
-import com.app.otmjobs.authentication.ui.activity.IntroductionActivity
 import com.app.otmjobs.common.ui.activity.BaseActivity
 import com.app.otmjobs.common.ui.adapter.ViewPagerAdapter
+import com.app.otmjobs.common.utils.AppConstants
 import com.app.otmjobs.common.utils.AppUtils
 import com.app.otmjobs.dashboard.ui.fragment.ChatFragment
 import com.app.otmjobs.dashboard.ui.fragment.MoreFragment
-import com.app.otmjobs.dashboard.ui.fragment.UserFragment
 import com.app.otmjobs.databinding.ActivityDashboardBinding
 import com.app.otmjobs.databinding.ContentDashboardBinding
 import com.app.otmjobs.managejob.ui.fragment.HomeFragment
 import com.app.otmjobs.managejob.ui.fragment.MyJobsFragment
+import com.app.otmjobs.managejob.ui.fragment.UserFragment
 import com.app.utilities.utils.StringHelper
 import com.app.utilities.utils.ViewPagerDisableSwipe
 import kotlinx.android.synthetic.main.app_bar_dashboard.view.*
@@ -71,7 +71,12 @@ class DashBoardActivity : BaseActivity(), View.OnClickListener {
         pagerAdapter.addFrag(ChatFragment.newInstance(), "")
         pagerAdapter.addFrag(MyJobsFragment.newInstance(), "")
         pagerAdapter.addFrag(HomeFragment.newInstance(), "")
-        pagerAdapter.addFrag(UserFragment.newInstance(), "")
+        val bundle = Bundle()
+        bundle.putInt(
+            AppConstants.IntentKey.JOB_ID,
+            0
+        )
+        pagerAdapter.addFrag(UserFragment.newInstance(bundle), "")
         pagerAdapter.addFrag(MoreFragment.newInstance(), "")
         viewPager.adapter = pagerAdapter
         setupTab(selectedTabIndex)

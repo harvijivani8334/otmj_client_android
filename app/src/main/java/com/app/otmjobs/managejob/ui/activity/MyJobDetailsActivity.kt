@@ -19,13 +19,13 @@ import com.app.otmjobs.common.ui.adapter.ViewPagerAdapter
 import com.app.otmjobs.common.utils.AppConstants
 import com.app.otmjobs.common.utils.AppUtils
 import com.app.otmjobs.common.utils.PopupMenuHelper
-import com.app.otmjobs.dashboard.ui.fragment.UserFragment
 import com.app.otmjobs.databinding.ActivityMyJobsDetailsBinding
 import com.app.otmjobs.managejob.data.model.AddJobResponse
 import com.app.otmjobs.managejob.data.model.DeleteJobRequest
 import com.app.otmjobs.managejob.data.model.JobImageInfo
 import com.app.otmjobs.managejob.data.model.PostJobRequest
 import com.app.otmjobs.managejob.ui.fragment.MyJobDetailsFragment
+import com.app.otmjobs.managejob.ui.fragment.UserFragment
 import com.app.otmjobs.managejob.ui.viewmodel.ManageJobViewModel
 import com.app.utilities.callback.DialogButtonClickListener
 import com.app.utilities.utils.AlertDialogHelper
@@ -52,7 +52,7 @@ class MyJobDetailsActivity : BaseActivity(), View.OnClickListener, SelectItemLis
         setupToolbar("", true)
         jobDetailsObservers()
         deleteJobObservers()
-
+        
         binding.imgJob.setOnClickListener {
             if (addJobResponse.info!!.images!!.size > 0) {
                 val bundle = Bundle()
@@ -131,13 +131,20 @@ class MyJobDetailsActivity : BaseActivity(), View.OnClickListener, SelectItemLis
     }
 
     private fun setupViewPager(viewPager: ViewPager, postJobRequest: PostJobRequest) {
+        pagerAdapter = ViewPagerAdapter(supportFragmentManager)
+
+        val bundle1 = Bundle()
+        bundle1.putInt(
+            AppConstants.IntentKey.JOB_ID,
+            jobId
+        )
+        pagerAdapter.addFrag(UserFragment.newInstance(bundle1), getString(R.string.trades_person) + " (0)")
+
         val bundle = Bundle()
         bundle.putParcelable(
             AppConstants.IntentKey.POST_JOB_DATA,
             Parcels.wrap(postJobRequest)
         )
-        pagerAdapter = ViewPagerAdapter(supportFragmentManager)
-        pagerAdapter.addFrag(UserFragment.newInstance(), getString(R.string.trades_person) + " (0)")
         pagerAdapter.addFrag(
             MyJobDetailsFragment.newInstance(bundle),
             getString(R.string.job_details)

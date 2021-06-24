@@ -3,7 +3,6 @@ package com.app.otmjobs.managejob.ui.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.app.otmjobs.authentication.data.model.User
 import com.app.otmjobs.common.data.model.BaseResponse
 import com.app.otmjobs.common.utils.AppConstants
 import com.app.otmjobs.common.utils.AppUtils
@@ -27,6 +26,7 @@ class ManageJobViewModel(private val manageJobRepository: ManageJobRepository) :
     val addJobResponse = MutableLiveData<AddJobResponse>()
     val myJobsResponse = MutableLiveData<MyJobsResponse>()
     val baseResponse = MutableLiveData<BaseResponse>()
+    val tradesPersonResponse = MutableLiveData<TradesPersonResponse>()
 
     fun getTradesResponse() {
         viewModelScope.launch(Dispatchers.IO) {
@@ -209,6 +209,42 @@ class ManageJobViewModel(private val manageJobRepository: ManageJobRepository) :
                     manageJobRepository.jobCompleted(jobId)
                 withContext(Dispatchers.Main) {
                     baseResponse.value = response
+                }
+            } catch (e: JSONException) {
+                traceErrorException(e)
+            } catch (e: CancellationException) {
+                traceErrorException(e)
+            } catch (e: Exception) {
+                traceErrorException(e)
+            }
+        }
+    }
+
+    fun getTradesPersonResponse(jobId: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val response =
+                    manageJobRepository.getTradesPersons(jobId)
+                withContext(Dispatchers.Main) {
+                    tradesPersonResponse.value = response
+                }
+            } catch (e: JSONException) {
+                traceErrorException(e)
+            } catch (e: CancellationException) {
+                traceErrorException(e)
+            } catch (e: Exception) {
+                traceErrorException(e)
+            }
+        }
+    }
+
+    fun getTradesPersonResponse() {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val response =
+                    manageJobRepository.getTradesPersons()
+                withContext(Dispatchers.Main) {
+                    tradesPersonResponse.value = response
                 }
             } catch (e: JSONException) {
                 traceErrorException(e)

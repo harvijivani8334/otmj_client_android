@@ -29,4 +29,10 @@ interface ManageJobRepository {
     suspend fun jobPaused(jobId: Int): BaseResponse
 
     suspend fun jobCompleted(jobId: Int): BaseResponse
+
+    suspend fun getTradesPersons(jobId: Int): TradesPersonResponse
+
+    suspend fun getTradesPersons(): TradesPersonResponse
+
+    suspend fun getWorkerDetails(workerId: Int): BaseResponse
 }

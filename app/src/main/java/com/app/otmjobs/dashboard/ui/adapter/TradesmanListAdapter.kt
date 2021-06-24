@@ -7,24 +7,15 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.app.otmjobs.R
-import com.app.otmjobs.dashboard.data.model.JobInfo
+import com.app.otmjobs.common.utils.AppUtils
 import com.app.otmjobs.databinding.RowTradesmanListBinding
+import com.app.otmjobs.managejob.data.model.TradePersonInfo
 
 class TradesmanListAdapter(
-    mContext: Context,
-    list: ArrayList<JobInfo>?
+    var mContext: Context,
+    var list: MutableList<TradePersonInfo>
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    //    private var listAll: ArrayList<JobInfo>
-//    private var list: ArrayList<JobInfo>
     var position = 0
-    val mContext: Context
-
-    init {
-//        listAll = ArrayList<JobInfo>()
-//        listAll.addAll(list)
-//        this.list = list
-        this.mContext = mContext
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val itemView: View =
@@ -33,14 +24,14 @@ class TradesmanListAdapter(
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-//        val info: JobInfo = list[position]
+        val info: TradePersonInfo = list[position]
         val itemViewHolder = holder as ItemViewHolder
-//        itemViewHolder.getData(info)
-
+        itemViewHolder.getData(info)
+        AppUtils.setUserImage(mContext, info.image, itemViewHolder.binding!!.imgUser)
     }
 
     override fun getItemCount(): Int {
-        return 6
+        return list.size
     }
 
     override fun getItemId(position: Int): Long {
@@ -53,50 +44,9 @@ class TradesmanListAdapter(
 
     private inner class ItemViewHolder(itemView: View?) :
         RecyclerView.ViewHolder(itemView!!) {
-        var binding: RowTradesmanListBinding?
-        fun getData(info: JobInfo?) {
-//            binding.setInfo(info)
-        }
-
-        init {
-            binding = DataBindingUtil.bind(itemView!!)
+        var binding: RowTradesmanListBinding? = DataBindingUtil.bind(itemView!!)
+        fun getData(info: TradePersonInfo) {
+            binding!!.info = info
         }
     }
-
-//    fun addProjectInfo(info: ProjectsInfo) {
-//        listAll.add(info)
-//        list.clear()
-//        list.addAll(listAll)
-//        notifyDataSetChanged()
-//    }
-
-
-    // Filter Class
-    /* fun filter(charText: String) {
-         var charText = charText
-         val tradeName = ""
-         charText = charText.toLowerCase(Locale.getDefault())
-         list.clear()
-         if (charText.length == 0) {
-             list.addAll(listAll)
-         } else {
-             for (wp in listAll) {
-                 try {
-                     val name = if (!StringHelper.isEmpty(wp.getName())) wp.getName() else ""
-                     if (name.toLowerCase(Locale.getDefault()).contains(charText)) list.add(wp)
-                 } catch (e: Exception) {
-                     Log.e(javaClass.name, "Exception in Filter :" + e.message)
-                 }
-             }
-         }
-         notifyDataSetChanged()
-     }*/
-
-//    fun getList(): ArrayList<JobInfo> {
-//        return list
-//    }
-//
-//    fun setList(list: ArrayList<JobInfo>) {
-//        this.list = list
-//    }
 }

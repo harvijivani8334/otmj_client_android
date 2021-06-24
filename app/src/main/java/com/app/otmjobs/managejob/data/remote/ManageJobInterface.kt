@@ -52,4 +52,16 @@ interface ManageJobInterface {
     @Multipart
     @POST("job/completed")
     suspend fun jobCompleted(@Part("job_id") job_id: Int): BaseResponse
+
+    @Multipart
+    @POST("job-application/get-all")
+    suspend fun getTradesPersons(@Part("job_id") job_id: Int): TradesPersonResponse
+
+    @POST("job-application/get-all")
+    suspend fun getTradesPersons(): TradesPersonResponse
+
+    @Multipart
+    @POST("get-worker-details")
+    suspend fun getWorkerDetails(@Part("worker_id") worker_id: Int): BaseResponse
+
 }
