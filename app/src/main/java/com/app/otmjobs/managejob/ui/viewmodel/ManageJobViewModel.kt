@@ -27,6 +27,7 @@ class ManageJobViewModel(private val manageJobRepository: ManageJobRepository) :
     val myJobsResponse = MutableLiveData<MyJobsResponse>()
     val baseResponse = MutableLiveData<BaseResponse>()
     val tradesPersonResponse = MutableLiveData<TradesPersonResponse>()
+    val workDetailsResponse = MutableLiveData<WorkDetailsResponse>()
 
     fun getTradesResponse() {
         viewModelScope.launch(Dispatchers.IO) {
@@ -245,6 +246,61 @@ class ManageJobViewModel(private val manageJobRepository: ManageJobRepository) :
                     manageJobRepository.getTradesPersons()
                 withContext(Dispatchers.Main) {
                     tradesPersonResponse.value = response
+                }
+            } catch (e: JSONException) {
+                traceErrorException(e)
+            } catch (e: CancellationException) {
+                traceErrorException(e)
+            } catch (e: Exception) {
+                traceErrorException(e)
+            }
+        }
+    }
+
+    fun getWorkerDetailsResponse(userId: String) {
+        val userId: RequestBody = AppUtils.getRequestBody(userId)
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val response =
+                    manageJobRepository.getWorkerDetails(userId)
+                withContext(Dispatchers.Main) {
+                    workDetailsResponse.value = response
+                }
+            } catch (e: JSONException) {
+                traceErrorException(e)
+            } catch (e: CancellationException) {
+                traceErrorException(e)
+            } catch (e: Exception) {
+                traceErrorException(e)
+            }
+        }
+    }
+
+    fun acceptRejectJobApplicationResponse(job_application_id: Int,status_id: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val response =
+                    manageJobRepository.acceptRejectJobApplication(job_application_id,status_id)
+                withContext(Dispatchers.Main) {
+                    baseResponse.value = response
+                }
+            } catch (e: JSONException) {
+                traceErrorException(e)
+            } catch (e: CancellationException) {
+                traceErrorException(e)
+            } catch (e: Exception) {
+                traceErrorException(e)
+            }
+        }
+    }
+
+    fun repostJobResponse(job_id: Int,device_id: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val response =
+                    manageJobRepository.repostJob(job_id,device_id)
+                withContext(Dispatchers.Main) {
+                    baseResponse.value = response
                 }
             } catch (e: JSONException) {
                 traceErrorException(e)

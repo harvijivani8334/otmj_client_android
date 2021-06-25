@@ -5,7 +5,7 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class TradePersonInfo(
-    val job_application_id: Int? = 0,
+    val job_application_id: Int = 0,
     var worker_id: String? = "",
     var worker_code: String? = "",
     val job_id: Int? = 0,

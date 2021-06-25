@@ -282,7 +282,7 @@ class PostJobDetailsActivity : BaseActivity(), View.OnClickListener, SelectItemL
                     showSelectDateRangeDialog()
                 } else {
                     val listJobStartFrom = resources.getStringArray(R.array.listJobStartFrom)
-                    postJobRequest.expected_start_time = listJobStartFrom[position]
+                    postJobRequest.expected_start_time = (position + 1).toString()
                     binding.edtStartFrom.setText(listJobStartFrom[position])
                 }
             }

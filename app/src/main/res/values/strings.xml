@@ -10,10 +10,10 @@
     <string name="CHANNEL_ID" translatable="false">OTM Jobs</string>
     <!--    <string name="font_family_regular" translatable="false">sans-serif</string>-->
     <!--    <string name="font_family_medium" translatable="false">sans-serif-medium</string>-->
+    <string name="google_maps_key" translatable="false">AIzaSyDDOWUo-4BVRwrbtkE2kPVz7USJCZqlwd4</string>
 
     <string name="font_family_medium" translatable="false">sans-serif-medium</string>
     <string name="font_family_regular" translatable="false">sans-serif</string>
-    <string name="google_key_api" translatable="false">AIzaSyBcxNZeUe5zUqDVXAvk3fOATaXROrpbUhE</string>
     <string name="ripple_duration" translatable="false">300</string>
     <string name="only_text_digits" translatable="false">ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz</string>
     <string name="nav_header_desc" translatable="false">Navigation header</string>
@@ -22,6 +22,8 @@
     <string name="display_budget_hint" translatable="false">%s (%s)</string>
     <string name="display_budget" translatable="false">%s%s</string>
     <string name="desc_order" translatable="false">DESC</string>
+    <string name="space" translatable="false">&#160;</string>
+
 
     <string name="error_access_denied">Access Denied</string>
     <string name="error_bad_request_400">The request could not be understood by the server due to malformed syntax.</string>
@@ -46,7 +48,7 @@
         <item>In One Week</item>
         <item>In Two Weeks</item>
         <item>Not Decided Yet</item>
-        <item>Custom Data</item>
+<!--        <item>Custom Date</item>-->
     </string-array>
 
     <string name="ok">Ok</string>
@@ -76,6 +78,12 @@
     <string name="update">Update</string>
     <string name="error_empty_old_password">Please enter old password</string>
     <string name="error_empty_new_password">Please enter new password</string>
+    <string name="send">Send</string>
+    <string name="lbl_get_code_to_reset_password">Get a code to reset your password</string>
+    <string name="title_enter_otp">Enter a verification code</string>
+    <string name="hint_enter_otp">Please enter a 4 digit verification code which you just received</string>
+    <string name="hint_did_not_get_otp">Did not get the Code?</string>
+    <string name="hint_re_send_otp">Resend Code</string>
 
     <!-- Sign In Screen -->
     <string name="hint_user_name">Name</string>
@@ -152,6 +160,7 @@
     <string name="hint_search_by_category">e.g. Plumbing &amp; Cold Water</string>
     <string name="hint_installing">e.g. Installing</string>
     <string name="submit">Submit</string>
+    <string name="verify">Verify</string>
     <string name="logout_msg">Are you sure you want to logout?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
@@ -178,6 +187,8 @@
     <string name="live">Live</string>
     <string name="deleted">Deleted</string>
     <string name="reposted">Reposted</string>
+    <string name="accept">Accept</string>
+    <string name="reject">Reject</string>
 
     <!-- EditProfile -->
     <string name="edit_profile">Edit Profile</string>

@@ -67,7 +67,18 @@ class ManageJobRepositoryImp(
         return manageJobInterface.getTradesPersons()
     }
 
-    override suspend fun getWorkerDetails(workerId: Int): BaseResponse {
+    override suspend fun getWorkerDetails(workerId: RequestBody): WorkDetailsResponse {
         return manageJobInterface.getWorkerDetails(workerId)
+    }
+
+    override suspend fun acceptRejectJobApplication(
+        job_application_id: Int,
+        status_id: Int
+    ): BaseResponse {
+        return manageJobInterface.acceptRejectJobApplication(job_application_id,status_id)
+    }
+
+    override suspend fun repostJob(job_id: Int, device_id: Int): BaseResponse {
+        return manageJobInterface.repostJob(job_id,device_id)
     }
 }

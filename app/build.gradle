@@ -116,6 +116,7 @@ dependencies {
     annotationProcessor "org.parceler:parceler:${PARCELER}"
 
     implementation "com.google.android.gms:play-services-location:${GOOGLE_LOCATION}"
+    implementation "com.google.android.gms:play-services-maps:${GOOGLE_MAP}"
     implementation "pub.devrel:easypermissions:${EASY_PERMISSSION}"
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation "com.isseiaoki:simplecropview:1.1.8"

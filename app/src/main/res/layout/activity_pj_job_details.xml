@@ -231,7 +231,6 @@
                     android:hint="@string/choose_option"
                     android:imeOptions="actionNext"
                     android:inputType="text"
-                    android:text="@={data.expected_start_time}"
                     android:textColorHint="@color/colorHint"
                     app:met_errorColor="@color/colorErrorColor"
                     app:met_floatingLabel="none"

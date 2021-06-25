@@ -27,6 +27,8 @@ object AppConstants {
         const val CROP_RATIO_Y = "crop_ratio_Y"
         const val FILE_EXTENSION = "file_extension"
         const val POST_JOB_PHOTOS = "POST_JOB_PHOTOS"
+        const val USER_ID = "USER_ID"
+        const val JOB_APPLICATION_ID = "JOB_APPLICATION_ID"
         const val RC_LOCATION_PERM = 1
         const val LOCATION_SETTING_STATUS = 2
         const val SELECT_CATEGORY = 3
@@ -80,6 +82,7 @@ object AppConstants {
         const val MARK_AS_COMPLETED_JOB = 9
         const val MARK_AS_PAUSED_JOB = 10
         const val JOB_HISTORY = 11
+        const val VIEW_USER = 12
     }
 
     object FileExtension {

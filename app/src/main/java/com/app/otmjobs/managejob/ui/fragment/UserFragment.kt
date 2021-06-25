@@ -1,27 +1,33 @@
 package com.app.otmjobs.managejob.ui.fragment
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.databinding.DataBindingUtil
 import com.app.otmjobs.R
+import com.app.otmjobs.common.callback.SelectItemListener
 import com.app.otmjobs.common.ui.fragment.BaseFragment
 import com.app.otmjobs.common.utils.AppConstants
 import com.app.otmjobs.common.utils.AppUtils
-import com.app.otmjobs.dashboard.ui.adapter.TradesmanListAdapter
 import com.app.otmjobs.databinding.FragmentUsersBinding
 import com.app.otmjobs.managejob.data.model.TradePersonInfo
+import com.app.otmjobs.managejob.ui.activity.MyJobDetailsActivity
+import com.app.otmjobs.managejob.ui.activity.TradesPersonDetailsActivity
+import com.app.otmjobs.managejob.ui.adapter.TradesPersonListAdapter
 import com.app.otmjobs.managejob.ui.viewmodel.ManageJobViewModel
 import com.app.utilities.utils.AlertDialogHelper
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class UserFragment : BaseFragment(), View.OnClickListener {
+class UserFragment : BaseFragment(), View.OnClickListener, SelectItemListener {
     private lateinit var binding: FragmentUsersBinding
     private lateinit var mContext: Context
     private val manageJobViewModel: ManageJobViewModel by viewModel()
-    private lateinit var adapter: TradesmanListAdapter
+    private lateinit var adapter: TradesPersonListAdapter
     private var jobId: Int = 0
 
     companion object {
@@ -71,7 +77,7 @@ class UserFragment : BaseFragment(), View.OnClickListener {
             binding.rvUsersList.visibility = View.VISIBLE
             binding.tvEmptyText.visibility = View.GONE
             binding.rvUsersList.setHasFixedSize(true)
-            adapter = TradesmanListAdapter(mContext, list)
+            adapter = TradesPersonListAdapter(mContext, list, this)
             binding.rvUsersList.adapter = adapter
         } else {
             binding.rvUsersList.visibility = View.GONE
@@ -101,4 +107,26 @@ class UserFragment : BaseFragment(), View.OnClickListener {
             }
         }
     }
+
+    override fun onSelectItem(position: Int, action: Int) {
+        if (action == AppConstants.Action.VIEW_USER) {
+            val bundle = Bundle()
+            bundle.putString(
+                AppConstants.IntentKey.USER_ID, adapter.list[position].worker_id!!
+            )
+            bundle.putInt(
+                AppConstants.IntentKey.JOB_APPLICATION_ID, adapter.list[position].job_application_id
+            )
+            val intent = Intent(requireActivity(), TradesPersonDetailsActivity::class.java)
+            intent.putExtras(bundle)
+            resultViewTradePerson.launch(intent)
+        }
+    }
+
+    private var resultViewTradePerson =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+
+            }
+        }
 }

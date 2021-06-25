@@ -1,4 +1,4 @@
-package com.app.otmjobs.dashboard.ui.adapter
+package com.app.otmjobs.managejob.ui.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -7,13 +7,16 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.app.otmjobs.R
+import com.app.otmjobs.common.callback.SelectItemListener
+import com.app.otmjobs.common.utils.AppConstants
 import com.app.otmjobs.common.utils.AppUtils
 import com.app.otmjobs.databinding.RowTradesmanListBinding
 import com.app.otmjobs.managejob.data.model.TradePersonInfo
 
-class TradesmanListAdapter(
+class TradesPersonListAdapter(
     var mContext: Context,
-    var list: MutableList<TradePersonInfo>
+    var list: MutableList<TradePersonInfo>,
+    var listener: SelectItemListener
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     var position = 0
 
@@ -28,6 +31,9 @@ class TradesmanListAdapter(
         val itemViewHolder = holder as ItemViewHolder
         itemViewHolder.getData(info)
         AppUtils.setUserImage(mContext, info.image, itemViewHolder.binding!!.imgUser)
+        itemViewHolder.binding!!.routMainView.setOnClickListener {
+            listener.onSelectItem(position, AppConstants.Action.VIEW_USER)
+        }
     }
 
     override fun getItemCount(): Int {

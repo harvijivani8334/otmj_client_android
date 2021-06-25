@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <!--<variable-->
+        <!--name="loginViewModel"-->
+        <!--type="com.app.owlacademic.viewModel.LoginViewModel" />-->
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:focusableInTouchMode="true">
+
+        <include
+            android:id="@+id/toolbarView"
+            layout="@layout/toolbar_main" />
+
+        <TextView
+            android:id="@+id/txtSubTitle"
+            style="@style/MediumFontTextView"
+            android:layout_below="@+id/toolbarView"
+            android:layout_marginStart="@dimen/size_20dp"
+            android:layout_marginTop="@dimen/size_14dp"
+            android:fontFamily="@string/font_family_medium"
+            android:text="@string/lbl_get_code_to_reset_password"
+            android:textColor="@color/colorPrimaryText" />
+
+        <RadioGroup
+            android:id="@+id/rgSelectMethodType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtSubTitle"
+            android:layout_marginStart="@dimen/size_14dp"
+            android:layout_marginTop="@dimen/size_20dp"
+            android:orientation="vertical">
+
+            <RadioButton
+                android:id="@+id/rbEmail"
+                style="@style/MediumFontTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:fontFamily="@string/font_family_medium" />
+
+            <RadioButton
+                android:id="@+id/rbPhone"
+                style="@style/MediumFontTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_14dp"
+                android:fontFamily="@string/font_family_medium" />
+
+        </RadioGroup>
+
+        <com.balysv.materialripple.MaterialRippleLayout
+            android:id="@+id/btnSubmit"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/save_button_height_50dp"
+            android:layout_below="@+id/rgSelectMethodType"
+            android:layout_marginStart="@dimen/size_20dp"
+            android:layout_marginTop="@dimen/size_25dp"
+            android:layout_marginEnd="@dimen/size_20dp"
+            app:mrl_rippleColor="@color/colorRippleColor"
+            app:mrl_rippleDelayClick="true"
+            app:mrl_rippleDuration="@string/ripple_duration"
+            app:mrl_rippleHover="true"
+            app:mrl_rippleOverlay="true">
+
+            <TextView
+                android:id="@+id/txtSubmit"
+                style="@style/MediumFont"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/rounded_button_bg"
+                android:fontFamily="@string/font_family_medium"
+                android:gravity="center"
+                android:text="@string/submit"
+                android:textColor="@color/colorWhite" />
+        </com.balysv.materialripple.MaterialRippleLayout>
+
+    </RelativeLayout>
+</layout>
+

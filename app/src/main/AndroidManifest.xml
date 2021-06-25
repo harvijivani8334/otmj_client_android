@@ -98,6 +98,10 @@
             android:name=".authentication.ui.activity.ChangePasswordActivity"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:name=".managejob.ui.activity.TradesPersonDetailsActivity"
+            android:screenOrientation="portrait" />
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.provider"
@@ -107,6 +111,10 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths" />
         </provider>
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
     </application>
 
 </manifest>

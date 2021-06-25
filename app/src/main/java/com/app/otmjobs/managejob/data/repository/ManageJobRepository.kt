@@ -34,5 +34,9 @@ interface ManageJobRepository {
 
     suspend fun getTradesPersons(): TradesPersonResponse
 
-    suspend fun getWorkerDetails(workerId: Int): BaseResponse
+    suspend fun getWorkerDetails(workerId: RequestBody): WorkDetailsResponse
+
+    suspend fun acceptRejectJobApplication(job_application_id: Int,status_id: Int): BaseResponse
+
+    suspend fun repostJob(job_id: Int,device_id: Int): BaseResponse
 }

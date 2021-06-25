@@ -3,6 +3,13 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
+
+        <variable
+            name="info"
+            type="com.app.otmjobs.managejob.data.model.WorkerDetailsInfo" />
+    </data>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -17,8 +24,11 @@
             android:layout_below="@+id/toolbar" />
 
         <androidx.core.widget.NestedScrollView
+            android:id="@+id/scrollView"
             android:layout_width="match_parent"
+            android:visibility="gone"
             android:layout_height="wrap_content"
+            android:layout_above="@id/routBottomView"
             android:layout_below="@id/toolbarDivider">
 
             <LinearLayout
@@ -30,9 +40,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
-                    android:paddingStart="@dimen/size_25dp"
+                    android:paddingStart="@dimen/size_20dp"
                     android:paddingTop="@dimen/size_20dp"
-                    android:paddingEnd="@dimen/size_25dp"
+                    android:paddingEnd="@dimen/size_20dp"
                     android:paddingBottom="@dimen/size_20dp"
                     android:visibility="visible">
 
@@ -56,11 +66,11 @@
                             android:id="@+id/txtUserName"
                             style="@style/MediumFontTextView"
                             android:fontFamily="@string/font_family_medium"
-                            android:textColor="@color/colorAccent"
-                            android:textSize="@dimen/text_size_17sp" />
+                            android:text="@{info.first_name.concat(@string/space).concat(info.last_name)}"
+                            android:textColor="@color/colorPrimaryText"
+                            android:textSize="@dimen/text_size_18sp" />
 
                     </LinearLayout>
-
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/imgPin"
@@ -96,6 +106,7 @@
 
                     <TextView
                         style="@style/SmallFontTextView"
+                        android:text="@{info.email}"
                         android:textColor="@color/colorPrimaryText" />
 
                 </RelativeLayout>
@@ -131,6 +142,7 @@
                     <TextView
                         android:id="@+id/txtContact"
                         style="@style/SmallFontTextView"
+                        android:text="@{info.extension.concat(info.phone)}"
                         android:textColor="@color/colorPrimaryText" />
 
                 </RelativeLayout>
@@ -143,7 +155,7 @@
                 <TextView
                     style="@style/SmallFontTextView"
                     android:layout_marginStart="@dimen/size_20dp"
-                    android:layout_marginTop="@dimen/size_14dp"
+                    android:layout_marginTop="@dimen/size_12dp"
                     android:fontFamily="@string/font_family_medium"
                     android:text="@string/lbl_about"
                     android:textColor="@color/colorPrimaryText" />
@@ -152,19 +164,19 @@
                     android:id="@+id/txtAbout"
                     style="@style/SmallFontTextView"
                     android:layout_marginStart="@dimen/size_20dp"
-                    android:layout_marginTop="@dimen/size_4dp"
-                    android:text="I am painter"
+                    android:layout_marginTop="@dimen/size_2dp"
+                    android:text="@{info.about}"
                     android:textColor="@color/colorPrimaryText"
                     android:textSize="@dimen/text_size_15sp" />
 
                 <View
                     style="@style/Divider"
-                    android:layout_marginTop="@dimen/size_14dp" />
+                    android:layout_marginTop="@dimen/size_12dp" />
 
                 <TextView
                     style="@style/SmallFontTextView"
                     android:layout_marginStart="@dimen/size_20dp"
-                    android:layout_marginTop="@dimen/size_14dp"
+                    android:layout_marginTop="@dimen/size_12dp"
                     android:fontFamily="@string/font_family_medium"
                     android:text="@string/categories_serviced"
                     android:textColor="@color/colorPrimaryText" />
@@ -173,27 +185,37 @@
                     android:id="@+id/txtCategoriesService"
                     style="@style/SmallFontTextView"
                     android:layout_marginStart="@dimen/size_20dp"
-                    android:layout_marginTop="@dimen/size_4dp"
-                    android:text="I am painter"
+                    android:layout_marginTop="@dimen/size_2dp"
+                    android:text="@{info.trade_name_web}"
                     android:textColor="@color/colorPrimaryText"
                     android:textSize="@dimen/text_size_15sp" />
 
                 <View
                     style="@style/Divider"
-                    android:layout_marginTop="@dimen/size_14dp" />
+                    android:layout_marginTop="@dimen/size_12dp" />
 
                 <TextView
                     style="@style/SmallFontTextView"
                     android:layout_marginStart="@dimen/size_20dp"
-                    android:layout_marginTop="@dimen/size_14dp"
+                    android:layout_marginTop="@dimen/size_12dp"
                     android:fontFamily="@string/font_family_medium"
                     android:text="@string/available_hours"
                     android:textColor="@color/colorPrimaryText" />
 
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvWorkTime"
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:layout_marginTop="@dimen/size_6dp"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/size_20dp"
+                    android:layout_marginEnd="@dimen/size_20dp" />
+
                 <TextView
                     style="@style/SmallFontTextView"
                     android:layout_marginStart="@dimen/size_20dp"
-                    android:layout_marginTop="@dimen/size_14dp"
+                    android:layout_marginTop="@dimen/size_12dp"
                     android:fontFamily="@string/font_family_medium"
                     android:text="@string/available_after_work_hours"
                     android:textColor="@color/colorPrimaryText" />
@@ -202,19 +224,18 @@
                     android:id="@+id/txtAvailableAfterWork"
                     style="@style/SmallFontTextView"
                     android:layout_marginStart="@dimen/size_20dp"
-                    android:layout_marginTop="@dimen/size_4dp"
-                    android:text="No"
+                    android:layout_marginTop="@dimen/size_2dp"
                     android:textColor="@color/colorAccent"
                     android:textSize="@dimen/text_size_15sp" />
 
                 <View
                     style="@style/Divider"
-                    android:layout_marginTop="@dimen/size_14dp" />
+                    android:layout_marginTop="@dimen/size_12dp" />
 
                 <TextView
                     style="@style/SmallFontTextView"
                     android:layout_marginStart="@dimen/size_20dp"
-                    android:layout_marginTop="@dimen/size_14dp"
+                    android:layout_marginTop="@dimen/size_12dp"
                     android:fontFamily="@string/font_family_medium"
                     android:text="@string/lbl_location"
                     android:textColor="@color/colorPrimaryText" />
@@ -223,8 +244,8 @@
                     android:id="@+id/txtLocation"
                     style="@style/SmallFontTextView"
                     android:layout_marginStart="@dimen/size_20dp"
-                    android:layout_marginTop="@dimen/size_4dp"
-                    android:text="Ahmedabad"
+                    android:layout_marginTop="@dimen/size_2dp"
+                    android:text="@{info.city}"
                     android:textColor="@color/colorPrimaryText"
                     android:textSize="@dimen/text_size_15sp" />
 
@@ -232,9 +253,75 @@
                     style="@style/Divider"
                     android:layout_marginTop="@dimen/size_14dp" />
 
+                <fragment
+                    android:id="@+id/map"
+                    android:name="com.app.otmjobs.common.utils.WorkAroundMapFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_208dp" />
+
             </LinearLayout>
 
         </androidx.core.widget.NestedScrollView>
+
+        <LinearLayout
+            android:id="@+id/routBottomView"
+            android:layout_width="match_parent"
+            android:visibility="gone"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:padding="@dimen/size_6dp">
+
+            <com.balysv.materialripple.MaterialRippleLayout
+                android:id="@+id/btnAccept"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/size_46dp"
+                android:layout_marginEnd="@dimen/size_3dp"
+                android:layout_weight="1"
+                android:background="@drawable/rounded_button_bg"
+                app:mrl_rippleColor="@color/colorRippleColor"
+                app:mrl_rippleDelayClick="true"
+                app:mrl_rippleDuration="@string/ripple_duration"
+                app:mrl_rippleHover="true"
+                app:mrl_rippleOverlay="true">
+
+                <TextView
+                    android:id="@+id/txtAccept"
+                    style="@style/SmallFont"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="sans-serif-medium"
+                    android:gravity="center"
+                    android:text="@string/accept"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorWhite" />
+            </com.balysv.materialripple.MaterialRippleLayout>
+
+            <com.balysv.materialripple.MaterialRippleLayout
+                android:id="@+id/btnReject"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/size_46dp"
+                android:layout_marginStart="@dimen/size_3dp"
+                android:layout_weight="1"
+                android:background="@drawable/rounded_red_button"
+                app:mrl_rippleColor="@color/colorRippleColor"
+                app:mrl_rippleDelayClick="true"
+                app:mrl_rippleDuration="@string/ripple_duration"
+                app:mrl_rippleHover="true"
+                app:mrl_rippleOverlay="true">
+
+                <TextView
+                    android:id="@+id/txtReject"
+                    style="@style/SmallFont"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="sans-serif-medium"
+                    android:gravity="center"
+                    android:text="@string/reject"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorWhite" />
+            </com.balysv.materialripple.MaterialRippleLayout>
+
+        </LinearLayout>
 
     </RelativeLayout>
 
