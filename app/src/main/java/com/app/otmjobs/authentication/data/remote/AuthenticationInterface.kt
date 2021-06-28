@@ -2,6 +2,7 @@ package com.app.otmjobs.authentication.data.remote
 
 import com.app.otmjobs.authentication.data.model.*
 import com.app.otmjobs.common.data.model.BaseResponse
+import com.app.otmjobs.managejob.data.model.WorkDetailsResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.http.*
@@ -50,4 +51,19 @@ interface AuthenticationInterface {
 
     @POST("change-password")
     suspend fun changePassword(@Body changePasswordRequest: ChangePasswordRequest): BaseResponse
+
+    @Multipart
+    @POST("forgot-password/user-exist")
+    suspend fun forgotPasswordUserExist(
+        @Part("email") email: RequestBody, @Part("guard") guard: RequestBody
+    ): ForgotPasswordUserExistResponse
+
+    @POST("forgot-password/send-otp")
+    suspend fun forgotPasswordSendOtp(@Body forgotPasswordSendOtpRequest: ForgotPasswordSendOtpRequest): BaseResponse
+
+    @POST("forgot-password/verify-otp")
+    suspend fun forgotPasswordVerifyOtp(@Body forgotPasswordVerifyOtpRequest: ForgotPasswordVerifyOtpRequest): BaseResponse
+
+    @POST("forgot-password/save-password")
+    suspend fun forgotPasswordSavePassword(@Body forgotPasswordSavePasswordRequest: ForgotPasswordSavePasswordRequest): BaseResponse
 }

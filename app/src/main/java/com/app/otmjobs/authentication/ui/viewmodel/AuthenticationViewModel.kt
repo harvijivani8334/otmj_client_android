@@ -26,6 +26,7 @@ class AuthenticationViewModel(val authenticationRepository: AuthenticationReposi
     val phoneExtensionResponse = MutableLiveData<PhoneExtensionResponse>()
     val countryResponse = MutableLiveData<CountryResponse>()
     val baseResponse = MutableLiveData<BaseResponse>()
+    val forgotPasswordUserExistResponse = MutableLiveData<ForgotPasswordUserExistResponse>()
 
     fun login(loginRequest: LoginRequest) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -175,6 +176,83 @@ class AuthenticationViewModel(val authenticationRepository: AuthenticationReposi
                     authenticationRepository.changePassword(changePasswordRequest)
                 withContext(Dispatchers.Main) {
                     baseResponse.value = changePasswordResponse
+                }
+            } catch (e: JSONException) {
+                traceErrorException(e)
+            } catch (e: CancellationException) {
+                traceErrorException(e)
+            } catch (e: Exception) {
+                traceErrorException(e)
+            }
+        }
+    }
+
+    fun forgotPasswordUserExist(email: String, guard: String) {
+        val email: RequestBody = AppUtils.getRequestBody(email)
+        val guard: RequestBody = AppUtils.getRequestBody(guard)
+
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val forgotPasswordResponse =
+                    authenticationRepository.forgotPasswordUserExist(email, guard)
+                withContext(Dispatchers.Main) {
+                    forgotPasswordUserExistResponse.value = forgotPasswordResponse
+                }
+            } catch (e: JSONException) {
+                traceErrorException(e)
+            } catch (e: CancellationException) {
+                traceErrorException(e)
+            } catch (e: Exception) {
+                traceErrorException(e)
+            }
+        }
+    }
+
+    fun forgotPasswordSendOtpRequest(forgotPasswordSendOtpRequest: ForgotPasswordSendOtpRequest) {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val forgotPasswordResponse =
+                    authenticationRepository.forgotPasswordSendOtp(forgotPasswordSendOtpRequest)
+                withContext(Dispatchers.Main) {
+                    baseResponse.value = forgotPasswordResponse
+                }
+            } catch (e: JSONException) {
+                traceErrorException(e)
+            } catch (e: CancellationException) {
+                traceErrorException(e)
+            } catch (e: Exception) {
+                traceErrorException(e)
+            }
+        }
+    }
+
+    fun forgotPasswordVerifyOtpRequest(forgotPasswordVerifyOtpRequest: ForgotPasswordVerifyOtpRequest) {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val forgotPasswordResponse =
+                    authenticationRepository.forgotPasswordVerifyOtp(forgotPasswordVerifyOtpRequest)
+                withContext(Dispatchers.Main) {
+                    baseResponse.value = forgotPasswordResponse
+                }
+            } catch (e: JSONException) {
+                traceErrorException(e)
+            } catch (e: CancellationException) {
+                traceErrorException(e)
+            } catch (e: Exception) {
+                traceErrorException(e)
+            }
+        }
+    }
+
+    fun forgotPasswordSavePasswordRequest(forgotPasswordSavePasswordRequest: ForgotPasswordSavePasswordRequest) {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val forgotPasswordResponse =
+                    authenticationRepository.forgotPasswordSavePassword(
+                        forgotPasswordSavePasswordRequest
+                    )
+                withContext(Dispatchers.Main) {
+                    baseResponse.value = forgotPasswordResponse
                 }
             } catch (e: JSONException) {
                 traceErrorException(e)

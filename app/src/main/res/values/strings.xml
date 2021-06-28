@@ -48,7 +48,7 @@
         <item>In One Week</item>
         <item>In Two Weeks</item>
         <item>Not Decided Yet</item>
-<!--        <item>Custom Date</item>-->
+        <!--        <item>Custom Date</item>-->
     </string-array>
 
     <string name="ok">Ok</string>
@@ -84,6 +84,8 @@
     <string name="hint_enter_otp">Please enter a 4 digit verification code which you just received</string>
     <string name="hint_did_not_get_otp">Did not get the Code?</string>
     <string name="hint_re_send_otp">Resend Code</string>
+    <string name="create_new_password">Create New Password</string>
+    title_create_new_pw
 
     <!-- Sign In Screen -->
     <string name="hint_user_name">Name</string>

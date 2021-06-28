@@ -4,9 +4,6 @@ import com.app.otmjobs.authentication.data.model.*
 import com.app.otmjobs.common.data.model.BaseResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
-import retrofit2.http.Multipart
-import retrofit2.http.POST
-import retrofit2.http.Part
 
 interface AuthenticationRepository {
     suspend fun login(loginRequest: LoginRequest): UserResponse
@@ -32,4 +29,12 @@ interface AuthenticationRepository {
 
     suspend fun getCustomerDetails(customerId: Int): UserResponse
     suspend fun changePassword(changePasswordRequest: ChangePasswordRequest): BaseResponse
+    suspend fun forgotPasswordUserExist(
+        email: RequestBody,
+        guard: RequestBody
+    ): ForgotPasswordUserExistResponse
+
+    suspend fun forgotPasswordSendOtp(forgotPasswordSendOtpRequest: ForgotPasswordSendOtpRequest): BaseResponse
+    suspend fun forgotPasswordVerifyOtp(forgotPasswordSendOtpRequest: ForgotPasswordVerifyOtpRequest): BaseResponse
+    suspend fun forgotPasswordSavePassword(forgotPasswordSavePasswordRequest: ForgotPasswordSavePasswordRequest): BaseResponse
 }

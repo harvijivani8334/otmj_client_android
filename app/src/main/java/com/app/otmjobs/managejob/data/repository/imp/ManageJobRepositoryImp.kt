@@ -81,4 +81,6 @@ class ManageJobRepositoryImp(
     override suspend fun repostJob(job_id: Int, device_id: Int): BaseResponse {
         return manageJobInterface.repostJob(job_id,device_id)
     }
+
+
 }

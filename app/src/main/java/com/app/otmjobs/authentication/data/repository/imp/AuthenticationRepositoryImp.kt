@@ -79,4 +79,23 @@ class AuthenticationRepositoryImp(
     override suspend fun changePassword(changePasswordRequest: ChangePasswordRequest): BaseResponse {
         return authenticationInterface.changePassword(changePasswordRequest)
     }
+
+    override suspend fun forgotPasswordUserExist(
+        email: RequestBody,
+        guard: RequestBody
+    ): ForgotPasswordUserExistResponse {
+        return authenticationInterface.forgotPasswordUserExist(email, guard)
+    }
+
+    override suspend fun forgotPasswordSendOtp(forgotPasswordSendOtpRequest: ForgotPasswordSendOtpRequest): BaseResponse {
+        return authenticationInterface.forgotPasswordSendOtp(forgotPasswordSendOtpRequest)
+    }
+
+    override suspend fun forgotPasswordVerifyOtp(forgotPasswordSendOtpRequest: ForgotPasswordVerifyOtpRequest): BaseResponse {
+        return authenticationInterface.forgotPasswordVerifyOtp(forgotPasswordSendOtpRequest)
+    }
+
+    override suspend fun forgotPasswordSavePassword(forgotPasswordSavePasswordRequest: ForgotPasswordSavePasswordRequest): BaseResponse {
+        return authenticationInterface.forgotPasswordSavePassword(forgotPasswordSavePasswordRequest)
+    }
 }

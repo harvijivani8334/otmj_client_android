@@ -1,6 +1,5 @@
 package com.app.otmjobs.common.utils
 
-import androidx.work.Operation
 import com.app.utilities.utils.DateFormatsConstants
 
 object AppConstants {
@@ -13,6 +12,7 @@ object AppConstants {
     const val defaultDateFormat = DateFormatsConstants.DD_MMM_YYYY_SPACE
     const val apiDateFormat = DateFormatsConstants.DD_MM_YYYY_DASH
     const val defaultCountryCode = "GB"
+    const val guard = "api"
 
     object IntentKey {
         const val POST_JOB_TYPE = "POST_JOB_TYPE"
