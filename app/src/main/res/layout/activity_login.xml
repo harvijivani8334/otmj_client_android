@@ -83,7 +83,7 @@
                 app:srcCompat="@drawable/ic_eye_visible" />
 
             <TextView
-                android:id="@+id/tvForgotPwd"
+                android:id="@+id/txtForgotPassword"
                 style="@style/SmallFontTextView"
                 android:layout_below="@+id/edtPassword"
                 android:layout_alignParentEnd="true"
@@ -95,7 +95,7 @@
                 android:id="@+id/btnLogin"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/save_button_height_50dp"
-                android:layout_below="@+id/tvForgotPwd"
+                android:layout_below="@+id/txtForgotPassword"
                 android:layout_marginTop="@dimen/size_20dp"
                 android:layout_marginBottom="@dimen/size_15dp"
                 android:background="@drawable/rounded_button_bg"

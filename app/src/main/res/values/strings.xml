@@ -85,7 +85,7 @@
     <string name="hint_did_not_get_otp">Did not get the Code?</string>
     <string name="hint_re_send_otp">Resend Code</string>
     <string name="create_new_password">Create New Password</string>
-    title_create_new_pw
+    <string name="error_verify_code">Verification code is not valid</string>
 
     <!-- Sign In Screen -->
     <string name="hint_user_name">Name</string>

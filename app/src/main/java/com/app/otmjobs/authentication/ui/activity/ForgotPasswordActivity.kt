@@ -8,56 +8,61 @@ import android.text.method.PasswordTransformationMethod
 import android.view.View
 import androidx.databinding.DataBindingUtil
 import com.app.otmjobs.R
-import com.app.otmjobs.authentication.data.model.ChangePasswordRequest
-import com.app.otmjobs.authentication.data.model.SignUpRequest
+import com.app.otmjobs.authentication.data.model.ForgotPasswordSavePasswordRequest
 import com.app.otmjobs.authentication.data.model.User
 import com.app.otmjobs.authentication.ui.viewmodel.AuthenticationViewModel
 import com.app.otmjobs.common.ui.activity.BaseActivity
 import com.app.otmjobs.common.utils.AppConstants
 import com.app.otmjobs.common.utils.AppUtils
-import com.app.otmjobs.dashboard.ui.activity.DashBoardActivity
-import com.app.otmjobs.databinding.ActivityChangePasswordBinding
+import com.app.otmjobs.databinding.ActivityForgotPasswordBinding
 import com.app.utilities.utils.AlertDialogHelper
 import com.app.utilities.utils.ValidationUtil
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class ChangePasswordActivity : BaseActivity(), View.OnClickListener {
-    private lateinit var binding: ActivityChangePasswordBinding
+class ForgotPasswordActivity : BaseActivity(), View.OnClickListener {
+    private lateinit var binding: ActivityForgotPasswordBinding
     private lateinit var mContext: Context;
-    private var visiblePassword: Boolean = false
     private var visibleNewPassword: Boolean = false
     private var visibleConfPassword: Boolean = false
-    lateinit var changePasswordRequest: ChangePasswordRequest
+    private lateinit var forgotPasswordSavePasswordRequest: ForgotPasswordSavePasswordRequest
     private val authenticationViewModel: AuthenticationViewModel by viewModel()
+    private var email: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_change_password)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_forgot_password)
         setStatusBarColor()
-        setupToolbar(getString(R.string.lbl_change_your_password), true)
+        setupToolbar("", true)
         mContext = this
         changePasswordObservers()
-        changePasswordRequest = ChangePasswordRequest()
-        binding.changePasswordRequest = changePasswordRequest
+        forgotPasswordSavePasswordRequest = ForgotPasswordSavePasswordRequest()
+        binding.forgotPasswordRequest = forgotPasswordSavePasswordRequest
 
-        binding.ivOldPasswordVisibility.setOnClickListener(this)
+        binding.txtSubmit.setOnClickListener(this)
         binding.ivNewPasswordVisibility.setOnClickListener(this)
         binding.ivConfirmNewPasswordVisibility.setOnClickListener(this)
-        binding.txtUpdate.setOnClickListener(this)
+
+        getIntentData()
+    }
+    
+    private fun getIntentData() {
+        if (intent != null && intent.extras != null) {
+            email = intent.getStringExtra(AppConstants.IntentKey.EMAIL)
+        }
     }
 
     override fun onClick(v: View?) {
         when (v?.id) {
-            R.id.txtUpdate -> {
+            R.id.txtSubmit -> {
                 if (valid()) {
-                    changePasswordRequest.guard = AppConstants.guard
-                    changePasswordRequest.device_type = AppConstants.DEVICE_TYPE.toString()
-                    changePasswordRequest.device_token = AppUtils.getDeviceToken()
-                    showProgressDialog(mContext,"")
-                    authenticationViewModel.changePassword(changePasswordRequest)
+                    forgotPasswordSavePasswordRequest.guard = AppConstants.guard
+                    forgotPasswordSavePasswordRequest.email = email!!
+                    showProgressDialog(mContext, "")
+                    authenticationViewModel.forgotPasswordSavePasswordRequest(
+                        forgotPasswordSavePasswordRequest
+                    )
                 }
             }
-            R.id.ivOldPasswordVisibility -> setPasswordVisibility()
             R.id.ivNewPasswordVisibility -> setNewPasswordVisibility()
             R.id.ivConfirmNewPasswordVisibility -> setConfPasswordVisibility()
         }
@@ -65,23 +70,12 @@ class ChangePasswordActivity : BaseActivity(), View.OnClickListener {
 
     private fun valid(): Boolean {
         var valid = true
-        if (!ValidationUtil.isEmptyEditText(binding.edtOldPassword.text.toString().trim())) {
-            binding.edtOldPassword.error = null
-        } else {
-            ValidationUtil.setErrorIntoEditText(
-                binding.edtOldPassword,
-                mContext.getString(R.string.error_empty_old_password)
-            )
-            valid = false
-            return valid
-        }
-
-        if (!ValidationUtil.isEmptyEditText(binding.edtNewPassword.text.toString().trim())) {
-            if (ValidationUtil.isValidPassword(binding.edtNewPassword.text.toString().trim())) {
-                binding.edtNewPassword.error = null
+        if (!ValidationUtil.isEmptyEditText(binding.edtPassword.text.toString().trim())) {
+            if (ValidationUtil.isValidPassword(binding.edtPassword.text.toString().trim())) {
+                binding.edtPassword.error = null
             } else {
                 ValidationUtil.setErrorIntoEditText(
-                    binding.edtNewPassword,
+                    binding.edtPassword,
                     mContext.getString(R.string.error_invalid_password)
                 )
                 valid = false
@@ -89,7 +83,7 @@ class ChangePasswordActivity : BaseActivity(), View.OnClickListener {
             }
         } else {
             ValidationUtil.setErrorIntoEditText(
-                binding.edtNewPassword,
+                binding.edtPassword,
                 mContext.getString(R.string.error_empty_new_password)
             )
             valid = false
@@ -97,12 +91,12 @@ class ChangePasswordActivity : BaseActivity(), View.OnClickListener {
         }
 
         if (!ValidationUtil.isValidConfirmPassword(
-                binding.edtConfirmNewPassword.text.toString().trim(),
-                binding.edtNewPassword.text.toString().trim()
+                binding.edtPassword.text.toString().trim(),
+                binding.edtConfirmPassword.text.toString().trim()
             )
         ) {
             ValidationUtil.setErrorIntoEditText(
-                binding.edtConfirmNewPassword,
+                binding.edtConfirmPassword,
                 mContext.getString(R.string.error_password_not_match)
             )
             valid = false
@@ -111,49 +105,34 @@ class ChangePasswordActivity : BaseActivity(), View.OnClickListener {
         return valid
     }
 
-    private fun setPasswordVisibility() {
-        if (visiblePassword) {
-            visiblePassword = false
-            binding.edtOldPassword.transformationMethod = PasswordTransformationMethod.getInstance()
-            binding.ivOldPasswordVisibility.setImageResource(R.drawable.ic_eye_visible)
-            binding.edtOldPassword.setSelection(binding.edtOldPassword.text!!.length)
-        } else {
-            visiblePassword = true
-            binding.edtOldPassword.transformationMethod =
-                HideReturnsTransformationMethod.getInstance()
-            binding.ivOldPasswordVisibility.setImageResource(R.drawable.ic_eye_invisible)
-            binding.edtOldPassword.setSelection(binding.edtOldPassword.text!!.length)
-        }
-    }
-
     private fun setNewPasswordVisibility() {
         if (visibleNewPassword) {
             visibleNewPassword = false
-            binding.edtNewPassword.transformationMethod = PasswordTransformationMethod.getInstance()
+            binding.edtPassword.transformationMethod = PasswordTransformationMethod.getInstance()
             binding.ivNewPasswordVisibility.setImageResource(R.drawable.ic_eye_visible)
-            binding.edtNewPassword.setSelection(binding.edtNewPassword.text!!.length)
+            binding.edtPassword.setSelection(binding.edtPassword.text!!.length)
         } else {
             visibleNewPassword = true
-            binding.edtNewPassword.transformationMethod =
+            binding.edtPassword.transformationMethod =
                 HideReturnsTransformationMethod.getInstance()
             binding.ivNewPasswordVisibility.setImageResource(R.drawable.ic_eye_invisible)
-            binding.edtNewPassword.setSelection(binding.edtNewPassword.text!!.length)
+            binding.edtPassword.setSelection(binding.edtPassword.text!!.length)
         }
     }
 
     private fun setConfPasswordVisibility() {
         if (visibleConfPassword) {
             visibleConfPassword = false
-            binding.edtConfirmNewPassword.transformationMethod =
+            binding.edtConfirmPassword.transformationMethod =
                 PasswordTransformationMethod.getInstance()
             binding.ivConfirmNewPasswordVisibility.setImageResource(R.drawable.ic_eye_visible)
-            binding.edtConfirmNewPassword.setSelection(binding.edtConfirmNewPassword.text!!.length)
+            binding.edtConfirmPassword.setSelection(binding.edtConfirmPassword.text!!.length)
         } else {
             visibleConfPassword = true
-            binding.edtConfirmNewPassword.transformationMethod =
+            binding.edtConfirmPassword.transformationMethod =
                 HideReturnsTransformationMethod.getInstance()
             binding.ivConfirmNewPasswordVisibility.setImageResource(R.drawable.ic_eye_invisible)
-            binding.edtConfirmNewPassword.setSelection(binding.edtConfirmNewPassword.text!!.length)
+            binding.edtConfirmPassword.setSelection(binding.edtConfirmPassword.text!!.length)
         }
     }
 
@@ -170,7 +149,7 @@ class ChangePasswordActivity : BaseActivity(), View.OnClickListener {
                 } else {
                     if (response.IsSuccess) {
                         val user: User = AppUtils.getUserPreference(mContext)!!
-                        user.password = changePasswordRequest.password
+                        user.password = forgotPasswordSavePasswordRequest.password
                         AppUtils.setUserPreference(mContext, user)
                         moveActivity(mContext, IntroductionActivity::class.java, true, true, null)
                     } else {

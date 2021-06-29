@@ -29,6 +29,8 @@ object AppConstants {
         const val POST_JOB_PHOTOS = "POST_JOB_PHOTOS"
         const val USER_ID = "USER_ID"
         const val JOB_APPLICATION_ID = "JOB_APPLICATION_ID"
+        const val FORGOT_PASSWORD_DATA = "FORGOT_PASSWORD_DATA"
+        const val EMAIL = "EMAIL"
         const val RC_LOCATION_PERM = 1
         const val LOCATION_SETTING_STATUS = 2
         const val SELECT_CATEGORY = 3

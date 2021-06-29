@@ -3,33 +3,28 @@ package com.app.otmjobs.authentication.ui.activity
 
 import android.content.Context
 import android.os.Bundle
-import android.text.method.HideReturnsTransformationMethod
-import android.text.method.PasswordTransformationMethod
+import android.util.Log
 import android.view.View
 import androidx.databinding.DataBindingUtil
 import com.app.otmjobs.R
-import com.app.otmjobs.authentication.data.model.ChangePasswordRequest
-import com.app.otmjobs.authentication.data.model.SignUpRequest
-import com.app.otmjobs.authentication.data.model.User
 import com.app.otmjobs.authentication.ui.viewmodel.AuthenticationViewModel
 import com.app.otmjobs.common.ui.activity.BaseActivity
 import com.app.otmjobs.common.utils.AppConstants
 import com.app.otmjobs.common.utils.AppUtils
-import com.app.otmjobs.dashboard.ui.activity.DashBoardActivity
-import com.app.otmjobs.databinding.ActivityChangePasswordBinding
-import com.app.otmjobs.databinding.ActivityForgotPasswordBinding
+import com.app.otmjobs.databinding.ActivityForgotPasswordUserExistBinding
 import com.app.utilities.utils.AlertDialogHelper
 import com.app.utilities.utils.ValidationUtil
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.parceler.Parcels
 
 class ForgotPasswordUserExistActivity : BaseActivity(), View.OnClickListener {
-    private lateinit var binding: ActivityForgotPasswordBinding
+    private lateinit var binding: ActivityForgotPasswordUserExistBinding
     private lateinit var mContext: Context;
     private val authenticationViewModel: AuthenticationViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_forgot_password)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_forgot_password_user_exist)
         setStatusBarColor()
         setupToolbar("", true)
         mContext = this
@@ -67,7 +62,7 @@ class ForgotPasswordUserExistActivity : BaseActivity(), View.OnClickListener {
     }
 
     private fun forgotPasswordUserExistObservers() {
-        authenticationViewModel.baseResponse.observe(this) { response ->
+        authenticationViewModel.forgotPasswordUserExistResponse.observe(this) { response ->
             hideProgressDialog()
             try {
                 if (response == null) {
@@ -78,7 +73,12 @@ class ForgotPasswordUserExistActivity : BaseActivity(), View.OnClickListener {
                     )
                 } else {
                     if (response.IsSuccess) {
-                        moveActivity(mContext, IntroductionActivity::class.java, true, true, null)
+                        val bundle = Bundle()
+                        bundle.putParcelable(
+                            AppConstants.IntentKey.FORGOT_PASSWORD_DATA,
+                            Parcels.wrap(response)
+                        )
+                        moveActivity(mContext, ForgotPasswordSendOtpRequestActivity::class.java, false, false, bundle)
                     } else {
                         AppUtils.handleUnauthorized(mContext, response)
                     }

@@ -102,6 +102,22 @@
             android:name=".managejob.ui.activity.TradesPersonDetailsActivity"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:name=".authentication.ui.activity.ForgotPasswordUserExistActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".authentication.ui.activity.ForgotPasswordSendOtpRequestActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".authentication.ui.activity.ForgotPasswordVerifyOtpActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".authentication.ui.activity.ForgotPasswordActivity"
+            android:screenOrientation="portrait" />
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.provider"

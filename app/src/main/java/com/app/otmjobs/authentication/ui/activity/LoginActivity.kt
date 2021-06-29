@@ -40,6 +40,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
         binding.txtLogin.setOnClickListener(this)
         binding.txtSignUp.setOnClickListener(this)
         binding.ivPasswordVisibility.setOnClickListener(this)
+        binding.txtForgotPassword.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
@@ -56,6 +57,14 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
                 moveActivity(mContext, SignUp1Activity::class.java, false, false, null)
             R.id.ivPasswordVisibility ->
                 setPasswordVisibility()
+            R.id.txtForgotPassword ->
+                moveActivity(
+                    mContext,
+                    ForgotPasswordUserExistActivity::class.java,
+                    false,
+                    false,
+                    null
+                )
         }
     }
 
