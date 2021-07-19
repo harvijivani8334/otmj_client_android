@@ -9,7 +9,11 @@ import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Environment
 import android.provider.Settings.Secure
+import android.text.SpannableString
+import android.text.style.ForegroundColorSpan
 import android.util.Log
+import android.view.MenuItem
+import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.content.res.ResourcesCompat
 import com.app.imagepickers.models.FileWithPath
@@ -25,6 +29,7 @@ import com.app.otmjobs.common.data.model.BaseResponse
 import com.app.otmjobs.common.ui.activity.BaseActivity
 import com.app.utilities.callback.DialogButtonClickListener
 import com.app.utilities.utils.AlertDialogHelper
+import com.app.utilities.utils.DateFormatsConstants
 import com.app.utilities.utils.DateHelper
 import com.app.utilities.utils.StringHelper
 import com.google.gson.Gson
@@ -270,6 +275,23 @@ object AppUtils {
         }
     }
 
+    fun setImage(mContext: Context, image: String?, imageView: AppCompatImageView) {
+        if (!StringHelper.isEmpty(image)) {
+            GlideUtil.loadImage(
+                image,
+                imageView,
+                getEmptyGalleryDrawable(mContext),
+                getEmptyGalleryDrawable(mContext),
+                Constant.ImageScaleType.CENTER_CROP,
+                null
+            )
+        } else {
+            imageView.setImageDrawable(
+                getEmptyGalleryDrawable(mContext)
+            )
+        }
+    }
+
     fun getApiDateFormat(input: String?): String {
         return if (!StringHelper.isEmpty(input)) {
             DateHelper.changeDateFormat(
@@ -445,5 +467,50 @@ object AppUtils {
         val intent = Intent(Intent.ACTION_VIEW)
         intent.data = Uri.parse(url)
         mContext.startActivity(intent)
+    }
+
+    fun setToolbarTextColor(item: MenuItem, title: String, color: Int) {
+        val s = SpannableString(title)
+        s.setSpan(ForegroundColorSpan(color), 0, s.length, 0)
+        item.title = s
+    }
+
+    fun getFirebaseUserId(mContext: Context): String {
+        return "CUST_" + getUserPreference(mContext)!!.customer_id
+    }
+
+    fun getFirebaseTime(date: Date): String {
+        val format = SimpleDateFormat(DateFormatsConstants.HH_MM_24, Locale.US)
+        return format.format(date)
+    }
+
+    fun getFirebaseDate(date: Date): String {
+        val format = SimpleDateFormat(DateFormatsConstants.DD_MMMM_YYYY_SPACE, Locale.US)
+        var finalDate = ""
+        if (DateHelper.isSameDay(date, Date())) {
+            finalDate = "Today"
+        } else if (DateHelper.isYesterDay(date, Date())) {
+            finalDate = "Yesterday"
+        } else {
+            finalDate = format.format(date)
+        }
+        return finalDate
+    }
+
+    fun checkFirebaseDate(date: Date): String {
+        val format = SimpleDateFormat(DateFormatsConstants.DD_MMM_YYYY_SPACE, Locale.US)
+        return format.format(date)
+    }
+
+    fun showKeyBoard(mContext: Context) {
+        val imm: InputMethodManager =
+            mContext.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, 0)
+    }
+
+    fun hideKeyBoard(mContext: Context) {
+        val imm =
+            mContext.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0)
     }
 }

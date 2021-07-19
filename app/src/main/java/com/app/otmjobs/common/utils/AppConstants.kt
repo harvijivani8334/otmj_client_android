@@ -13,6 +13,10 @@ object AppConstants {
     const val apiDateFormat = DateFormatsConstants.DD_MM_YYYY_DASH
     const val defaultCountryCode = "GB"
     const val guard = "api"
+    const val FCM_ROOM = "chatRooms"
+    const val FCM_USERS = "users"
+    const val FCM_MESSAGES = "messages"
+    const val SERVER_IMAGE_PATH = "https://otmsystem.com/storage/app/user_images/"
 
     object IntentKey {
         const val POST_JOB_TYPE = "POST_JOB_TYPE"
@@ -31,6 +35,7 @@ object AppConstants {
         const val JOB_APPLICATION_ID = "JOB_APPLICATION_ID"
         const val FORGOT_PASSWORD_DATA = "FORGOT_PASSWORD_DATA"
         const val EMAIL = "EMAIL"
+        const val CHANNEL_INFO = "CHANNEL_INFO"
         const val RC_LOCATION_PERM = 1
         const val LOCATION_SETTING_STATUS = 2
         const val SELECT_CATEGORY = 3
@@ -59,6 +64,8 @@ object AppConstants {
         const val SELECT_POST_CODE = 4
         const val SELECT_POST_CODE2 = 5
         const val DELETE_JOB = 6
+        const val CLEAR_CHAT = 7
+        const val DELETE_SELECTED_MESSAGE = 8
         const val START_DATE = "START_DATE"
         const val END_DATE = "END_DATE"
         const val DOB_PICKER = "DOB_PICKER"
@@ -85,6 +92,12 @@ object AppConstants {
         const val MARK_AS_PAUSED_JOB = 10
         const val JOB_HISTORY = 11
         const val VIEW_USER = 12
+        const val MESSAGE_ITEM_MENU = 9
+        const val COPY_MESSAGE = 1
+        const val REPLAY_MESSAGE = 2
+        const val DELETE_MESSAGE = 3
+        const val UN_SEND_MESSAGE = 4
+        const val SELECT_MESSAGE = 5
     }
 
     object FileExtension {
@@ -103,6 +116,11 @@ object AppConstants {
         const val JOB_TYPE_REGULAR = "1"
         const val JOB_TYPE_EMERGENCY = "2"
         const val JOB_TYPE_POPULAR = "3"
+        const val TYPE_ME = 1
+        const val TYPE_FROM = 2
+        const val MESSAGE_TYPE_TEXT = 0
+        const val MESSAGE_TYPE_IMAGE = 1
+        const val MESSAGE_TYPE_REPLAY = 2
     }
 
     object Directory {

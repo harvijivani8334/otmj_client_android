@@ -118,6 +118,11 @@
             android:name=".authentication.ui.activity.ForgotPasswordActivity"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:name=".managechat.ui.activity.ChatActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.provider"
@@ -131,6 +136,7 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
+
     </application>
 
 </manifest>

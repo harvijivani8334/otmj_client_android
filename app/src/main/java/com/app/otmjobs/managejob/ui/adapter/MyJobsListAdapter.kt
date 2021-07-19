@@ -200,8 +200,14 @@ class MyJobsListAdapter(
                 when (position) {
                     0 -> listener.onSelectItem(selectedPosition, AppConstants.Action.EDIT_JOB)
                     1 -> listener.onSelectItem(selectedPosition, AppConstants.Action.DELETE_JOB)
-                    2 -> listener.onSelectItem(selectedPosition, AppConstants.Action.MARK_AS_COMPLETED_JOB)
-                    3 -> listener.onSelectItem(selectedPosition, AppConstants.Action.MARK_AS_PAUSED_JOB)
+                    2 -> listener.onSelectItem(
+                        selectedPosition,
+                        AppConstants.Action.MARK_AS_COMPLETED_JOB
+                    )
+                    3 -> listener.onSelectItem(
+                        selectedPosition,
+                        AppConstants.Action.MARK_AS_PAUSED_JOB
+                    )
                     4 -> listener.onSelectItem(selectedPosition, AppConstants.Action.JOB_HISTORY)
                 }
             }
@@ -209,7 +215,10 @@ class MyJobsListAdapter(
                 when (position) {
                     0 -> listener.onSelectItem(selectedPosition, AppConstants.Action.EDIT_JOB)
                     1 -> listener.onSelectItem(selectedPosition, AppConstants.Action.DELETE_JOB)
-                    2 -> listener.onSelectItem(selectedPosition, AppConstants.Action.MARK_AS_COMPLETED_JOB)
+                    2 -> listener.onSelectItem(
+                        selectedPosition,
+                        AppConstants.Action.MARK_AS_COMPLETED_JOB
+                    )
                     3 -> listener.onSelectItem(selectedPosition, AppConstants.Action.JOB_HISTORY)
                 }
             }

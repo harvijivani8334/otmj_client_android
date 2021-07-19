@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:id="@+id/routRootView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorBlack"
+        android:clickable="true"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <RelativeLayout
+            android:id="@+id/routToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imgClosePreviewImage"
+                android:layout_width="@dimen/size_38dp"
+                android:layout_height="@dimen/size_38dp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/size_10dp"
+                android:padding="@dimen/size_7dp"
+                android:tint="@color/colorWhite"
+                app:srcCompat="@drawable/ic_arrow_back" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.jsibbold.zoomage.ZoomageView
+                android:id="@+id/imgPreviewImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                app:zoomage_animateOnReset="true"
+                app:zoomage_autoCenter="true"
+                app:zoomage_autoResetMode="UNDER"
+                app:zoomage_maxScale="8"
+                app:zoomage_minScale="0.6"
+                app:zoomage_restrictBounds="false"
+                app:zoomage_translatable="true"
+                app:zoomage_zoomable="true" />
+
+            <ProgressBar
+                android:id="@+id/pbPreviewImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:visibility="gone" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</layout>

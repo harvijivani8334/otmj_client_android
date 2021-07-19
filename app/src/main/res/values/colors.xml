@@ -8,6 +8,7 @@
     <color name="colorWhite">#ffffff</color>
     <color name="colorBlack">#000000</color>
     <color name="colorDivider">#ebe9e6</color>
+    <color name="colorDarkDivider">#bdc5d4</color>
     <color name="colorPrimaryText">#0b0b0b</color>
     <color name="colorSecondaryText">#5a5a5a</color>
     <color name="colorSecondaryLightText">#888888</color>
@@ -29,4 +30,5 @@
     <color name="colorDashBoardTabIndicator">#0065FF</color>
     <color name="colorIconBackground">#E6EAEE</color>
     <color name="colorPopupBackground">#ffffff</color>
+    <color name="color_scroll_to_bottom_button_circle">#f4f4f4</color>
 </resources>

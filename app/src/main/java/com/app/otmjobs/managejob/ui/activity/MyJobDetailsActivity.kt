@@ -52,7 +52,7 @@ class MyJobDetailsActivity : BaseActivity(), View.OnClickListener, SelectItemLis
         setupToolbar("", true)
         jobDetailsObservers()
         deleteJobObservers()
-        
+
         binding.imgJob.setOnClickListener {
             if (addJobResponse.info!!.images!!.size > 0) {
                 val bundle = Bundle()
@@ -138,7 +138,10 @@ class MyJobDetailsActivity : BaseActivity(), View.OnClickListener, SelectItemLis
             AppConstants.IntentKey.JOB_ID,
             jobId
         )
-        pagerAdapter.addFrag(UserFragment.newInstance(bundle1), getString(R.string.trades_person) + " (0)")
+        pagerAdapter.addFrag(
+            UserFragment.newInstance(bundle1),
+            getString(R.string.trades_person) + " (0)"
+        )
 
         val bundle = Bundle()
         bundle.putParcelable(

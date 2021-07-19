@@ -343,6 +343,15 @@ object DateHelper {
         }
     }
 
+    fun isYesterDay(dateOne: Date?, dateTwo: Date?): Boolean {
+        if (dateOne == null || dateTwo == null) {
+            return false
+        }
+        val milliDiff = dateTwo.time - dateOne.time
+        val dayCount = (milliDiff.toFloat() / (24 * 60 * 60 * 1000)).toInt()
+        return dayCount == 1
+    }
+
     /**
      *
      * @param date1

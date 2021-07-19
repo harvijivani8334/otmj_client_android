@@ -17,6 +17,7 @@ import com.app.otmjobs.dashboard.ui.fragment.ChatFragment
 import com.app.otmjobs.dashboard.ui.fragment.MoreFragment
 import com.app.otmjobs.databinding.ActivityDashboardBinding
 import com.app.otmjobs.databinding.ContentDashboardBinding
+import com.app.otmjobs.managechat.ui.fragment.UserChatFragment
 import com.app.otmjobs.managejob.ui.fragment.HomeFragment
 import com.app.otmjobs.managejob.ui.fragment.MyJobsFragment
 import com.app.otmjobs.managejob.ui.fragment.UserFragment
@@ -68,7 +69,7 @@ class DashBoardActivity : BaseActivity(), View.OnClickListener {
     private fun setupViewPager(viewPager: ViewPagerDisableSwipe) {
         viewPager.setPagingEnabled(false)
         pagerAdapter = ViewPagerAdapter(supportFragmentManager)
-        pagerAdapter.addFrag(ChatFragment.newInstance(), "")
+        pagerAdapter.addFrag(UserChatFragment.newInstance(), "")
         pagerAdapter.addFrag(MyJobsFragment.newInstance(), "")
         pagerAdapter.addFrag(HomeFragment.newInstance(), "")
         val bundle = Bundle()
@@ -157,6 +158,15 @@ class DashBoardActivity : BaseActivity(), View.OnClickListener {
             if (pagerAdapter.getmFragmentList()[i] is MyJobsFragment) {
                 (pagerAdapter.getmFragmentList()[i] as MyJobsFragment).loadData(false)
             }
+        }
+    }
+
+    fun updateChatCount(count: Int) {
+        if (count > 0) {
+            bindingContent!!.txtMessageCount.visibility = View.VISIBLE
+            bindingContent!!.txtMessageCount.text = count.toString()
+        } else {
+            bindingContent!!.txtMessageCount.visibility = View.GONE
         }
     }
 

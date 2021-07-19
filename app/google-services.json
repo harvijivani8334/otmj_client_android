@@ -1,0 +1,83 @@
+{
+  "project_info": {
+    "project_number": "252777754069",
+    "firebase_url": "https://otmj-1027d-default-rtdb.firebaseio.com",
+    "project_id": "otmj-1027d",
+    "storage_bucket": "otmj-1027d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:252777754069:android:6ecc7eafcccd0ebafee15c",
+        "android_client_info": {
+          "package_name": "com.app.otmjobs"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "252777754069-957d9otn6jqrl3joo5v2q7b5ndlk98de.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDor9627QgEuZQNdN5txVLSp2xwHlCnKA0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "252777754069-957d9otn6jqrl3joo5v2q7b5ndlk98de.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "252777754069-terbq44hq3pebuafp74cnh4veouss32h.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.otmj.OTMJobs"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:252777754069:android:2c9762c882ed947afee15c",
+        "android_client_info": {
+          "package_name": "com.app.otmjobs"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "252777754069-957d9otn6jqrl3joo5v2q7b5ndlk98de.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDor9627QgEuZQNdN5txVLSp2xwHlCnKA0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "252777754069-957d9otn6jqrl3joo5v2q7b5ndlk98de.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "252777754069-terbq44hq3pebuafp74cnh4veouss32h.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.otmj.OTMJobs"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

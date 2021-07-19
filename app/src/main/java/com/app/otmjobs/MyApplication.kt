@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import com.app.otmjobs.authentication.di.authenticationModule
 import com.app.otmjobs.common.utils.AppConstants
 import com.app.otmjobs.managejob.di.manageJobModule
+import com.google.firebase.FirebaseApp
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import org.koin.android.ext.koin.androidContext
@@ -25,8 +26,8 @@ class MyApplication : Application() {
         super.onCreate()
         context = this
         provideSharedPreference()
-
-        startKoin {
+        FirebaseApp.initializeApp(context)
+        startKoin {   FirebaseApp.initializeApp(context)
             androidContext(this@MyApplication)
             androidLogger(Level.DEBUG)
             modules(

@@ -223,5 +223,15 @@
 
     <string name="select_photos">Select Photos</string>
 
+    <string name="type_message">Type Message</string>
+    <string name="display_typing_user">%s is typing...</string>
+    <string name="replay">Replay</string>
+    <string name="unsend">Unsend</string>
+    <string name="clear_chat">Clear Chat</string>
+    <string name="clear_chat_message">Are you sure you want to clear messages in this chat?</string>
+    <string name="delete_selected_messages">Are you sure you want to delete selected messages?</string>
+    <string name="clear">Clear</string>
+    <string name="copy">Copy</string>
+    <string name="msg_copied_text">Copied to clipboard</string>
 
 </resources>
