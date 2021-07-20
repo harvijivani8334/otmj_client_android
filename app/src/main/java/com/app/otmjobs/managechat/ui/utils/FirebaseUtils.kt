@@ -12,17 +12,18 @@ import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.tasks.await
 
 object FirebaseUtils {
-    suspend fun getUserDetails(userId: String): UserInfo {
+    suspend fun getUserDetails(userId: String): UserInfo? {
         var userInfo: UserInfo? = null
         val db: FirebaseFirestore = FirebaseFirestore.getInstance()
-        val userRef = db.collection("users")
-            .whereEqualTo("_id", userId)
+        val userRef = db.collection("users").document(userId)
+//            .whereEqualTo("_id", userId)
         val userdata = userRef.get().await()
-        for (document in userdata.documents) {
-            userInfo = document.toObject(UserInfo::class.java)
-        }
+//        for (document in userdata.documents) {
+//            userInfo = document.toObject(UserInfo::class.java)
+//        }
+        userInfo = userdata.toObject(UserInfo::class.java)
         Log.d("test", "end")
-        return userInfo!!;
+        return userInfo
     }
 
     suspend fun getChannelALlMessages(roomId: String): MutableList<MessageInfo> {

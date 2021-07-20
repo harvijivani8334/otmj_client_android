@@ -525,8 +525,10 @@ class ChatActivity : BaseActivity(), View.OnClickListener, EasyPermissions.Permi
             var isSeen = false
             if (seen != null) {
                 for (i in seen.keys) {
-                    if (i != currentUser) isSeen = true
-                    break
+                    if (i != currentUser) {
+                        isSeen = true
+                        break
+                    }
                 }
             }
             if (isSeen)
@@ -543,7 +545,7 @@ class ChatActivity : BaseActivity(), View.OnClickListener, EasyPermissions.Permi
         }
 
         private fun setReplayViewLeft(binding: RowChatLeftItemBinding, info: ReplayMessageInfo?) {
-            if (info != null) {
+            if (info != null && !StringHelper.isEmpty(info.sender_id)) {
                 binding.routReplayView.visibility = View.VISIBLE
 
                 if (!StringHelper.isEmpty(info.content)) {
@@ -565,7 +567,7 @@ class ChatActivity : BaseActivity(), View.OnClickListener, EasyPermissions.Permi
         }
 
         private fun setReplayViewRight(binding: RowChatRightItemBinding, info: ReplayMessageInfo?) {
-            if (info != null) {
+            if (info != null && !StringHelper.isEmpty(info.sender_id)) {
                 binding.routReplayView.visibility = View.VISIBLE
 
                 if (!StringHelper.isEmpty(info.content)) {
@@ -931,7 +933,7 @@ class ChatActivity : BaseActivity(), View.OnClickListener, EasyPermissions.Permi
         val data = query.await()
         val info: ChannelInfo = data!!.toObject(ChannelInfo::class.java)!!
         for (user in info.users) {
-            val userInfo: UserInfo = FirebaseUtils.getUserDetails(user)
+            val userInfo: UserInfo = FirebaseUtils.getUserDetails(user)!!
             users[user] = userInfo
         }
         if (users.size > 0)

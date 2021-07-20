@@ -168,7 +168,7 @@ class UserChatFragment : BaseFragment(), View.OnClickListener {
                         userId = id
                 }
                 GlobalScope.launch(Dispatchers.IO) {
-                    val userInfo: UserInfo = FirebaseUtils.getUserDetails(userId)
+                    val userInfo: UserInfo = FirebaseUtils.getUserDetails(userId)!!
                     activity?.runOnUiThread {
                         binding.txtUserName.text = userInfo.username
                         val imageUrl = AppConstants.SERVER_IMAGE_PATH + userInfo.avatar
@@ -237,15 +237,20 @@ class UserChatFragment : BaseFragment(), View.OnClickListener {
     private suspend fun getTotalUnreadCount(channels: MutableList<ChannelInfo>?): Int {
         var totalCount = 0
         if (channels != null) {
-            for (i in adapter!!.snapshots.indices) {
-                val roomId = adapter!!.snapshots.getSnapshot(i).id
-                val messages: MutableList<MessageInfo> = FirebaseUtils.getChannelALlMessages(roomId)
-                var count = 0
-                for (message in messages) {
-                    if (!isSeenMessage(message.seen, message.sender_id))
-                        count += 1
+            try {
+                for (i in adapter!!.snapshots.indices) {
+                    val roomId = adapter!!.snapshots.getSnapshot(i).id
+                    val messages: MutableList<MessageInfo> =
+                        FirebaseUtils.getChannelALlMessages(roomId)
+                    var count = 0
+                    for (message in messages) {
+                        if (!isSeenMessage(message.seen, message.sender_id))
+                            count += 1
+                    }
+                    totalCount += count
                 }
-                totalCount += count
+            } catch (e: Exception) {
+                e.printStackTrace()
             }
         }
         return totalCount
@@ -269,7 +274,7 @@ class UserChatFragment : BaseFragment(), View.OnClickListener {
     }
 
 
-    suspend fun getChannelAllUsersDetails() {
+   /* suspend fun getChannelAllUsersDetails() {
         if (adapter != null) {
 //            users.clear()
             for (i in adapter!!.snapshots.indices) {
@@ -285,7 +290,7 @@ class UserChatFragment : BaseFragment(), View.OnClickListener {
             }
             Log.e("test", "users size:" + users.size);
         }
-    }
+    }*/
 
     override fun onStart() {
         super.onStart()
