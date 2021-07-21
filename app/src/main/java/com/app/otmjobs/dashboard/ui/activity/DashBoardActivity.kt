@@ -2,6 +2,7 @@ package com.app.otmjobs.dashboard.ui.activity
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
@@ -18,11 +19,13 @@ import com.app.otmjobs.dashboard.ui.fragment.MoreFragment
 import com.app.otmjobs.databinding.ActivityDashboardBinding
 import com.app.otmjobs.databinding.ContentDashboardBinding
 import com.app.otmjobs.managechat.ui.fragment.UserChatFragment
+import com.app.otmjobs.managechat.ui.utils.FirebaseUtils
 import com.app.otmjobs.managejob.ui.fragment.HomeFragment
 import com.app.otmjobs.managejob.ui.fragment.MyJobsFragment
 import com.app.otmjobs.managejob.ui.fragment.UserFragment
 import com.app.utilities.utils.StringHelper
 import com.app.utilities.utils.ViewPagerDisableSwipe
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.app_bar_dashboard.view.*
 
 class DashBoardActivity : BaseActivity(), View.OnClickListener {
@@ -31,6 +34,7 @@ class DashBoardActivity : BaseActivity(), View.OnClickListener {
     private lateinit var pagerAdapter: ViewPagerAdapter
     private var selectedTabIndex: Int = 2
     private var bindingContent: ContentDashboardBinding? = null
+    private var mAuth = FirebaseAuth.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,6 +51,8 @@ class DashBoardActivity : BaseActivity(), View.OnClickListener {
         bindingContent!!.routUsers.setOnClickListener(this)
         bindingContent!!.routMoreTab.setOnClickListener(this)
         binding.drawerLayout.imgUser.setOnClickListener(this)
+
+        signInAnonymously()
     }
 
     override fun onClick(v: View?) {
@@ -167,6 +173,21 @@ class DashBoardActivity : BaseActivity(), View.OnClickListener {
             bindingContent!!.txtMessageCount.text = count.toString()
         } else {
             bindingContent!!.txtMessageCount.visibility = View.GONE
+        }
+    }
+
+    private fun signInAnonymously() {
+        val user = mAuth.currentUser
+        if (user != null) {
+            FirebaseUtils.setOnlineStatus(mContext, true)
+        } else {
+            mAuth.signInAnonymously()
+                .addOnSuccessListener(this) {
+                    FirebaseUtils.setOnlineStatus(mContext, true)
+                }
+                .addOnFailureListener(
+                    this
+                ) { exception -> Log.e("test", "signInAnonymously:FAILURE", exception) }
         }
     }
 

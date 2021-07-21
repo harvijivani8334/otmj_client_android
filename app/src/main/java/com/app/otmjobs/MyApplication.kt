@@ -5,9 +5,13 @@ import android.content.Context
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatDelegate
 import com.app.otmjobs.authentication.di.authenticationModule
+import com.app.otmjobs.common.callback.LifeCycleDelegate
 import com.app.otmjobs.common.utils.AppConstants
+import com.app.otmjobs.common.utils.AppLifecycleHandler
+import com.app.otmjobs.managechat.ui.utils.FirebaseUtils
 import com.app.otmjobs.managejob.di.manageJobModule
 import com.google.firebase.FirebaseApp
+import com.google.firebase.auth.FirebaseAuth
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import org.koin.android.ext.koin.androidContext
@@ -15,7 +19,7 @@ import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
 import org.koin.core.logger.Level
 
-class MyApplication : Application() {
+class MyApplication : Application(), LifeCycleDelegate {
     companion object {
         lateinit var context: MyApplication private set
         lateinit var sharedPreferencesEditor: SharedPreferences.Editor
@@ -50,7 +54,8 @@ class MyApplication : Application() {
             )
         }
 
-
+        val lifeCycleHandler = AppLifecycleHandler(this)
+        registerLifecycleHandler(lifeCycleHandler)
     }
 
     private fun provideSharedPreference() {
@@ -91,5 +96,25 @@ class MyApplication : Application() {
 
     fun clearData() {
         preferenceRemoveKey(AppConstants.SharedPrefKey.USER_INFO)
+        FirebaseAuth.getInstance().signOut();
+    }
+
+    override fun onAppBackgrounded() {
+        val mAuth = FirebaseAuth.getInstance()
+        val user = mAuth.currentUser
+        if (user != null)
+            FirebaseUtils.setOnlineStatus(MyApplication().getContext(), false)
+    }
+
+    override fun onAppForegrounded() {
+        val mAuth = FirebaseAuth.getInstance()
+        val user = mAuth.currentUser
+        if (user != null)
+            FirebaseUtils.setOnlineStatus(MyApplication().getContext(), true)
+    }
+
+    private fun registerLifecycleHandler(lifeCycleHandler: AppLifecycleHandler) {
+        registerActivityLifecycleCallbacks(lifeCycleHandler)
+        registerComponentCallbacks(lifeCycleHandler)
     }
 }
