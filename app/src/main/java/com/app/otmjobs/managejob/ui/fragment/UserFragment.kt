@@ -98,6 +98,9 @@ class UserFragment : BaseFragment(), View.OnClickListener, SelectItemListener {
                 } else {
                     if (response.IsSuccess) {
                         setTradesmanListAdapter(response.info)
+                        (activity as MyJobDetailsActivity?)?.setTabTitle(
+                            response.info.size
+                        )
                     } else {
                         AppUtils.handleUnauthorized(mContext, response)
                     }

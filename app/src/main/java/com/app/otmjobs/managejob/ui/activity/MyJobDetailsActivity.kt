@@ -30,6 +30,7 @@ import com.app.otmjobs.managejob.ui.viewmodel.ManageJobViewModel
 import com.app.utilities.callback.DialogButtonClickListener
 import com.app.utilities.utils.AlertDialogHelper
 import com.app.utilities.utils.StringHelper
+import com.google.android.material.tabs.TabLayout
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.parceler.Parcels
 
@@ -140,8 +141,7 @@ class MyJobDetailsActivity : BaseActivity(), View.OnClickListener, SelectItemLis
         )
         pagerAdapter.addFrag(
             UserFragment.newInstance(bundle1),
-            getString(R.string.trades_person) + " (0)"
-        )
+            getString(R.string.trades_person))
 
         val bundle = Bundle()
         bundle.putParcelable(
@@ -155,6 +155,15 @@ class MyJobDetailsActivity : BaseActivity(), View.OnClickListener, SelectItemLis
         viewPager.adapter = pagerAdapter
         binding.tabs.setupWithViewPager(viewPager)
         viewPager.offscreenPageLimit = 2
+    }
+
+    fun setTabTitle(count: Int) {
+        val title = if (count > 0)
+            getString(R.string.trades_person) + " (" + count + ")"
+        else
+            getString(R.string.trades_person)
+        val tab: TabLayout.Tab? = binding.tabs.getTabAt(0)
+        tab!!.text = title
     }
 
     private fun jobDetailsObservers() {

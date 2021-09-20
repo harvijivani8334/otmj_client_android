@@ -45,7 +45,6 @@
             <TextView
                 android:id="@+id/txtJobDetail"
                 style="@style/VerySmallFontTextView"
-                android:layout_marginTop="@dimen/size_1dp"
                 android:text="@{info.trade_name_web}"
                 android:textColor="@color/colorSecondaryText" />
 
@@ -53,7 +52,7 @@
                 android:id="@+id/routRatingView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/size_3dp">
+                android:layout_marginTop="@dimen/size_4dp">
 
                 <TextView
                     android:id="@+id/txtStarRating"

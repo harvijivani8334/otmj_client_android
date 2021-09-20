@@ -7,7 +7,7 @@ object VariantConfig {
         get() {
             return MyApplication().preferenceGetString(
                 AppConstants.SharedPrefKey.APP_URL,
-                "https://jobs.xpertdeveloper.com/api/"
+                "http://dev.otmjobs.com/api/"
             )
         }
 }

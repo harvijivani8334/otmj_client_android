@@ -1021,9 +1021,10 @@ class ChatActivity : BaseActivity(), View.OnClickListener, EasyPermissions.Permi
         binding.rvUserChat.addOnLayoutChangeListener { v, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom ->
             if (bottom < oldBottom && lastCompletelyVisibleItemPosition >= adapter!!.itemCount - 2) {
                 binding.rvUserChat.postDelayed({
-                    binding.rvUserChat.smoothScrollToPosition(
-                        adapter!!.itemCount - 1
-                    )
+                    if (adapter!!.itemCount - 1 >= 0)
+                        binding.rvUserChat.smoothScrollToPosition(
+                            adapter!!.itemCount - 1
+                        )
                 }, 100)
             }
         }

@@ -205,7 +205,7 @@ class TradesPersonDetailsActivity : BaseActivity(), View.OnClickListener, OnMapR
             polygon.strokeColor = resources.getColor(R.color.colorAccent)
             polygon.fillColor = resources.getColor(R.color.colorAccentTransparent)
             polygon.strokeJointType = JointType.ROUND
-            mMap!!.animateCamera(CameraUpdateFactory.newLatLngZoom(latLngList[0], 7.0f))
+            mMap!!.animateCamera(CameraUpdateFactory.newLatLngZoom(latLngList[0], 1.0f))
 //            mMap!!.moveCamera(CameraUpdateFactory.newLatLng(latLngList[0]))
         }
     }
