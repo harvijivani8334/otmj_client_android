@@ -58,11 +58,10 @@ class UserFragment : BaseFragment(), View.OnClickListener, SelectItemListener {
         mContext = requireActivity()
         getBundleData()
         getTradePersonObservers()
-        showProgressDialog(mContext, "")
-        if (jobId == 0)
-            manageJobViewModel.getTradesPersonResponse()
-        else
-            manageJobViewModel.getTradesPersonResponse(jobId)
+        loadData(true)
+
+        binding.swipeRefreshLayout.setOnRefreshListener { loadData(false) }
+
         return binding.root
     }
 
@@ -70,6 +69,16 @@ class UserFragment : BaseFragment(), View.OnClickListener, SelectItemListener {
         when (v.id) {
 
         }
+    }
+
+    fun loadData(isProgress: Boolean) {
+        if (isProgress)
+            showProgressDialog(mContext, "")
+
+        if (jobId == 0)
+            manageJobViewModel.getTradesPersonResponse()
+        else
+            manageJobViewModel.getTradesPersonResponse(jobId)
     }
 
     private fun setTradesmanListAdapter(list: MutableList<TradePersonInfo>) {
@@ -88,6 +97,7 @@ class UserFragment : BaseFragment(), View.OnClickListener, SelectItemListener {
     private fun getTradePersonObservers() {
         manageJobViewModel.tradesPersonResponse.observe(requireActivity()) { response ->
             hideProgressDialog()
+            binding.swipeRefreshLayout.isRefreshing = false
             try {
                 if (response == null) {
                     AlertDialogHelper.showDialog(
@@ -119,6 +129,9 @@ class UserFragment : BaseFragment(), View.OnClickListener, SelectItemListener {
             )
             bundle.putInt(
                 AppConstants.IntentKey.JOB_APPLICATION_ID, adapter.list[position].job_application_id
+            )
+            bundle.putString(
+                AppConstants.IntentKey.JOB_ID, adapter.list[position].job_id!!.toString()
             )
             val intent = Intent(requireActivity(), TradesPersonDetailsActivity::class.java)
             intent.putExtras(bundle)

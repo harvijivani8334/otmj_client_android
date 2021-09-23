@@ -26,6 +26,7 @@ object AppConstants {
         const val CATEGORY_TITLE = "CATEGORY_TITLE"
         const val POST_JOB_DATA = "POST_JOB_DATA"
         const val JOB_ID = "JOB_ID"
+        const val JOB_CODE = "JOB_CODE"
         const val IMAGE_URI = "image_uri"
         const val CROP_RATIO_X = "crop_ratio_X"
         const val CROP_RATIO_Y = "crop_ratio_Y"
@@ -140,6 +141,11 @@ object AppConstants {
         const val Completed = 3
         const val Reposted = 4
         const val Deleted = 5
+
+        const val APPLIED = 1
+        const val REJECTED = 2
+        const val ACCEPTED = 3
+        const val WITHDRAWN = 4
     }
 }
 

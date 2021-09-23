@@ -7,6 +7,7 @@ import kotlinx.android.parcel.Parcelize
 class PostJobRequest(
     var customer_id: Int? = 0,
     var job_id: Int? = 0,
+    var job_code: String? = "",
     var trade_id: Int? = 0,
     var trade_name: String? = "",
     var job_title: String? = "",

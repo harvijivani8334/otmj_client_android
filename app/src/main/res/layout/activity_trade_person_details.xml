@@ -26,10 +26,10 @@
         <androidx.core.widget.NestedScrollView
             android:id="@+id/scrollView"
             android:layout_width="match_parent"
-            android:visibility="gone"
             android:layout_height="wrap_content"
             android:layout_above="@id/routBottomView"
-            android:layout_below="@id/toolbarDivider">
+            android:layout_below="@id/toolbarDivider"
+            android:visibility="gone">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -69,6 +69,12 @@
                             android:text="@{info.first_name.concat(@string/space).concat(info.last_name)}"
                             android:textColor="@color/colorPrimaryText"
                             android:textSize="@dimen/text_size_18sp" />
+
+                        <TextView
+                            android:id="@+id/txtJobStatus"
+                            android:visibility="gone"
+                            style="@style/MediumFontTextView"
+                            android:textSize="@dimen/text_size_14sp" />
 
                     </LinearLayout>
 
@@ -205,12 +211,12 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvWorkTime"
                     android:layout_width="match_parent"
-                    android:orientation="vertical"
-                    android:layout_marginTop="@dimen/size_6dp"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/size_20dp"
-                    android:layout_marginEnd="@dimen/size_20dp" />
+                    android:layout_marginTop="@dimen/size_6dp"
+                    android:layout_marginEnd="@dimen/size_20dp"
+                    android:orientation="vertical"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
                 <TextView
                     style="@style/SmallFontTextView"
@@ -266,10 +272,10 @@
         <LinearLayout
             android:id="@+id/routBottomView"
             android:layout_width="match_parent"
-            android:visibility="gone"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:padding="@dimen/size_6dp">
+            android:padding="@dimen/size_6dp"
+            android:visibility="gone">
 
             <com.balysv.materialripple.MaterialRippleLayout
                 android:id="@+id/btnAccept"

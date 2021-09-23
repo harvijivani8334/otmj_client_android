@@ -35,6 +35,7 @@ class TradesPersonDetailsActivity : BaseActivity(), View.OnClickListener, OnMapR
     private lateinit var mContext: Context;
     private var userId: String = "";
     private var jobApplicationId: Int = 0;
+    private var jobId: String = "";
     private var workDetailsResponse: WorkDetailsResponse = WorkDetailsResponse()
     private val latLngList: MutableList<LatLng> = ArrayList()
     private var mMap: GoogleMap? = null
@@ -72,8 +73,9 @@ class TradesPersonDetailsActivity : BaseActivity(), View.OnClickListener, OnMapR
         if (intent != null && intent.extras != null) {
             userId = intent.getStringExtra(AppConstants.IntentKey.USER_ID)!!
             jobApplicationId = intent.getIntExtra(AppConstants.IntentKey.JOB_APPLICATION_ID, 0)
+            jobId = intent.getStringExtra(AppConstants.IntentKey.JOB_ID)!!
             showProgressDialog(mContext, "")
-            manageJobViewModel.getWorkerDetailsResponse(userId)
+            manageJobViewModel.getWorkerDetailsResponse(userId, jobId)
         }
     }
 
@@ -142,7 +144,21 @@ class TradesPersonDetailsActivity : BaseActivity(), View.OnClickListener, OnMapR
                 } else {
                     if (response.IsSuccess) {
                         binding.scrollView.visibility = View.VISIBLE
-                        binding.routBottomView.visibility = View.VISIBLE
+                        if (response.info!!.job_application_status == AppConstants.JobStatus.APPLIED) {
+                            binding.routBottomView.visibility = View.VISIBLE
+                            binding.txtJobStatus.visibility = View.GONE
+                        } else {
+                            binding.routBottomView.visibility = View.GONE
+                            if (response.info!!.job_application_status == AppConstants.JobStatus.REJECTED) {
+                                binding.txtJobStatus.visibility = View.VISIBLE
+                                binding.txtJobStatus.text = mContext.getString(R.string.rejected)
+                                binding.txtJobStatus.setTextColor(mContext.resources.getColor(R.color.red))
+                            } else if (response.info!!.job_application_status == AppConstants.JobStatus.ACCEPTED) {
+                                binding.txtJobStatus.visibility = View.VISIBLE
+                                binding.txtJobStatus.text = mContext.getString(R.string.accepted)
+                                binding.txtJobStatus.setTextColor(mContext.resources.getColor(R.color.colorAccent))
+                            }
+                        }
                         workDetailsResponse = response
                         binding.info = response.info
                         AppUtils.setUserImage(
@@ -187,7 +203,7 @@ class TradesPersonDetailsActivity : BaseActivity(), View.OnClickListener, OnMapR
                     )
                 } else {
                     if (response.IsSuccess) {
-
+                        finish()
                     } else {
                         AppUtils.handleUnauthorized(mContext, response)
                     }

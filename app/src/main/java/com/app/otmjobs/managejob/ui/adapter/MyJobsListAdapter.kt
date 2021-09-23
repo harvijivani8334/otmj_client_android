@@ -81,7 +81,6 @@ class MyJobsListAdapter(
                 itemViewHolder.binding.txtStatus.text = mContext.getString(R.string.live)
                 itemViewHolder.binding.imgStatus.setColorFilter(mContext.resources.getColor(R.color.green))
             }
-
         }
 
         itemViewHolder.binding.imgMenu.setOnClickListener { v ->

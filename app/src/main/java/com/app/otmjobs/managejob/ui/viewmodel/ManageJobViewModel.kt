@@ -28,6 +28,7 @@ class ManageJobViewModel(private val manageJobRepository: ManageJobRepository) :
     val baseResponse = MutableLiveData<BaseResponse>()
     val tradesPersonResponse = MutableLiveData<TradesPersonResponse>()
     val workDetailsResponse = MutableLiveData<WorkDetailsResponse>()
+    val jobHistoryResponse = MutableLiveData<JobHistoryResponse>()
 
     fun getTradesResponse() {
         viewModelScope.launch(Dispatchers.IO) {
@@ -257,12 +258,14 @@ class ManageJobViewModel(private val manageJobRepository: ManageJobRepository) :
         }
     }
 
-    fun getWorkerDetailsResponse(userId: String) {
+    fun getWorkerDetailsResponse(userId: String, jobId: String) {
         val userId: RequestBody = AppUtils.getRequestBody(userId)
+        val jobId: RequestBody = AppUtils.getRequestBody(jobId)
+
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 val response =
-                    manageJobRepository.getWorkerDetails(userId)
+                    manageJobRepository.getWorkerDetails(userId, jobId)
                 withContext(Dispatchers.Main) {
                     workDetailsResponse.value = response
                 }
@@ -276,11 +279,11 @@ class ManageJobViewModel(private val manageJobRepository: ManageJobRepository) :
         }
     }
 
-    fun acceptRejectJobApplicationResponse(job_application_id: Int,status_id: Int) {
+    fun acceptRejectJobApplicationResponse(job_application_id: Int, status_id: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 val response =
-                    manageJobRepository.acceptRejectJobApplication(job_application_id,status_id)
+                    manageJobRepository.acceptRejectJobApplication(job_application_id, status_id)
                 withContext(Dispatchers.Main) {
                     baseResponse.value = response
                 }
@@ -294,13 +297,15 @@ class ManageJobViewModel(private val manageJobRepository: ManageJobRepository) :
         }
     }
 
-    fun repostJobResponse(job_id: Int,device_id: Int) {
+    fun getActionLog(job_id: String) {
+        val jobIdBody: RequestBody = AppUtils.getRequestBody(job_id)
+
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 val response =
-                    manageJobRepository.repostJob(job_id,device_id)
+                    manageJobRepository.getActionLog(jobIdBody)
                 withContext(Dispatchers.Main) {
-                    baseResponse.value = response
+                    jobHistoryResponse.value = response
                 }
             } catch (e: JSONException) {
                 traceErrorException(e)

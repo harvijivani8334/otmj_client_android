@@ -233,5 +233,8 @@
     <string name="clear">Clear</string>
     <string name="copy">Copy</string>
     <string name="msg_copied_text">Copied to clipboard</string>
+    <string name="accepted">Accepted</string>
+    <string name="rejected">Rejected</string>
+    <string name="error_empty_data">No Data</string>
 
 </resources>

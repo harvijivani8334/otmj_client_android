@@ -62,15 +62,24 @@ interface ManageJobInterface {
 
     @Multipart
     @POST("get-worker-details")
-    suspend fun getWorkerDetails(@Part("worker_id") worker_id: RequestBody): WorkDetailsResponse
+    suspend fun getWorkerDetails(
+        @Part("worker_id") worker_id: RequestBody, @Part("job_id") job_id: RequestBody
+    ): WorkDetailsResponse
 
     @Multipart
     @POST("job-application/status")
-    suspend fun acceptRejectJobApplication(@Part("job_application_id") job_application_id: Int
-                                           ,@Part("status_id") status_id: Int): BaseResponse
+    suspend fun acceptRejectJobApplication(
+        @Part("job_application_id") job_application_id: Int, @Part("status_id") status_id: Int
+    ): BaseResponse
 
     @Multipart
     @POST("job/repost")
-    suspend fun repostJob(@Part("job_id") job_id: Int
-                                           ,@Part("device_id") device_id: Int): BaseResponse
+    suspend fun repostJob(
+        @Part("job_id") job_id: Int, @Part("device_id") device_id: Int
+    ): BaseResponse
+
+    @Multipart
+    @POST("get-action-log")
+    suspend fun getActionLog(@Part("job_id") job_id: RequestBody): JobHistoryResponse
+
 }

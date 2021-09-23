@@ -30,13 +30,13 @@
                 android:layout_width="@dimen/size_9dp"
                 android:layout_height="@dimen/size_9dp"
                 android:tint="@color/colorAccent"
+                android:visibility="gone"
                 app:srcCompat="@drawable/circle_red" />
 
             <TextView
+                android:id="@+id/txtCategory"
                 style="@style/SmallFontTextView"
-                android:layout_marginStart="@dimen/size_10dp"
                 android:fontFamily="@string/font_family_medium"
-                android:text="Plumbing &amp; Cold Water"
                 android:textColor="@color/colorPrimaryText" />
 
         </LinearLayout>
@@ -54,6 +54,18 @@
             android:layout_below="@id/divider"
             android:orientation="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+        <TextView
+            android:id="@+id/txtEmptyData"
+            style="@style/SmallFontTextView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/divider"
+            android:gravity="center"
+            android:text="@string/error_empty_data"
+            android:textColor="@color/colorSecondaryLightText"
+            android:textSize="@dimen/text_size_15sp"
+            android:visibility="gone" />
 
     </RelativeLayout>
 

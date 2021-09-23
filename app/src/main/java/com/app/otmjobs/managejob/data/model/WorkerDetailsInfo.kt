@@ -26,5 +26,7 @@ data class WorkerDetailsInfo(
     var flag_name: String? = "",
     var extension_with_name: String? = "",
     var working_area: MutableList<WorkingAreaInfo> = ArrayList(),
-    var working_time: MutableList<WorkingTimeInfo> = ArrayList()
+    var working_time: MutableList<WorkingTimeInfo> = ArrayList(),
+    val job_application_status: Int = 0,
+
 )

@@ -185,8 +185,14 @@ class MyJobsFragment : BaseFragment(), View.OnClickListener, SelectItemListener,
                 selectedStatus = AppConstants.JobStatus.Paused
                 manageJobViewModel.markAsPausedResponse(adapter!!.list[selectedJob!!].job_id!!)
             }
-            AppConstants.Action.JOB_HISTORY ->
-                moveActivity(mContext, JobHistoryActivity::class.java, false, false, null)
+            AppConstants.Action.JOB_HISTORY -> {
+                val bundle = Bundle()
+                bundle.putParcelable(
+                    AppConstants.IntentKey.POST_JOB_DATA,
+                    Parcels.wrap(adapter!!.list[selectedJob!!])
+                )
+                moveActivity(mContext, JobHistoryActivity::class.java, false, false, bundle)
+            }
         }
     }
 

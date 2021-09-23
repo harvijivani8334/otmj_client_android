@@ -141,7 +141,8 @@ class MyJobDetailsActivity : BaseActivity(), View.OnClickListener, SelectItemLis
         )
         pagerAdapter.addFrag(
             UserFragment.newInstance(bundle1),
-            getString(R.string.trades_person))
+            getString(R.string.trades_person)
+        )
 
         val bundle = Bundle()
         bundle.putParcelable(
@@ -327,7 +328,12 @@ class MyJobDetailsActivity : BaseActivity(), View.OnClickListener, SelectItemLis
     }
 
     private fun onClickJobHistory() {
-        moveActivity(mContext, JobHistoryActivity::class.java, false, false, null)
+        val bundle = Bundle()
+        bundle.putParcelable(
+            AppConstants.IntentKey.POST_JOB_DATA,
+            Parcels.wrap(addJobResponse.info!!)
+        )
+        moveActivity(mContext, JobHistoryActivity::class.java, false, false, bundle)
     }
 
     private fun setStatus(status: Int) {
