@@ -42,7 +42,7 @@ class JobHistoryActivity : BaseActivity(), View.OnClickListener {
             postJobRequest =
                 Parcels.unwrap(intent.getParcelableExtra(AppConstants.IntentKey.POST_JOB_DATA))
             binding.txtCategory.text = postJobRequest.trade_name
-            showProgressDialog(mContext,"")
+            showProgressDialog(mContext, "")
             manageJobViewModel.getActionLog(postJobRequest.job_code!!)
         }
     }

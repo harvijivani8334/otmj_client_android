@@ -1132,7 +1132,7 @@ class ChatActivity : BaseActivity(), View.OnClickListener, EasyPermissions.Permi
         AppUtils.setToolbarTextColor(
             menu.findItem(R.id.clearChat),
             resources.getString(R.string.clear_chat),
-            resources.getColor(R.color.colorPrimaryText)
+            resources.getColor(R.color.colorBlack)
         )
         return true
     }

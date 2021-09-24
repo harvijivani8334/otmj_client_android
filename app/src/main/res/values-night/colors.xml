@@ -29,5 +29,6 @@
     <color name="colorIconBackground">#323542</color>
     <color name="colorPopupBackground">#424242</color>
     <color name="color_scroll_to_bottom_button_circle">#474747</color>
-
+    <color name="colorChatBubbleStroke">#5E5E5E</color>
+    <color name="colorChatBubbleSolid">#5F6168</color>
 </resources>
