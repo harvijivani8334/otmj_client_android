@@ -27,6 +27,8 @@ import com.app.otmjobs.authentication.data.model.Users
 import com.app.otmjobs.authentication.ui.activity.IntroductionActivity
 import com.app.otmjobs.common.data.model.BaseResponse
 import com.app.otmjobs.common.ui.activity.BaseActivity
+import com.app.otmjobs.managechat.data.model.ChatUserInfo
+import com.app.otmjobs.managechat.data.model.ChatUsersListResponse
 import com.app.utilities.callback.DialogButtonClickListener
 import com.app.utilities.utils.AlertDialogHelper
 import com.app.utilities.utils.DateFormatsConstants
@@ -126,6 +128,30 @@ object AppUtils {
             MyApplication().preferencePutString(
                 AppConstants.SharedPrefKey.USERS,
                 gson.toJson(users)
+            )
+        }
+    }
+
+    fun getChatUserPreference(context: Context?): ChatUsersListResponse? {
+        if (context != null && context.applicationContext != null) {
+            val gson: Gson = (context.applicationContext as MyApplication).provideGson()
+            val userInfo: String =
+                MyApplication().preferenceGetString(AppConstants.SharedPrefKey.CHAT_USER_INFO, "")
+            if (!StringHelper.isEmpty(userInfo)) {
+                return gson.fromJson(userInfo, ChatUsersListResponse::class.java)
+            }
+        }
+        return null
+    }
+
+
+    fun setChatUserPreference(context: Context, chatUsersListResponse: ChatUsersListResponse?) {
+        if (context.applicationContext != null) {
+            val gson: Gson =
+                (context.applicationContext as MyApplication).provideGson()
+            MyApplication().preferencePutString(
+                AppConstants.SharedPrefKey.CHAT_USER_INFO,
+                gson.toJson(chatUsersListResponse)
             )
         }
     }

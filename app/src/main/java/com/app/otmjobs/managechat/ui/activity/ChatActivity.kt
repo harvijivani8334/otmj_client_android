@@ -43,7 +43,6 @@ import com.app.otmjobs.databinding.ActivityUserChatBinding
 import com.app.otmjobs.databinding.RowChatLeftItemBinding
 import com.app.otmjobs.databinding.RowChatRightItemBinding
 import com.app.otmjobs.managechat.data.model.*
-import com.app.otmjobs.managechat.ui.utils.FirebaseUtils
 import com.app.utilities.callback.DialogButtonClickListener
 import com.app.utilities.utils.AlertDialogHelper
 import com.app.utilities.utils.StringHelper
@@ -61,7 +60,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.tasks.await
 import org.parceler.Parcels
 import pub.devrel.easypermissions.AppSettingsDialog
 import pub.devrel.easypermissions.EasyPermissions
@@ -87,7 +85,7 @@ class ChatActivity : BaseActivity(), View.OnClickListener, EasyPermissions.Permi
     private var selectedMessageItem: Int = 0
     private var sendMessageType: Int = 0
     private var initialLoaded: Boolean = false
-    private val users: HashMap<String, UserInfo> = HashMap()
+    private val users: HashMap<String, ChatUserInfo> = HashMap()
     private var statusInfo: StatusInfo? = null
     private var isMessageSelected = false
     private lateinit var menu: Menu
@@ -109,9 +107,9 @@ class ChatActivity : BaseActivity(), View.OnClickListener, EasyPermissions.Permi
 
         getIntentData()
 
-        GlobalScope.launch(Dispatchers.IO) {
-            getAllUserDetails()
-        }
+//        GlobalScope.launch(Dispatchers.IO) {
+        getAllUserDetails()
+//        }
 
         /*   binding.scrollView.setOnScrollChangeListener(
                NestedScrollView.OnScrollChangeListener { _, scrollX, scrollY, _, oldScrollY ->
@@ -838,7 +836,9 @@ class ChatActivity : BaseActivity(), View.OnClickListener, EasyPermissions.Permi
         } else {
             binding.imgReplayImage.visibility = View.GONE
         }
-        binding.txtUserName.text = users[info.sender_id]!!.username
+
+        if (users.containsKey(info.sender_id))
+            binding.txtUserName.text = users[info.sender_id]!!.name
 
         if (!StringHelper.isEmpty(info.content))
             binding.txtMessage.text = info.content
@@ -927,15 +927,21 @@ class ChatActivity : BaseActivity(), View.OnClickListener, EasyPermissions.Permi
         return totalItems
     }
 
-    private suspend fun getAllUserDetails() {
-        val query =
-            db.collection(AppConstants.FCM_ROOM).document(channelInfo.roomId!!).get()
-        val data = query.await()
-        val info: ChannelInfo = data!!.toObject(ChannelInfo::class.java)!!
-        for (user in info.users) {
-            val userInfo: UserInfo = FirebaseUtils.getUserDetails(user)!!
-            users[user] = userInfo
+    private fun getAllUserDetails() {
+//        val query =
+//            db.collection(AppConstants.FCM_ROOM).document(channelInfo.roomId!!).get()
+//        val data = query.await()
+//        val info: ChannelInfo = data!!.toObject(ChannelInfo::class.java)!!
+//        for (user in info.users) {
+//            val userInfo: UserInfo = FirebaseUtils.getUserDetails(user)!!
+//            users[user] = user
+//        }
+
+        val listUsers = AppUtils.getChatUserPreference(mContext)!!.info
+        for (user in listUsers) {
+            users[user._id] = user
         }
+
         if (users.size > 0)
             setUserData()
 
@@ -948,8 +954,8 @@ class ChatActivity : BaseActivity(), View.OnClickListener, EasyPermissions.Permi
                 channelInfo.typingUsers = info.typingUsers
                 var typingUser = ""
                 for (user in info.typingUsers) {
-                    if (user != currentUser)
-                        typingUser = users[user]!!.username
+                    if (user != currentUser && users.containsKey(user))
+                        typingUser = users[user]!!.name
 
                 }
                 if (!StringHelper.isEmpty(typingUser)) {
@@ -1042,19 +1048,22 @@ class ChatActivity : BaseActivity(), View.OnClickListener, EasyPermissions.Permi
                     binding.routMainView.visibility = View.VISIBLE
                     hideProgressDialog()
                     binding.toolbar.toolbar.toolbarChatView.visibility = View.VISIBLE
-                    binding.toolbar.toolbar.txtTitle.text = users[friendId]!!.username
-                    val imageUrl = AppConstants.SERVER_IMAGE_PATH + users[friendId]!!.avatar
-                    binding.toolbar.toolbar.imgUser.visibility = View.VISIBLE
-                    AppUtils.setUserImage(
-                        applicationContext,
-                        imageUrl,
-                        binding.toolbar.toolbar.imgUser
-                    )
-                    AppUtils.setImage(
-                        applicationContext,
-                        imageUrl,
-                        binding.imgJob
-                    )
+                    if (users.containsKey(friendId)) {
+                        binding.toolbar.toolbar.txtTitle.text = users[friendId]!!.name
+                        val imageUrl = users[friendId]!!.image
+                        binding.toolbar.toolbar.imgUser.visibility = View.VISIBLE
+                        AppUtils.setUserImage(
+                            applicationContext,
+                            imageUrl,
+                            binding.toolbar.toolbar.imgUser
+                        )
+                        AppUtils.setImage(
+                            applicationContext,
+                            imageUrl,
+                            binding.imgJob
+                        )
+                    }
+
                     manageLastSeenStatus()
                 }
             } catch (e: Exception) {

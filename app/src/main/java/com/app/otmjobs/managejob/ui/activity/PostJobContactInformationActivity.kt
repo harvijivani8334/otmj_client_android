@@ -108,6 +108,7 @@ class PostJobContactInformationActivity : BaseActivity(), View.OnClickListener,
             if (postJobRequest.job_id != 0) {
                 isEdit = true
             } else {
+//                postJobRequest.status = 1
                 mLocationHelper = LocationHelper(this)
                 mLocationHelper!!.setLocationUpdateListener(this)
                 if(!mLocationHelper!!.isGPSEnabled)

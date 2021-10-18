@@ -18,10 +18,13 @@ import com.app.otmjobs.dashboard.ui.activity.DashBoardActivity
 import com.app.otmjobs.databinding.FragmentChatBinding
 import com.app.otmjobs.databinding.RowUsersChatListBinding
 import com.app.otmjobs.managechat.data.model.ChannelInfo
+import com.app.otmjobs.managechat.data.model.ChatUserInfo
 import com.app.otmjobs.managechat.data.model.MessageInfo
 import com.app.otmjobs.managechat.data.model.UserInfo
 import com.app.otmjobs.managechat.ui.activity.ChatActivity
 import com.app.otmjobs.managechat.ui.utils.FirebaseUtils
+import com.app.otmjobs.managechat.ui.viewmodel.ManageChatViewModel
+import com.app.utilities.utils.AlertDialogHelper
 import com.app.utilities.utils.StringHelper
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
@@ -30,9 +33,9 @@ import com.google.firebase.firestore.Query
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.parceler.Parcels
 import java.util.*
-import kotlin.collections.ArrayList
 
 
 class UserChatFragment : BaseFragment(), View.OnClickListener {
@@ -41,7 +44,8 @@ class UserChatFragment : BaseFragment(), View.OnClickListener {
     private lateinit var db: FirebaseFirestore
     private var currentUser: String = ""
     private var adapter: ChannelListAdapter? = null
-    private val users: HashMap<String, MutableList<UserInfo>> = HashMap()
+    private val users: HashMap<String, ChatUserInfo?> = HashMap()
+    private val manageChatViewModel: ManageChatViewModel by viewModel()
 
     companion object {
         fun newInstance(): UserChatFragment {
@@ -63,8 +67,12 @@ class UserChatFragment : BaseFragment(), View.OnClickListener {
         mContext = requireActivity()
         db = FirebaseFirestore.getInstance()
         currentUser = AppUtils.getFirebaseUserId(mContext)
-        getAllChannel()
 
+        chatUsersListObservers()
+
+        manageChatViewModel.getChatUserList(AppConstants.guard)
+
+//        getAllChannel()
         return binding.root
     }
 
@@ -88,7 +96,9 @@ class UserChatFragment : BaseFragment(), View.OnClickListener {
                 .build()
         adapter = ChannelListAdapter(options)
         binding.rvUsersChatList.adapter = adapter
-
+        if (adapter != null) {
+            adapter!!.startListening()
+        }
     }
 
     class MyViewHolder(binding: RowUsersChatListBinding) : RecyclerView.ViewHolder(binding.root) {
@@ -160,22 +170,31 @@ class UserChatFragment : BaseFragment(), View.OnClickListener {
             }
         }
 
-        private fun setUserProfile(users: List<String>, binding: RowUsersChatListBinding) {
-            if (users.isNotEmpty()) {
+        private fun setUserProfile(userList: List<String>, binding: RowUsersChatListBinding) {
+            if (userList.isNotEmpty()) {
                 var userId = "";
-                for (id in users) {
+                for (id in userList) {
                     if (id != currentUser)
                         userId = id
                 }
-                GlobalScope.launch(Dispatchers.IO) {
-                    val userInfo: UserInfo = FirebaseUtils.getUserDetails(userId)!!
-                    activity?.runOnUiThread {
-                        binding.txtUserName.text = userInfo.username
-                        val imageUrl = AppConstants.SERVER_IMAGE_PATH + userInfo.avatar
-                        AppUtils.setUserImage(mContext, imageUrl, binding.imgUser)
-                    }
 
+                if(users.containsKey(userId)){
+                    val userInfo: ChatUserInfo? = users[userId]!!
+                    if (userInfo != null) {
+                        binding.txtUserName.text = userInfo.name
+                        AppUtils.setUserImage(mContext, userInfo.image, binding.imgUser)
+                    }
                 }
+
+//                GlobalScope.launch(Dispatchers.IO) {
+//                    val userInfo: UserInfo = FirebaseUtils.getUserDetails(userId)!!
+//                    activity?.runOnUiThread {
+//                        binding.txtUserName.text = userInfo.username
+//                        val imageUrl = AppConstants.SERVER_IMAGE_PATH + userInfo.avatar
+//                        AppUtils.setUserImage(mContext, imageUrl, binding.imgUser)
+//                    }
+//
+//                }
             }
         }
 
@@ -273,24 +292,52 @@ class UserChatFragment : BaseFragment(), View.OnClickListener {
         return isSeen
     }
 
-
-   /* suspend fun getChannelAllUsersDetails() {
-        if (adapter != null) {
-//            users.clear()
-            for (i in adapter!!.snapshots.indices) {
-                val info = adapter!!.getItem(i)
-                val listUserInfo: MutableList<UserInfo> = ArrayList()
-                for (user in info.users) {
-                    val userInfo: UserInfo = FirebaseUtils.getUserDetails(user)
-                    listUserInfo.add(userInfo)
+    private fun chatUsersListObservers() {
+        manageChatViewModel.chatUsersListResponse.observe(requireActivity()) { response ->
+            hideProgressDialog()
+            try {
+                if (response == null) {
+                    AlertDialogHelper.showDialog(
+                        mContext, null,
+                        mContext.getString(R.string.error_unknown), mContext.getString(R.string.ok),
+                        null, false, null, 0
+                    )
+                } else {
+                    if (response.IsSuccess) {
+                        AppUtils.setChatUserPreference(mContext, response)
+                        for (info in response.info) {
+                            users[info._id] = info
+                        }
+                        Log.e("test", "Info Size:" + response.info.size);
+                        getAllChannel()
+                    } else {
+                        AppUtils.handleUnauthorized(mContext, response)
+                    }
                 }
-                users[adapter!!.snapshots.getSnapshot(i).id] = listUserInfo
-                Log.e("test", "" + users[adapter!!.snapshots.getSnapshot(i).id]!!.size);
-                Log.e("test", "-----------------------------");
+            } catch (e: Exception) {
+
             }
-            Log.e("test", "users size:" + users.size);
         }
-    }*/
+    }
+
+
+    /* suspend fun getChannelAllUsersDetails() {
+         if (adapter != null) {
+ //            users.clear()
+             for (i in adapter!!.snapshots.indices) {
+                 val info = adapter!!.getItem(i)
+                 val listUserInfo: MutableList<UserInfo> = ArrayList()
+                 for (user in info.users) {
+                     val userInfo: UserInfo = FirebaseUtils.getUserDetails(user)
+                     listUserInfo.add(userInfo)
+                 }
+                 users[adapter!!.snapshots.getSnapshot(i).id] = listUserInfo
+                 Log.e("test", "" + users[adapter!!.snapshots.getSnapshot(i).id]!!.size);
+                 Log.e("test", "-----------------------------");
+             }
+             Log.e("test", "users size:" + users.size);
+         }
+     }*/
 
     override fun onStart() {
         super.onStart()

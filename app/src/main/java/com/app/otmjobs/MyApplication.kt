@@ -10,6 +10,7 @@ import com.app.otmjobs.common.utils.AppConstants
 import com.app.otmjobs.common.utils.AppLifecycleHandler
 import com.app.otmjobs.managechat.ui.utils.FirebaseUtils
 import com.app.otmjobs.managejob.di.manageJobModule
+import com.app.otmjobs.managechat.di.manageChatModule
 import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.gson.Gson
@@ -38,6 +39,7 @@ class MyApplication : Application(), LifeCycleDelegate {
                 listOf(
                     authenticationModule,
                     manageJobModule,
+                    manageChatModule,
                 )
             )
         }
