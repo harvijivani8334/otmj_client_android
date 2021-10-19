@@ -20,10 +20,8 @@ import com.app.otmjobs.common.utils.PopupMenuHelper
 import com.app.otmjobs.databinding.RowMyJobsBinding
 import com.app.otmjobs.managejob.data.model.JobImageInfo
 import com.app.otmjobs.managejob.data.model.PostJobRequest
-import com.app.otmjobs.managejob.ui.activity.PostJobContactInformationActivity
 import com.app.otmjobs.managejob.ui.activity.PostJobPagerImagesActivity
 import com.app.utilities.utils.StringHelper
-import org.parceler.Parcels
 import java.util.*
 import kotlin.collections.ArrayList
 

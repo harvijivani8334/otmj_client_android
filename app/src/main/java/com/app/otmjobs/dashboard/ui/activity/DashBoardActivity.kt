@@ -2,6 +2,7 @@ package com.app.otmjobs.dashboard.ui.activity
 
 import android.content.Context
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.View
 import android.widget.TextView
@@ -14,7 +15,6 @@ import com.app.otmjobs.common.ui.activity.BaseActivity
 import com.app.otmjobs.common.ui.adapter.ViewPagerAdapter
 import com.app.otmjobs.common.utils.AppConstants
 import com.app.otmjobs.common.utils.AppUtils
-import com.app.otmjobs.dashboard.ui.fragment.ChatFragment
 import com.app.otmjobs.dashboard.ui.fragment.MoreFragment
 import com.app.otmjobs.databinding.ActivityDashboardBinding
 import com.app.otmjobs.databinding.ContentDashboardBinding
@@ -165,6 +165,9 @@ class DashBoardActivity : BaseActivity(), View.OnClickListener {
                 (pagerAdapter.getmFragmentList()[i] as MyJobsFragment).loadData(false)
             }
         }
+        val uiHandler = Handler()
+        uiHandler.post({ setupTab(1)})
+
     }
 
     fun updateChatCount(count: Int) {
