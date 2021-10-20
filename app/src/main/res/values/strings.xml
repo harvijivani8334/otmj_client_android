@@ -236,5 +236,6 @@
     <string name="accepted">Accepted</string>
     <string name="rejected">Rejected</string>
     <string name="error_empty_data">No Data</string>
+    <string name="loading_more">Loading more&#8230;</string>
 
 </resources>

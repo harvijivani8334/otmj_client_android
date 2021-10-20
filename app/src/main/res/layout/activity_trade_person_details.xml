@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_above="@id/routBottomView"
             android:layout_below="@id/toolbarDivider"
-            android:visibility="gone">
+            android:visibility="visible">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -58,7 +58,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginStart="@dimen/size_16dp"
                         android:layout_marginEnd="@dimen/size_12dp"
-                        android:layout_toStartOf="@+id/imgPin"
+                        android:layout_toStartOf="@+id/routChatView"
                         android:layout_toEndOf="@+id/imgUserProfile"
                         android:orientation="vertical">
 
@@ -78,15 +78,32 @@
 
                     </LinearLayout>
 
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/imgPin"
-                        android:layout_width="@dimen/size_27dp"
-                        android:layout_height="@dimen/size_27dp"
-                        android:layout_alignParentEnd="true"
+                    <LinearLayout
+                        android:id="@+id/routChatView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:padding="@dimen/size_5dp"
-                        android:visibility="gone"
-                        app:srcCompat="@drawable/ic_map_pin" />
+                        android:background="@drawable/search_btn_bg"
+                        android:layout_alignParentEnd="true"
+                        android:gravity="center_vertical"
+                        android:paddingStart="@dimen/size_10dp"
+                        android:paddingTop="@dimen/size_5dp"
+                        android:paddingEnd="@dimen/size_10dp"
+                        android:paddingBottom="@dimen/size_6dp">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="@dimen/size_18dp"
+                            android:layout_height="@dimen/size_18dp"
+                            android:tint="@color/colorAccent"
+                            app:srcCompat="@drawable/ic_inactive_chat_tab" />
+
+                        <TextView
+                            style="@style/SmallFontTextView"
+                            android:layout_marginStart="@dimen/size_6dp"
+                            android:text="@string/chat"
+                            android:textColor="@color/colorAccent" />
+
+                    </LinearLayout>
 
                 </RelativeLayout>
 
