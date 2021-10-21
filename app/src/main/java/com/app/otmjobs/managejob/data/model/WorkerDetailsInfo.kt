@@ -28,5 +28,5 @@ data class WorkerDetailsInfo(
     var working_area: MutableList<WorkingAreaInfo> = ArrayList(),
     var working_time: MutableList<WorkingTimeInfo> = ArrayList(),
     val job_application_status: Int = 0,
-
+    var job_application_chat_id: String? = "",
 )

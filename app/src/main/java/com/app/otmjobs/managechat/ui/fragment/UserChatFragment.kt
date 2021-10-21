@@ -178,7 +178,7 @@ class UserChatFragment : BaseFragment(), View.OnClickListener {
                         userId = id
                 }
 
-                if(users.containsKey(userId)){
+                if (users.containsKey(userId)) {
                     val userInfo: ChatUserInfo? = users[userId]!!
                     if (userInfo != null) {
                         binding.txtUserName.text = userInfo.name

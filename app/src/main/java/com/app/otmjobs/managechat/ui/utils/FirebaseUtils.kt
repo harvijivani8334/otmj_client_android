@@ -22,7 +22,6 @@ object FirebaseUtils {
 //            userInfo = document.toObject(UserInfo::class.java)
 //        }
         userInfo = userdata.toObject(UserInfo::class.java)
-        Log.d("test", "end")
         return userInfo
     }
 
@@ -37,7 +36,6 @@ object FirebaseUtils {
             val messageInfo = document.toObject(MessageInfo::class.java)
             list.add(messageInfo!!)
         }
-        Log.d("test", "end")
         return list
     }
 

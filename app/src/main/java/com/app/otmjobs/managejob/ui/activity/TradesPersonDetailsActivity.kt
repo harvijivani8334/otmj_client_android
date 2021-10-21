@@ -14,6 +14,8 @@ import com.app.otmjobs.common.utils.AppConstants
 import com.app.otmjobs.common.utils.AppUtils
 import com.app.otmjobs.common.utils.WorkAroundMapFragment
 import com.app.otmjobs.databinding.ActivityTradePersonDetailsBinding
+import com.app.otmjobs.managechat.data.model.ChannelInfo
+import com.app.otmjobs.managechat.ui.activity.ChatActivity
 import com.app.otmjobs.managejob.data.model.JobImageInfo
 import com.app.otmjobs.managejob.data.model.WorkDetailsResponse
 import com.app.otmjobs.managejob.data.model.WorkingTimeInfo
@@ -26,7 +28,11 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
+import com.google.android.gms.tasks.Task
+import com.google.firebase.firestore.DocumentSnapshot
+import com.google.firebase.firestore.FirebaseFirestore
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.parceler.Parcels
 import java.util.*
 
 class TradesPersonDetailsActivity : BaseActivity(), View.OnClickListener, OnMapReadyCallback {
@@ -65,6 +71,7 @@ class TradesPersonDetailsActivity : BaseActivity(), View.OnClickListener, OnMapR
         binding.txtAccept.setOnClickListener(this)
         binding.txtReject.setOnClickListener(this)
         binding.imgUserProfile.setOnClickListener(this)
+        binding.routChatView.setOnClickListener(this)
 
         getIntentData()
     }
@@ -122,6 +129,9 @@ class TradesPersonDetailsActivity : BaseActivity(), View.OnClickListener, OnMapR
             R.id.imgUserProfile -> {
                 showUserPhotos()
             }
+            R.id.routChatView -> {
+                startUserChat(workDetailsResponse.info!!.job_application_chat_id)
+            }
         }
     }
 
@@ -147,16 +157,19 @@ class TradesPersonDetailsActivity : BaseActivity(), View.OnClickListener, OnMapR
                         if (response.info!!.job_application_status == AppConstants.JobStatus.APPLIED) {
                             binding.routBottomView.visibility = View.VISIBLE
                             binding.txtJobStatus.visibility = View.GONE
+                            binding.routChatView.visibility = View.GONE
                         } else {
                             binding.routBottomView.visibility = View.GONE
                             if (response.info!!.job_application_status == AppConstants.JobStatus.REJECTED) {
                                 binding.txtJobStatus.visibility = View.VISIBLE
                                 binding.txtJobStatus.text = mContext.getString(R.string.rejected)
                                 binding.txtJobStatus.setTextColor(mContext.resources.getColor(R.color.red))
+                                binding.routChatView.visibility = View.GONE
                             } else if (response.info!!.job_application_status == AppConstants.JobStatus.ACCEPTED) {
                                 binding.txtJobStatus.visibility = View.VISIBLE
                                 binding.txtJobStatus.text = mContext.getString(R.string.accepted)
                                 binding.txtJobStatus.setTextColor(mContext.resources.getColor(R.color.colorAccent))
+                                binding.routChatView.visibility = View.VISIBLE
                             }
                         }
                         workDetailsResponse = response
@@ -263,6 +276,41 @@ class TradesPersonDetailsActivity : BaseActivity(), View.OnClickListener, OnMapR
             val intent = Intent(mContext, PostJobPagerImagesActivity::class.java)
             intent.putExtras(bundle)
             mContext.startActivity(intent)
+        }
+    }
+
+    fun startUserChat(roomId: String?) {
+        if (roomId != null) {
+            val db = FirebaseFirestore.getInstance()
+            val docIdRef = db.collection(AppConstants.FCM_ROOM).document(roomId)
+            docIdRef.get().addOnCompleteListener { task: Task<DocumentSnapshot> ->
+                if (task.isSuccessful) {
+                    val document = task.result
+                    if (document.exists()) {
+                        moveToChatRoom(roomId)
+                    }
+                }
+            }
+        }
+
+    }
+
+    private fun moveToChatRoom(roomId: String?) {
+        val db = FirebaseFirestore.getInstance()
+        val docRef = db.collection(AppConstants.FCM_ROOM).document(
+            roomId!!
+        )
+        docRef.get().addOnCompleteListener { task: Task<DocumentSnapshot> ->
+            if (task.isSuccessful) {
+                val document = task.result
+                val info: ChannelInfo? = document.toObject(ChannelInfo::class.java)
+                if (info != null) {
+                    val bundle = Bundle()
+                    info.roomId = roomId
+                    bundle.putParcelable(AppConstants.IntentKey.CHANNEL_INFO, Parcels.wrap(info))
+                    moveActivity(mContext, ChatActivity::class.java, false, false, bundle)
+                }
+            }
         }
     }
 }
