@@ -7,6 +7,7 @@ import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.net.Uri
+import android.os.Build
 import android.os.Environment
 import android.provider.Settings.Secure
 import android.text.SpannableString
@@ -69,6 +70,27 @@ object AppUtils {
             MyApplication().preferencePutString(
                 AppConstants.SharedPrefKey.USER_INFO,
                 gson.toJson(userInfo)
+            )
+        }
+    }
+
+    fun getDeviceId(context: Context?): String? {
+        if (context != null && context.applicationContext != null) {
+            val deviceId: String =
+                MyApplication().preferenceGetString(AppConstants.SharedPrefKey.DEVICE_ID, "")
+            if (!StringHelper.isEmpty(deviceId)) {
+                return deviceId
+            }
+        }
+        return null
+    }
+
+
+    fun setDeviceId(context: Context, deviceId: String?) {
+        if (context.applicationContext != null) {
+            MyApplication().preferencePutString(
+                AppConstants.SharedPrefKey.DEVICE_ID,
+                deviceId!!
             )
         }
     }
@@ -349,6 +371,15 @@ object AppUtils {
         )
         return if (!StringHelper.isEmpty(deviceToken)) {
             deviceToken
+        } else {
+            ""
+        }
+    }
+
+    fun getDeviceModel(): String {
+        val model = Build.MODEL // returns model name
+        return if (!StringHelper.isEmpty(model)) {
+            model
         } else {
             ""
         }

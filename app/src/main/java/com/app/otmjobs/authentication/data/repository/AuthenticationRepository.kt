@@ -37,4 +37,7 @@ interface AuthenticationRepository {
     suspend fun forgotPasswordSendOtp(forgotPasswordSendOtpRequest: ForgotPasswordSendOtpRequest): BaseResponse
     suspend fun forgotPasswordVerifyOtp(forgotPasswordSendOtpRequest: ForgotPasswordVerifyOtpRequest): BaseResponse
     suspend fun forgotPasswordSavePassword(forgotPasswordSavePasswordRequest: ForgotPasswordSavePasswordRequest): BaseResponse
+    suspend fun getDeviceId(
+        device_type: String, device_token: String, device_model: String
+    ): GetDeviceIdResponse
 }

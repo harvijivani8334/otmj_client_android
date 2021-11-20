@@ -2,7 +2,6 @@ package com.app.otmjobs.authentication.data.remote
 
 import com.app.otmjobs.authentication.data.model.*
 import com.app.otmjobs.common.data.model.BaseResponse
-import com.app.otmjobs.managejob.data.model.WorkDetailsResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.http.*
@@ -66,4 +65,11 @@ interface AuthenticationInterface {
 
     @POST("forgot-password/save-password")
     suspend fun forgotPasswordSavePassword(@Body forgotPasswordSavePasswordRequest: ForgotPasswordSavePasswordRequest): BaseResponse
+
+    @GET("get-device-id")
+    suspend fun getDeviceId(
+        @Query("device_type") device_type: String,
+        @Query("device_token") device_token: String,
+        @Query("device_model") device_model: String
+    ): GetDeviceIdResponse
 }

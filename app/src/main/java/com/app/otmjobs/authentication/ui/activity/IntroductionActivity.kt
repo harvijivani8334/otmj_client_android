@@ -33,11 +33,18 @@ class IntroductionActivity : BaseActivity(), View.OnClickListener, SelectItemLis
         setStatusBarColor()
         mContext = this
         setLoginObservers()
+        getDeviceIdObservers()
 
         binding.txtLogin.setOnClickListener(this)
         binding.txtSignUp.setOnClickListener(this)
 
         setLoginUserListAdapter()
+
+        authenticationViewModel.getDeviceIdResponse(
+            AppConstants.DEVICE_TYPE.toString(),
+            AppUtils.getDeviceToken(),
+            AppUtils.getDeviceModel()
+        )
     }
 
     override fun onClick(v: View?) {
@@ -80,6 +87,28 @@ class IntroductionActivity : BaseActivity(), View.OnClickListener, SelectItemLis
                 } else {
                     if (response.IsSuccess) {
                         moveActivity(mContext, DashBoardActivity::class.java, true, true, null)
+                    } else {
+                        AppUtils.handleUnauthorized(mContext, response)
+                    }
+                }
+            } catch (e: Exception) {
+
+            }
+        }
+    }
+
+    private fun getDeviceIdObservers() {
+        authenticationViewModel.getDeviceIdResponse.observe(this) { response ->
+            try {
+                if (response == null) {
+                    AlertDialogHelper.showDialog(
+                        mContext, null,
+                        mContext.getString(R.string.error_unknown), mContext.getString(R.string.ok),
+                        null, false, null, 0
+                    )
+                } else {
+                    if (response.IsSuccess) {
+                        AppUtils.setDeviceId(mContext, response.device_id)
                     } else {
                         AppUtils.handleUnauthorized(mContext, response)
                     }

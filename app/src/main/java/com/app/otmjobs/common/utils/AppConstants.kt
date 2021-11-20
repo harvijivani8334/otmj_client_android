@@ -52,6 +52,7 @@ object AppConstants {
         const val APP_URL = "APP_URL"
         const val THEME_MODE = "THEME_MODE"
         const val CHAT_USER_INFO = "CHAT_USER_INFO"
+        const val DEVICE_ID = "DEVICE_ID"
     }
 
     object THEME_MODE {

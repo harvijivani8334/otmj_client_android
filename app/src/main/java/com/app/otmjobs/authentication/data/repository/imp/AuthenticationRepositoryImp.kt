@@ -98,4 +98,12 @@ class AuthenticationRepositoryImp(
     override suspend fun forgotPasswordSavePassword(forgotPasswordSavePasswordRequest: ForgotPasswordSavePasswordRequest): BaseResponse {
         return authenticationInterface.forgotPasswordSavePassword(forgotPasswordSavePasswordRequest)
     }
+
+    override suspend fun getDeviceId(
+        device_type: String,
+        device_token: String,
+        device_model: String
+    ): GetDeviceIdResponse {
+        return authenticationInterface.getDeviceId(device_type, device_token, device_model)
+    }
 }

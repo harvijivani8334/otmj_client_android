@@ -27,6 +27,7 @@ class AuthenticationViewModel(val authenticationRepository: AuthenticationReposi
     val countryResponse = MutableLiveData<CountryResponse>()
     val baseResponse = MutableLiveData<BaseResponse>()
     val forgotPasswordUserExistResponse = MutableLiveData<ForgotPasswordUserExistResponse>()
+    val getDeviceIdResponse = MutableLiveData<GetDeviceIdResponse>()
 
     fun login(loginRequest: LoginRequest) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -253,6 +254,24 @@ class AuthenticationViewModel(val authenticationRepository: AuthenticationReposi
                     )
                 withContext(Dispatchers.Main) {
                     baseResponse.value = forgotPasswordResponse
+                }
+            } catch (e: JSONException) {
+                traceErrorException(e)
+            } catch (e: CancellationException) {
+                traceErrorException(e)
+            } catch (e: Exception) {
+                traceErrorException(e)
+            }
+        }
+    }
+
+    fun getDeviceIdResponse(deviceType: String, deviceToken: String, deviceModel: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val response =
+                    authenticationRepository.getDeviceId(deviceType, deviceToken, deviceModel)
+                withContext(Dispatchers.Main) {
+                    getDeviceIdResponse.value = response
                 }
             } catch (e: JSONException) {
                 traceErrorException(e)

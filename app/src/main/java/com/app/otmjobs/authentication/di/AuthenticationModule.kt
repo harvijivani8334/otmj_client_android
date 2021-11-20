@@ -49,6 +49,13 @@ var authenticationModule = module {
                 if (userInfo != null && !StringHelper.isEmpty(userInfo.api_token)) {
                     requestBuilder.addHeader("Authorization", "Bearer " + userInfo.api_token)
                 }
+
+                if (!StringHelper.isEmpty(AppUtils.getDeviceId(MyApplication().getContext()))) {
+                    requestBuilder.addHeader(
+                        "device-id",
+                        AppUtils.getDeviceId(MyApplication().getContext())!!
+                    )
+                }
             } catch (e: Exception) {
                 e.printStackTrace()
             }
