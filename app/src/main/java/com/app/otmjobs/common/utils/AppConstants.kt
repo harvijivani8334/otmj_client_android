@@ -17,6 +17,7 @@ object AppConstants {
     const val FCM_USERS = "users"
     const val FCM_MESSAGES = "messages"
     const val SERVER_IMAGE_PATH = "https://otmsystem.com/storage/app/user_images/"
+    const val EXTRA_CHANNEL_SID = "C_SID"
 
     object IntentKey {
         const val POST_JOB_TYPE = "POST_JOB_TYPE"
@@ -37,6 +38,8 @@ object AppConstants {
         const val FORGOT_PASSWORD_DATA = "FORGOT_PASSWORD_DATA"
         const val EMAIL = "EMAIL"
         const val CHANNEL_INFO = "CHANNEL_INFO"
+        const val NOTIFICATION_TYPE = "NOTIFICATION_TYPE"
+        const val IS_FROM_NOTIFICATION = "IS_FROM_NOTIFICATION"
         const val RC_LOCATION_PERM = 1
         const val LOCATION_SETTING_STATUS = 2
         const val SELECT_CATEGORY = 3

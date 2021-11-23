@@ -125,6 +125,9 @@ dependencies {
     implementation "com.google.firebase:firebase-storage:${FIREBASE_STORAGE}"
     implementation 'com.google.firebase:firebase-firestore:23.0.2'
     implementation 'com.google.firebase:firebase-core:19.0.0'
+    implementation 'com.google.firebase:firebase-messaging:23.0.0'
+
+
     implementation 'com.firebaseui:firebase-ui-firestore:4.1.0'
     implementation 'com.android.support:multidex:1.0.3'
     implementation "pub.devrel:easypermissions:${EASY_PERMISSSION}"

@@ -8,6 +8,7 @@ import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Build
+import android.os.Bundle
 import android.os.Environment
 import android.provider.Settings.Secure
 import android.text.SpannableString
@@ -27,6 +28,7 @@ import com.app.otmjobs.authentication.data.model.User
 import com.app.otmjobs.authentication.data.model.Users
 import com.app.otmjobs.authentication.ui.activity.IntroductionActivity
 import com.app.otmjobs.common.data.model.BaseResponse
+import com.app.otmjobs.common.data.model.FcmData
 import com.app.otmjobs.common.ui.activity.BaseActivity
 import com.app.otmjobs.managechat.data.model.ChatUserInfo
 import com.app.otmjobs.managechat.data.model.ChatUsersListResponse
@@ -569,5 +571,31 @@ object AppUtils {
         val imm =
             mContext.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0)
+    }
+
+    fun getFcmIntent(data: FcmData): Intent? {
+        var intent: Intent? = null
+        val bundle = Bundle()
+        bundle.putString(AppConstants.IntentKey.NOTIFICATION_TYPE, data.type)
+        when (data.type) {
+            "1" -> {
+                intent = Intent("com.app.otmjobs.dashboard.ui.activity.DashBoardActivity")
+            }
+//            "2001", "2002" -> {
+//                intent = Intent("com.app.owlmanagement.view.activity.DashboardActivity")
+//                bundle.putInt(AppConstant.IntentKey.ACTION, AppConstant.Action.FROM_FEED)
+//                bundle.putInt(AppConstant.IntentKey.TYPE, AppConstant.Type.COMPANY_FEED)
+//            }
+//            "CHAT" -> {
+//                intent = Intent("com.app.owlmanagement.managechat.ui.activity.FirebaseChatActivity")
+//                //                bundle.putInt(AppConstant.IntentKey.ACTION, AppConstant.Action.FROM_CHAT);
+//                bundle.putString(AppConstant.IntentKey.CHANNEL_ID, data.getChannel_id())
+//            }
+            else -> intent = Intent("com.app.otmjobs.dashboard.ui.activity.DashBoardActivity")
+        }
+        if (intent != null) {
+            intent.putExtras(bundle)
+        }
+        return intent
     }
 }

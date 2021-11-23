@@ -3,6 +3,7 @@ package com.app.otmjobs.authentication.ui.activity
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,6 +19,8 @@ import com.app.otmjobs.common.utils.AppUtils
 import com.app.otmjobs.dashboard.ui.activity.DashBoardActivity
 import com.app.otmjobs.databinding.ActivityIntroductionBinding
 import com.app.utilities.utils.AlertDialogHelper
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.messaging.FirebaseMessaging
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -40,11 +43,22 @@ class IntroductionActivity : BaseActivity(), View.OnClickListener, SelectItemLis
 
         setLoginUserListAdapter()
 
-        authenticationViewModel.getDeviceIdResponse(
-            AppConstants.DEVICE_TYPE.toString(),
-            AppUtils.getDeviceToken(),
-            AppUtils.getDeviceModel()
-        )
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                return@OnCompleteListener
+            }
+            // Get new FCM registration token
+            val token = task.result
+            // Log and toast
+            val msg = "Token:$token"
+            Log.d("test", msg)
+
+            authenticationViewModel.getDeviceIdResponse(
+                AppConstants.DEVICE_TYPE.toString(),
+                token,
+                AppUtils.getDeviceModel()
+            )
+        })
     }
 
     override fun onClick(v: View?) {

@@ -7,7 +7,7 @@
     </string-array>
 
     <string name="app_name" translatable="false">OTM Jobs</string>
-    <string name="CHANNEL_ID" translatable="false">OTM Jobs</string>
+    <string name="default_notification_channel_id" translatable="false">OTM Jobs</string>
     <!--    <string name="font_family_regular" translatable="false">sans-serif</string>-->
     <!--    <string name="font_family_medium" translatable="false">sans-serif-medium</string>-->
     <string name="google_maps_key" translatable="false">AIzaSyDDOWUo-4BVRwrbtkE2kPVz7USJCZqlwd4</string>
