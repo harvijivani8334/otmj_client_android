@@ -1,0 +1,44 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+
+    </data>
+
+    <RelativeLayout
+        android:id="@+id/routMainView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/size_5dp">
+
+        <com.app.otmjobs.common.utils.SquareImageViewByWidth
+            android:id="@+id/imgSquare"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imgCertificate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/imgSquare"
+            android:layout_alignTop="@+id/imgSquare"
+            android:layout_alignEnd="@+id/imgSquare"
+            android:layout_alignBottom="@+id/imgSquare"
+            android:layout_centerInParent="true"
+            android:scaleType="centerCrop" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imgDownload"
+            android:layout_width="@dimen/size_30dp"
+            android:layout_height="@dimen/size_30dp"
+            android:visibility="visible"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="@dimen/size_6dp"
+            android:padding="@dimen/size_2dp"
+            app:tint="@color/colorSecondaryText"
+            app:srcCompat="@drawable/ic_baseline_download" />
+
+    </RelativeLayout>
+
+</layout>

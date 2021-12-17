@@ -3,16 +3,17 @@ package com.app.otmjobs.authentication.ui.activity
 
 import android.content.Context
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
 import android.view.View
 import androidx.databinding.DataBindingUtil
 import com.app.otmjobs.R
 import com.app.otmjobs.authentication.data.model.SignUpRequest
+import com.app.otmjobs.authentication.ui.viewmodel.AuthenticationViewModel
 import com.app.otmjobs.common.ui.activity.BaseActivity
 import com.app.otmjobs.common.utils.AppConstants
-import com.app.otmjobs.common.utils.AppUtils
-import com.app.otmjobs.dashboard.ui.activity.DashBoardActivity
 import com.app.otmjobs.databinding.ActivitySignup1Binding
 import com.app.utilities.utils.AlertDialogHelper
 import com.app.utilities.utils.ValidationUtil
@@ -25,6 +26,8 @@ class SignUp1Activity : BaseActivity(), View.OnClickListener {
     lateinit var signUpRequest: SignUpRequest
     private var visiblePassword: Boolean = false
     private var visibleConfPassword: Boolean = false
+    private var isNext: Boolean = false
+    private val authenticationViewModel: AuthenticationViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,18 +47,38 @@ class SignUp1Activity : BaseActivity(), View.OnClickListener {
         binding.ivPasswordVisibility.setOnClickListener(this)
         binding.ivConfirmPasswordVisibility.setOnClickListener(this)
         binding.txtNext.setOnClickListener(this)
+
+        binding.edtEmailId.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
+            override fun afterTextChanged(s: Editable) {
+                if (!ValidationUtil.isEmptyEditText(
+                        signUpRequest.email_address
+                    )
+                ) {
+                    if (ValidationUtil.isValidEmail(binding.edtEmailId.text.toString())) {
+                        authenticationViewModel.checkEmailExist(
+                            signUpRequest.email_address,
+                            AppConstants.guard
+                        )
+                    }
+                }
+            }
+        })
+
+        emailExistObservers()
     }
 
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.txtNext -> {
                 if (valid()) {
-                    val bundle = Bundle()
-                    bundle.putParcelable(
-                        AppConstants.IntentKey.SIGN_UP_REQUEST_DATA,
-                        Parcels.wrap(signUpRequest)
+                    showProgressDialog(mContext, "")
+                    isNext = true
+                    authenticationViewModel.checkEmailExist(
+                        signUpRequest.email_address,
+                        AppConstants.guard
                     )
-                    moveActivity(mContext, SignUp2Activity::class.java, false, false, bundle)
                 }
             }
             R.id.ivPasswordVisibility -> setPasswordVisibility()
@@ -181,6 +204,49 @@ class SignUp1Activity : BaseActivity(), View.OnClickListener {
                 HideReturnsTransformationMethod.getInstance()
             binding.ivConfirmPasswordVisibility.setImageResource(R.drawable.ic_eye_invisible)
             binding.edtConfirmPassword.setSelection(binding.edtConfirmPassword.text!!.length)
+        }
+    }
+
+    private fun emailExistObservers() {
+        authenticationViewModel.baseResponse.observe(this) { response ->
+            hideProgressDialog()
+            try {
+                if (response == null) {
+                    AlertDialogHelper.showDialog(
+                        mContext, null,
+                        mContext.getString(R.string.error_unknown), mContext.getString(R.string.ok),
+                        null, false, null, 0
+                    )
+                } else {
+                    if (response.IsSuccess) {
+                        if (isNext) {
+                            isNext = false
+                            val bundle = Bundle()
+                            bundle.putParcelable(
+                                AppConstants.IntentKey.SIGN_UP_REQUEST_DATA,
+                                Parcels.wrap(signUpRequest)
+                            )
+                            moveActivity(
+                                mContext,
+                                SignUp2Activity::class.java,
+                                false,
+                                false,
+                                bundle
+                            )
+                        } else {
+                            binding.edtEmailId.error = null
+                        }
+                    } else {
+                        isNext = false
+                        ValidationUtil.setErrorIntoEditText(
+                            binding.edtEmailId,
+                            mContext.getString(R.string.msg_email_already_exist)
+                        )
+                    }
+                }
+            } catch (e: Exception) {
+
+            }
         }
     }
 }

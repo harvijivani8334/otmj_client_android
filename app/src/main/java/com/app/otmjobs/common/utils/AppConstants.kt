@@ -104,6 +104,7 @@ object AppConstants {
         const val DELETE_MESSAGE = 3
         const val UN_SEND_MESSAGE = 4
         const val SELECT_MESSAGE = 5
+        const val DOWNLOAD_INVOICE = 6
     }
 
     object FileExtension {

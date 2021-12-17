@@ -82,4 +82,10 @@ interface ManageJobInterface {
     @POST("get-action-log")
     suspend fun getActionLog(@Part("job_id") job_id: RequestBody): JobHistoryResponse
 
+    @Multipart
+    @POST("job-invoice/get")
+    suspend fun getInvoices(
+        @Part("job_id") job_id: RequestBody,
+    ): GetInvoicesResponse
+
 }

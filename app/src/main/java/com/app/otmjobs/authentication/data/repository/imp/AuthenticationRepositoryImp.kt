@@ -106,4 +106,8 @@ class AuthenticationRepositoryImp(
     ): GetDeviceIdResponse {
         return authenticationInterface.getDeviceId(device_type, device_token, device_model)
     }
+
+    override suspend fun checkEmailExist(email: RequestBody, guard: RequestBody): BaseResponse {
+        return authenticationInterface.checkEmailExist(email, guard)
+    }
 }

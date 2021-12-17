@@ -88,4 +88,8 @@ class ManageJobRepositoryImp(
     override suspend fun getActionLog(job_id: RequestBody): JobHistoryResponse {
         return manageJobInterface.getActionLog(job_id)
     }
+
+    override suspend fun getInvoices(job_id: RequestBody): GetInvoicesResponse {
+        return manageJobInterface.getInvoices(job_id)
+    }
 }

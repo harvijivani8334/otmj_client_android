@@ -40,4 +40,9 @@ interface AuthenticationRepository {
     suspend fun getDeviceId(
         device_type: String, device_token: String, device_model: String
     ): GetDeviceIdResponse
+
+    suspend fun checkEmailExist(
+        email: RequestBody,
+        guard: RequestBody
+    ): BaseResponse
 }

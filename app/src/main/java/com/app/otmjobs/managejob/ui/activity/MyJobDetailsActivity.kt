@@ -24,6 +24,7 @@ import com.app.otmjobs.managejob.data.model.AddJobResponse
 import com.app.otmjobs.managejob.data.model.DeleteJobRequest
 import com.app.otmjobs.managejob.data.model.JobImageInfo
 import com.app.otmjobs.managejob.data.model.PostJobRequest
+import com.app.otmjobs.managejob.ui.fragment.JobInvoiceFragment
 import com.app.otmjobs.managejob.ui.fragment.MyJobDetailsFragment
 import com.app.otmjobs.managejob.ui.fragment.UserFragment
 import com.app.otmjobs.managejob.ui.viewmodel.ManageJobViewModel
@@ -153,9 +154,15 @@ class MyJobDetailsActivity : BaseActivity(), View.OnClickListener, SelectItemLis
             MyJobDetailsFragment.newInstance(bundle),
             getString(R.string.job_details)
         )
+
+        pagerAdapter.addFrag(
+            JobInvoiceFragment.newInstance(bundle1),
+            getString(R.string.invoices)
+        )
+
         viewPager.adapter = pagerAdapter
         binding.tabs.setupWithViewPager(viewPager)
-        viewPager.offscreenPageLimit = 2
+        viewPager.offscreenPageLimit = 3
     }
 
     fun setTabTitle(count: Int) {

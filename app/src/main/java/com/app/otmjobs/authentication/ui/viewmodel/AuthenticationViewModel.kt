@@ -282,4 +282,25 @@ class AuthenticationViewModel(val authenticationRepository: AuthenticationReposi
             }
         }
     }
+
+    fun checkEmailExist(email: String, guard: String) {
+        val email: RequestBody = AppUtils.getRequestBody(email)
+        val guard: RequestBody = AppUtils.getRequestBody(guard)
+
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val emailExistResponse =
+                    authenticationRepository.checkEmailExist(email, guard)
+                withContext(Dispatchers.Main) {
+                    baseResponse.value = emailExistResponse
+                }
+            } catch (e: JSONException) {
+                traceErrorException(e)
+            } catch (e: CancellationException) {
+                traceErrorException(e)
+            } catch (e: Exception) {
+                traceErrorException(e)
+            }
+        }
+    }
 }

@@ -29,6 +29,7 @@ class ManageJobViewModel(private val manageJobRepository: ManageJobRepository) :
     val tradesPersonResponse = MutableLiveData<TradesPersonResponse>()
     val workDetailsResponse = MutableLiveData<WorkDetailsResponse>()
     val jobHistoryResponse = MutableLiveData<JobHistoryResponse>()
+    val getInvoicesResponse = MutableLiveData<GetInvoicesResponse>()
 
     fun getTradesResponse() {
         viewModelScope.launch(Dispatchers.IO) {
@@ -306,6 +307,25 @@ class ManageJobViewModel(private val manageJobRepository: ManageJobRepository) :
                     manageJobRepository.getActionLog(jobIdBody)
                 withContext(Dispatchers.Main) {
                     jobHistoryResponse.value = response
+                }
+            } catch (e: JSONException) {
+                traceErrorException(e)
+            } catch (e: CancellationException) {
+                traceErrorException(e)
+            } catch (e: Exception) {
+                traceErrorException(e)
+            }
+        }
+    }
+
+    fun getInvoices(jobId: String) {
+        val jobIdBody: RequestBody = AppUtils.getRequestBody(jobId)
+
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val response = manageJobRepository.getInvoices(jobIdBody)
+                withContext(Dispatchers.Main) {
+                    getInvoicesResponse.value = response
                 }
             } catch (e: JSONException) {
                 traceErrorException(e)

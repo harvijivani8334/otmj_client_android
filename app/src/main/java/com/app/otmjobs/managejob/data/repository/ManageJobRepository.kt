@@ -42,4 +42,8 @@ interface ManageJobRepository {
 
     suspend fun getActionLog(job_id: RequestBody): JobHistoryResponse
 
+    suspend fun getInvoices(
+        job_id: RequestBody,
+    ): GetInvoicesResponse
+
 }

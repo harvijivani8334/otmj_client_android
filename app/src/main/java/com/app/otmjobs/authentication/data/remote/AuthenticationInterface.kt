@@ -5,6 +5,7 @@ import com.app.otmjobs.common.data.model.BaseResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.http.*
+import java.util.*
 
 interface AuthenticationInterface {
     @POST("login")
@@ -72,4 +73,10 @@ interface AuthenticationInterface {
         @Query("device_token") device_token: String,
         @Query("device_model") device_model: String
     ): GetDeviceIdResponse
+
+    @Multipart
+    @POST("email-check")
+    suspend fun checkEmailExist(@Part("email") email: RequestBody
+                                ,@Part("guard") guard: RequestBody): BaseResponse
 }
+
