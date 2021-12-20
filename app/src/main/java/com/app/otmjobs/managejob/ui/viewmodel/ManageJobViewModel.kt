@@ -138,6 +138,7 @@ class ManageJobViewModel(private val manageJobRepository: ManageJobRepository) :
         val jobId: RequestBody = AppUtils.getRequestBody(jobId.toString())
         val deviceToken: RequestBody = AppUtils.getRequestBody(AppUtils.getDeviceToken())
         val deviceType: RequestBody = AppUtils.getRequestBody(AppConstants.DEVICE_TYPE.toString())
+        val imageFrom: RequestBody = AppUtils.getRequestBody("1")
 
         if (!StringHelper.isEmpty(image)) {
             val file = File(image!!)
@@ -148,7 +149,7 @@ class ManageJobViewModel(private val manageJobRepository: ManageJobRepository) :
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 val response = manageJobRepository.addJobImage(
-                    jobId, deviceToken, deviceType, imageFileBody
+                    jobId, deviceToken, deviceType,imageFrom, imageFileBody
                 )
                 withContext(Dispatchers.Main) {
                     addJobResponse.value = response

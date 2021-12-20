@@ -38,9 +38,10 @@ class ManageJobRepositoryImp(
         job_id: RequestBody,
         device_token: RequestBody,
         device_type: RequestBody,
+        image_from: RequestBody,
         file_name: MultipartBody.Part?
     ): AddJobResponse {
-        return manageJobInterface.addJobImage(job_id, device_token, device_type, file_name)
+        return manageJobInterface.addJobImage(job_id, device_token, device_type,image_from, file_name)
     }
 
     override suspend fun deleteJobImage(

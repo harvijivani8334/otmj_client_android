@@ -5,26 +5,29 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.FileProvider
 import androidx.databinding.DataBindingUtil
 import com.app.imagepickers.models.FileWithPath
+import com.app.imagepickers.pickiT.PickiTCallbacks
 import com.app.imagepickers.utils.FileUtils
 import com.app.otmjobs.BuildConfig
 import com.app.otmjobs.R
 import com.app.otmjobs.common.callback.SelectAttachmentListener
 import com.app.otmjobs.common.callback.SelectDateRangeListener
 import com.app.otmjobs.common.callback.SelectItemListener
-import com.app.otmjobs.common.data.model.FileDetail
 import com.app.otmjobs.common.data.model.ModuleInfo
 import com.app.otmjobs.common.ui.activity.BaseActivity
 import com.app.otmjobs.common.ui.fragment.SelectAttachmentDialog
 import com.app.otmjobs.common.utils.AppConstants
 import com.app.otmjobs.common.utils.AppUtils
+import com.app.otmjobs.common.utils.ImagePickerUtility
 import com.app.otmjobs.common.utils.PopupMenuHelper
 import com.app.otmjobs.databinding.ActivityPjJobDetailsBinding
 import com.app.otmjobs.managejob.data.model.JobImageInfo
@@ -44,7 +47,8 @@ import pub.devrel.easypermissions.EasyPermissions
 import java.io.File
 
 class PostJobDetailsActivity : BaseActivity(), View.OnClickListener, SelectItemListener,
-    SelectDateRangeListener, EasyPermissions.PermissionCallbacks, SelectAttachmentListener {
+    SelectDateRangeListener, EasyPermissions.PermissionCallbacks, SelectAttachmentListener,
+    PickiTCallbacks {
     private val manageJobViewModel: ManageJobViewModel by viewModel()
     private lateinit var binding: ActivityPjJobDetailsBinding
     private lateinit var mContext: Context;
@@ -54,12 +58,14 @@ class PostJobDetailsActivity : BaseActivity(), View.OnClickListener, SelectItemL
     private lateinit var adapterPhotos: PostJobPhotosListAdapter
     private var currentPhotoPath: String = ""
     private var isUpdate: Boolean = false
+    private lateinit var imagePickerUtility: ImagePickerUtility;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_pj_job_details)
         setStatusBarColor()
         mContext = this
+        imagePickerUtility = ImagePickerUtility(this, this, this)
         setupToolbar(getString(R.string.post_job), true)
         getTradesObservers()
         deleteJobImageObservers()
@@ -439,20 +445,22 @@ class PostJobDetailsActivity : BaseActivity(), View.OnClickListener, SelectItemL
                     val count: Int =
                         data.clipData!!.itemCount //evaluate the count before the for loop --- otherwise, the count is evaluated every loop.
                     if (isLeftImageCount(count)) {
-                        for (i in 0 until count) {
-                            val imageUri: Uri = data.clipData!!.getItemAt(i).uri;
-                            val realPath: String = FileUtils.getPath(mContext, imageUri)!!
-                            if (!StringHelper.isEmpty(realPath))
-                                setImageData(realPath)
-                        }
+//                        for (i in 0 until count) {
+//                            val imageUri: Uri = data.clipData!!.getItemAt(i).uri;
+//                            val realPath: String = FileUtils.getPath(mContext, imageUri)!!
+//                            if (!StringHelper.isEmpty(realPath))
+//                                setImageData(realPath)
+//                        }
+                        imagePickerUtility.getMultiplePaths(data.clipData!!)
                     }
                 } else {
-                    val realPath: String = FileUtils.getPath(mContext, data.data)!!
-                    if (!StringHelper.isEmpty(realPath) && isLeftImageCount(1)) {
-                        setImageData(realPath)
-                    }
+                    imagePickerUtility.getPath(data.data!!, Build.VERSION.SDK_INT)
+//                    val realPath: String = FileUtils.getPath(mContext, data.data)!!
+//                    if (!StringHelper.isEmpty(realPath) && isLeftImageCount(1)) {
+//                        setImageData(realPath)
+//                    }
                 }
-                adapterPhotos.notifyDataSetChanged()
+//                adapterPhotos.notifyDataSetChanged()
             }
         }
 
@@ -508,6 +516,7 @@ class PostJobDetailsActivity : BaseActivity(), View.OnClickListener, SelectItemL
     override fun onBackPressed() {
         if (isUpdate)
             setResult(Activity.RESULT_OK)
+        imagePickerUtility.deleteTemporaryFile(this)
         finish()
     }
 
@@ -521,6 +530,53 @@ class PostJobDetailsActivity : BaseActivity(), View.OnClickListener, SelectItemL
                 false
             )
             false
+        }
+    }
+
+    override fun PickiTonUriReturned() {
+
+    }
+
+    override fun PickiTonStartListener() {
+
+    }
+
+    override fun PickiTonProgressUpdate(progress: Int) {
+
+    }
+
+    override fun PickiTonCompleteListener(
+        path: String?,
+        wasDriveFile: Boolean,
+        wasUnknownProvider: Boolean,
+        wasSuccessful: Boolean,
+        Reason: String?
+    ) {
+        val realPath: String = path!!
+        Log.e("test", "realPath:$realPath")
+        if (!StringHelper.isEmpty(realPath) && isLeftImageCount(1)) {
+            setImageData(realPath)
+            adapterPhotos.notifyDataSetChanged()
+        }
+    }
+
+    override fun PickiTonMultipleCompleteListener(
+        paths: java.util.ArrayList<String>,
+        wasSuccessful: Boolean,
+        Reason: String?
+    ) {
+        for (path in paths) {
+            val realPath: String = path
+            if (!StringHelper.isEmpty(realPath))
+                setImageData(realPath)
+        }
+        adapterPhotos.notifyDataSetChanged()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        if (!isChangingConfigurations) {
+            imagePickerUtility.deleteTemporaryFile(this)
         }
     }
 }

@@ -17,6 +17,7 @@ interface ManageJobRepository {
         job_id: RequestBody,
         device_token: RequestBody,
         device_type: RequestBody,
+        image_from: RequestBody,
         file_name: MultipartBody.Part?,
     ): AddJobResponse
 

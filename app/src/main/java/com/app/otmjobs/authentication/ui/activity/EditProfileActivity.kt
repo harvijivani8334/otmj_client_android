@@ -6,6 +6,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.text.Editable
@@ -18,6 +19,7 @@ import androidx.core.content.FileProvider
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
 import com.app.imagepickers.models.FileWithPath
+import com.app.imagepickers.pickiT.PickiTCallbacks
 import com.app.imagepickers.utils.Constant
 import com.app.imagepickers.utils.FileUtils
 import com.app.imagepickers.utils.GlideUtil
@@ -37,6 +39,7 @@ import com.app.otmjobs.common.ui.fragment.SearchPostCodeDialog
 import com.app.otmjobs.common.ui.fragment.SelectAttachmentDialog
 import com.app.otmjobs.common.utils.AppConstants
 import com.app.otmjobs.common.utils.AppUtils
+import com.app.otmjobs.common.utils.ImagePickerUtility
 import com.app.otmjobs.databinding.ActivityEditProfileBinding
 import com.app.utilities.callback.OnDateSetListener
 import com.app.utilities.fragments.DatePickerFragment
@@ -50,7 +53,9 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class EditProfileActivity : BaseActivity(), View.OnClickListener, SelectItemListener,
-    SelectPostCodeListener, PermissionCallbacks, SelectAttachmentListener, OnDateSetListener {
+    SelectPostCodeListener, PermissionCallbacks, SelectAttachmentListener, OnDateSetListener,
+    PickiTCallbacks {
+
     private lateinit var binding: ActivityEditProfileBinding
     private lateinit var mContext: Context
     private val authenticationViewModel: AuthenticationViewModel by viewModel()
@@ -60,6 +65,7 @@ class EditProfileActivity : BaseActivity(), View.OnClickListener, SelectItemList
     private var isValidPhone = false
     private var currentPhotoPath: String = ""
     private var imagePath: String = ""
+    private lateinit var imagePickerUtility: ImagePickerUtility;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,6 +73,7 @@ class EditProfileActivity : BaseActivity(), View.OnClickListener, SelectItemList
         setStatusBarColor()
         setupToolbar(getString(R.string.edit_profile), true)
         mContext = this
+        imagePickerUtility = ImagePickerUtility(this, this, this)
         editProfileObservers()
         getCustomerDetailsObservers()
         setCountriesObservers()
@@ -528,12 +535,13 @@ class EditProfileActivity : BaseActivity(), View.OnClickListener, SelectItemList
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
                 val data: Intent = result.data!!
-                val realPath: String = FileUtils.getPath(mContext, data.data)!!
-                Log.e("test", "realPath:$realPath")
-                if (!StringHelper.isEmpty(realPath)) {
-                    imagePath = realPath
-                    setUserImageFromFile(File(realPath));
-                }
+                imagePickerUtility.getPath(data.data!!, Build.VERSION.SDK_INT)
+//                val realPath: String = FileUtils.getPath(mContext, data.data)!!
+//                Log.e("test", "realPath:$realPath")
+//                if (!StringHelper.isEmpty(realPath)) {
+//                    imagePath = realPath
+//                    setUserImageFromFile(File(realPath));
+//                }
             }
         }
 
@@ -583,6 +591,53 @@ class EditProfileActivity : BaseActivity(), View.OnClickListener, SelectItemList
             val dateFormat1 = SimpleDateFormat(DateFormatsConstants.YYYY_MM_DD_DASH, Locale.US)
             user.date_of_birth = dateFormat1.format(dobDate.time)
 
+        }
+    }
+
+    override fun PickiTonUriReturned() {
+
+    }
+
+    override fun PickiTonStartListener() {
+
+    }
+
+    override fun PickiTonProgressUpdate(progress: Int) {
+
+    }
+
+    override fun PickiTonCompleteListener(
+        path: String?,
+        wasDriveFile: Boolean,
+        wasUnknownProvider: Boolean,
+        wasSuccessful: Boolean,
+        Reason: String?
+    ) {
+        val realPath: String = path!!
+        Log.e("test", "realPath:$realPath")
+        if (!StringHelper.isEmpty(realPath)) {
+            imagePath = realPath
+            setUserImageFromFile(File(realPath));
+        }
+    }
+
+    override fun PickiTonMultipleCompleteListener(
+        paths: ArrayList<String>,
+        wasSuccessful: Boolean,
+        Reason: String?
+    ) {
+
+    }
+
+    override fun onBackPressed() {
+        imagePickerUtility.deleteTemporaryFile(this)
+        finish()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        if (!isChangingConfigurations) {
+            imagePickerUtility.deleteTemporaryFile(this)
         }
     }
 }

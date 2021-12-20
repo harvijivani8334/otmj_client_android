@@ -34,6 +34,7 @@ interface ManageJobInterface {
         @Part("job_id") job_id: RequestBody,
         @Part("device_token") device_token: RequestBody,
         @Part("device_type") device_type: RequestBody,
+        @Part("image_from") image_from: RequestBody,
         @Part file_name: MultipartBody.Part?
     ): AddJobResponse
 

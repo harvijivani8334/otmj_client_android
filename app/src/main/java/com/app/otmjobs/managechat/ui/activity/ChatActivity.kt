@@ -8,6 +8,7 @@ import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.text.Editable
@@ -25,6 +26,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.imagepickers.models.FileWithPath
+import com.app.imagepickers.pickiT.PickiTCallbacks
 import com.app.imagepickers.utils.Constant
 import com.app.imagepickers.utils.FileUtils
 import com.app.imagepickers.utils.GlideUtil
@@ -35,10 +37,7 @@ import com.app.otmjobs.common.callback.SelectItemListener
 import com.app.otmjobs.common.data.model.ModuleInfo
 import com.app.otmjobs.common.ui.activity.BaseActivity
 import com.app.otmjobs.common.ui.fragment.SelectAttachmentDialog
-import com.app.otmjobs.common.utils.AppConstants
-import com.app.otmjobs.common.utils.AppUtils
-import com.app.otmjobs.common.utils.LastSeenTime
-import com.app.otmjobs.common.utils.PopupMenuHelper
+import com.app.otmjobs.common.utils.*
 import com.app.otmjobs.databinding.ActivityUserChatBinding
 import com.app.otmjobs.databinding.RowChatLeftItemBinding
 import com.app.otmjobs.databinding.RowChatRightItemBinding
@@ -69,7 +68,7 @@ import kotlin.collections.ArrayList
 
 
 class ChatActivity : BaseActivity(), View.OnClickListener, EasyPermissions.PermissionCallbacks,
-    SelectAttachmentListener, SelectItemListener, DialogButtonClickListener {
+    SelectAttachmentListener, SelectItemListener, DialogButtonClickListener, PickiTCallbacks {
     private lateinit var db: FirebaseFirestore
     private lateinit var mContext: Context
     private var adapter: MessageAdapter? = null
@@ -90,11 +89,13 @@ class ChatActivity : BaseActivity(), View.OnClickListener, EasyPermissions.Permi
     private var isMessageSelected = false
     private lateinit var menu: Menu
     private lateinit var listMenuItems: MutableList<ModuleInfo>
+    private lateinit var imagePickerUtility: ImagePickerUtility;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_user_chat)
         mContext = this
+        imagePickerUtility = ImagePickerUtility(this, this, this)
         db = FirebaseFirestore.getInstance()
         statusInfo = StatusInfo()
         currentUser = AppUtils.getFirebaseUserId(mContext)
@@ -737,12 +738,13 @@ class ChatActivity : BaseActivity(), View.OnClickListener, EasyPermissions.Permi
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
                 val data: Intent = result.data!!
-                val realPath: String = FileUtils.getPath(mContext, data.data)!!
+                imagePickerUtility.getPath(data.data!!, Build.VERSION.SDK_INT)
+            /*    val realPath: String = FileUtils.getPath(mContext, data.data)!!
                 Log.e("test", "realPath:$realPath")
                 if (!StringHelper.isEmpty(realPath)) {
 //                    sendImage(getFileInfo(File(realPath)), File(realPath))
                     displaySendImage(realPath)
-                }
+                }*/
             }
         }
 
@@ -1198,7 +1200,10 @@ class ChatActivity : BaseActivity(), View.OnClickListener, EasyPermissions.Permi
     override fun onDestroy() {
         super.onDestroy()
         if (adapter != null)
-            adapter!!.startListening()
+            adapter!!.stopListening()
+        if (!isChangingConfigurations) {
+            imagePickerUtility.deleteTemporaryFile(this)
+        }
     }
 
     override fun onBackPressed() {
@@ -1207,23 +1212,42 @@ class ChatActivity : BaseActivity(), View.OnClickListener, EasyPermissions.Permi
         } else if (binding.previewImage.routRootView.visibility == View.VISIBLE)
             binding.previewImage.routRootView.visibility = View.GONE
         else {
+            imagePickerUtility.deleteTemporaryFile(this)
             finish()
         }
     }
 
-    /*override fun onStart() {
-        super.onStart()
-        Log.e("test", "onStart");
-        if (adapter != null) {
-            adapter!!.startListening()
+    override fun PickiTonUriReturned() {
+
+    }
+
+    override fun PickiTonStartListener() {
+
+    }
+
+    override fun PickiTonProgressUpdate(progress: Int) {
+
+    }
+
+    override fun PickiTonCompleteListener(
+        path: String?,
+        wasDriveFile: Boolean,
+        wasUnknownProvider: Boolean,
+        wasSuccessful: Boolean,
+        Reason: String?
+    ) {
+        val realPath: String = path!!
+        Log.e("test", "realPath:$realPath")
+        if (!StringHelper.isEmpty(realPath)) {
+            displaySendImage(realPath)
         }
     }
 
-    override fun onStop() {
-        super.onStop()
+    override fun PickiTonMultipleCompleteListener(
+        paths: java.util.ArrayList<String>,
+        wasSuccessful: Boolean,
+        Reason: String?
+    ) {
 
-        if (adapter != null) {
-            adapter!!.stopListening()
-        }
-    }*/
+    }
 }
