@@ -8,6 +8,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
+import android.text.InputFilter
 import android.util.Log
 import android.view.View
 import android.widget.Toast
@@ -25,10 +26,7 @@ import com.app.otmjobs.common.callback.SelectItemListener
 import com.app.otmjobs.common.data.model.ModuleInfo
 import com.app.otmjobs.common.ui.activity.BaseActivity
 import com.app.otmjobs.common.ui.fragment.SelectAttachmentDialog
-import com.app.otmjobs.common.utils.AppConstants
-import com.app.otmjobs.common.utils.AppUtils
-import com.app.otmjobs.common.utils.ImagePickerUtility
-import com.app.otmjobs.common.utils.PopupMenuHelper
+import com.app.otmjobs.common.utils.*
 import com.app.otmjobs.databinding.ActivityPjJobDetailsBinding
 import com.app.otmjobs.managejob.data.model.JobImageInfo
 import com.app.otmjobs.managejob.data.model.PostJobRequest
@@ -80,6 +78,7 @@ class PostJobDetailsActivity : BaseActivity(), View.OnClickListener, SelectItemL
             getString(R.string.your_budget),
             AppConstants.CURRENCY
         )
+        binding.edtYourBudget.filters = arrayOf<InputFilter>(DecimalDigitsInputFilter(9, 2))
 
         binding.edtCategory.setOnClickListener(this)
         binding.edtStartFrom.setOnClickListener(this)
